@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://cx0b1v3saxxvy"]
+
+[ext_resource type="Shader" uid="uid://d1q3ratm6ww8o" path="res://Materials/PS1Scene.gdshader" id="1_3sm11"]
+[ext_resource type="PackedScene" uid="uid://l5boluq4n37e" path="res://scenes/lapine.tscn" id="1_xarpt"]
+[ext_resource type="PackedScene" uid="uid://c0dsmo2w7aenb" path="res://scenes/tower.tscn" id="2_xarpt"]
+[ext_resource type="PackedScene" uid="uid://b2mt87uhqd08p" path="res://scenes/player_3d.tscn" id="3_dum8x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ab3st"]
+shader = ExtResource("1_3sm11")
+shader_parameter/enabled = true
+shader_parameter/dithering = true
+shader_parameter/colors = 16
+shader_parameter/dither_size = 1
+
+[sub_resource type="Sky" id="Sky_3sm11"]
+
+[sub_resource type="Environment" id="Environment_ab3st"]
+background_mode = 1
+background_color = Color(0.466795, 0.580192, 0.83214, 1)
+background_energy_multiplier = 1.14
+sky = SubResource("Sky_3sm11")
+ambient_light_source = 2
+ambient_light_color = Color(0.543979, 0.680659, 0.89865, 1)
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.650985, 0.859031, 0.947646, 1)
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0289
+volumetric_fog_albedo = Color(0.777223, 0.767115, 0.938221, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_ab3st")
+offset_right = 320.0
+offset_bottom = 240.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(320, 240)
+render_target_update_mode = 4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
+environment = SubResource("Environment_ab3st")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/WorldEnvironment"]
+transform = Transform3D(0.755879, -0.440902, 0.483996, -0.242683, 0.497906, 0.832583, -0.608072, -0.74679, 0.269357, 5.00624, 9.33842, -0.482016)
+light_color = Color(0.841322, 0.839771, 0.87135, 1)
+light_energy = 1.646
+light_indirect_energy = 0.677
+light_volumetric_fog_energy = 1.105
+
+[node name="Lapine" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_xarpt")]
+transform = Transform3D(1.73047, 0, 0, 0, 1.73047, 0, 0, 0, 1.73047, -2.27439, 0.489635, -1.2235)
+
+[node name="Tower" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_xarpt")]
+transform = Transform3D(0.853334, 0.0765695, -2.60334, -0.00834215, 2.73958, 0.0778423, 2.60445, -0.0163127, 0.853219, -2.39561, -0.00205469, -16.1868)
+
+[node name="Player3D" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_dum8x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25579, 0.563078, -2.07338)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(43.1807, 0, 0, 0, 1, 0, 0, 0, 47.3168, 0, 0, 0)
+layers = 325
+use_collision = true
+collision_layer = 7
+collision_mask = 7

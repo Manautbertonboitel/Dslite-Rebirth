@@ -1,7 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://l5boluq4n37e"]
+[gd_scene load_steps=12 format=3 uid="uid://l5boluq4n37e"]
 
 [ext_resource type="PackedScene" uid="uid://cgb04soevrhns" path="res://scenes/Lapine.fbx" id="1_tqbee"]
+[ext_resource type="Shader" uid="uid://diwg8kbsjjmcw" path="res://Materials/PS1.gdshader" id="2_05syi"]
 [ext_resource type="Texture2D" uid="uid://b5u88uw4dwfx0" path="res://Textures/T_Lapine.png" id="2_d6dbv"]
+[ext_resource type="Texture2D" uid="uid://dk3hu7xla5os" path="res://Textures/T_Wing.png" id="3_x43c6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cot0g"]
+render_priority = 0
+shader = ExtResource("2_05syi")
+shader_parameter/affine_mapping = false
+shader_parameter/albedo = ExtResource("3_x43c6")
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/jitter = 0.25
+shader_parameter/resolution = Vector2i(320, 240)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xtl22"]
 albedo_color = Color(0.999999, 0.895085, 0.449542, 1)
@@ -10,9 +21,14 @@ emission = Color(0.906562, 0.734731, 0, 1)
 rim_enabled = true
 rim = 0.74
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k6p3a"]
-cull_mode = 2
-albedo_texture = ExtResource("2_d6dbv")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5525h"]
+render_priority = 0
+shader = ExtResource("2_05syi")
+shader_parameter/affine_mapping = false
+shader_parameter/albedo = ExtResource("2_d6dbv")
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/jitter = 0.25
+shader_parameter/resolution = Vector2i(320, 240)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a2xsl"]
 animation = &"metarig_002|metarig_002Action"
@@ -41,7 +57,7 @@ node_connections = [&"output", 0, &"StateMachine"]
 [node name="Lapine" instance=ExtResource("1_tqbee")]
 
 [node name="Skeleton3D" parent="metarig_002" index="0"]
-bones/1/rotation = Quaternion(-0.0910528, -0.00509924, -0.00798048, 0.995801)
+bones/1/rotation = Quaternion(-0.0893154, -0.00508511, -0.00798939, 0.995958)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/position = Vector3(0, 0.00229707, -1.84775e-11)
 bones/2/rotation = Quaternion(0.285659, 0.00172632, 0.00037068, 0.95833)
@@ -50,27 +66,27 @@ bones/3/position = Vector3(9.77647e-11, 0.00170194, -0.000410055)
 bones/3/rotation = Quaternion(-0.0289744, -0.0012087, -0.0271918, 0.99921)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/position = Vector3(-0.0001741, 0.00066427, -0.000876636)
-bones/4/rotation = Quaternion(-0.191482, 0.397029, -0.0322183, 0.897031)
+bones/4/rotation = Quaternion(-0.189924, 0.397244, -0.0315174, 0.897292)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/position = Vector3(0.00105834, 0.00324556, 0.000619315)
-bones/5/rotation = Quaternion(0.318489, 0.360541, -0.153634, 0.863118)
+bones/5/rotation = Quaternion(0.296595, 0.365713, -0.146917, 0.869886)
 bones/6/position = Vector3(-3.07154e-10, 0.00234237, -8.03335e-11)
-bones/6/rotation = Quaternion(0.469259, -0.245583, 0.0327063, 0.847594)
+bones/6/rotation = Quaternion(0.48535, -0.237999, 0.0322582, 0.840685)
 bones/6/scale = Vector3(1, 1, 1)
 bones/7/position = Vector3(-0.00105663, 0.00327591, 0.000623864)
-bones/7/rotation = Quaternion(0.227996, -0.155075, 0.161638, 0.947546)
+bones/7/rotation = Quaternion(0.208955, -0.152507, 0.133475, 0.956694)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/position = Vector3(3.72654e-10, 0.00234238, -9.09265e-11)
-bones/8/rotation = Quaternion(0.75744, -0.0445774, 0.0924204, 0.644791)
+bones/8/rotation = Quaternion(0.778902, -0.0348625, 0.104585, 0.61738)
 bones/8/scale = Vector3(1, 1, 1)
 bones/9/position = Vector3(5.666e-05, 0.000855096, -0.00250914)
-bones/9/rotation = Quaternion(0.0894777, 0.022742, 0.994732, 0.0445498)
+bones/9/rotation = Quaternion(0.0895196, 0.0246162, 0.994572, 0.0469734)
 bones/9/scale = Vector3(1, 1, 1)
 bones/10/position = Vector3(0.00116205, -0.000357851, 0.00119559)
-bones/10/rotation = Quaternion(-0.0283541, 0.156315, 0.980535, 0.115378)
+bones/10/rotation = Quaternion(-0.0288694, 0.150008, 0.982174, 0.109543)
 bones/10/scale = Vector3(1, 1, 1)
 bones/11/position = Vector3(-0.00157526, -0.000304652, 0.00117193)
-bones/11/rotation = Quaternion(0.0403476, 0.12379, 0.990411, 0.0461948)
+bones/11/rotation = Quaternion(0.0403393, 0.124445, 0.99033, 0.0461732)
 bones/11/scale = Vector3(1, 1, 0.999999)
 bones/12/position = Vector3(0.00303946, -0.000585141, -0.00351462)
 bones/12/rotation = Quaternion(-0.260684, 0.28056, -0.531177, 0.755765)
@@ -119,13 +135,17 @@ bones/27/position = Vector3(-1.32092e-10, 0.00558113, -2.624e-11)
 bones/27/rotation = Quaternion(-0.734794, 8.0859e-08, -2.62783e-07, 0.67829)
 bones/27/scale = Vector3(1, 1, 1)
 
+[node name="mesh_mai_001" parent="metarig_002/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_cot0g")
+
 [node name="Plane_004" parent="metarig_002/Skeleton3D" index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_xtl22")
 
 [node name="mesh_mai_005" parent="metarig_002/Skeleton3D" index="2"]
-surface_material_override/0 = SubResource("StandardMaterial3D_k6p3a")
+surface_material_override/0 = SubResource("ShaderMaterial_5525h")
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 root_motion_track = NodePath("metarig_002/Skeleton3D:spine")
+root_motion_local = false
 tree_root = SubResource("AnimationNodeBlendTree_nm8pq")
 anim_player = NodePath("../AnimationPlayer")

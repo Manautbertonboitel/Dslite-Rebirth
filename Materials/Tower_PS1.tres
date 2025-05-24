@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cyqjfyxoc1jh8"]
+
+[ext_resource type="Shader" uid="uid://diwg8kbsjjmcw" path="res://Materials/PS1.gdshader" id="1_xc3ct"]
+[ext_resource type="Texture2D" uid="uid://ba6sltjno7leb" path="res://scenes/Tower_medieval_wall_02_diff_256.jpg" id="2_ty2ng"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_xc3ct")
+shader_parameter/affine_mapping = false
+shader_parameter/albedo = ExtResource("2_ty2ng")
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/jitter = 0.25
+shader_parameter/resolution = Vector2i(320, 240)

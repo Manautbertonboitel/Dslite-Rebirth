@@ -252,4 +252,4 @@ depth = 4.0
 material = ExtResource("7_njuj4")
 
 [node name="Lapine" parent="." instance=ExtResource("12_0g8ro")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.44125, 0, -35.244)
+transform = Transform3D(1.70023, 0, 0, 0, 1.70023, 0, 0, 0, 1.70023, 5.44125, 0, -35.244)
