@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://c0dsmo2w7aenb"]
 
-[ext_resource type="PackedScene" uid="uid://bannkjitj3xwk" path="res://scenes/Tower.glb" id="1_ay4al"]
-[ext_resource type="Texture2D" uid="uid://ba6sltjno7leb" path="res://scenes/Tower_medieval_wall_02_diff_256.jpg" id="2_ktxwe"]
+[ext_resource type="PackedScene" uid="uid://bannkjitj3xwk" path="res://Meshes/Tower.glb" id="1_ay4al"]
+[ext_resource type="Texture2D" uid="uid://ba6sltjno7leb" path="res://Textures/Tower_medieval_wall_02_diff_256.jpg" id="2_ktxwe"]
 [ext_resource type="Material" uid="uid://cyqjfyxoc1jh8" path="res://Materials/Tower_PS1.tres" id="2_qrbg1"]
 [ext_resource type="Shader" uid="uid://diwg8kbsjjmcw" path="res://Materials/PS1.gdshader" id="4_qrbg1"]
 

@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjd5egmj8i8wy"
-path.s3tc="res://.godot/imported/Tower_medieval_wall_02_nor_gl_256.png-a8da85f10e6837f83476f673b91ec189.s3tc.ctex"
+uid="uid://ba6sltjno7leb"
+path.s3tc="res://.godot/imported/Tower_medieval_wall_02_diff_256.jpg-c9f7ed063d8ba51ec229c3b23b80ecd9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "2fc0394bc4aaef5b4ece10fea047cecf"
+"md5": "99d9e7875ba8ee35c539ef900eceb4de"
 }
 
 [deps]
 
-source_file="res://scenes/Tower_medieval_wall_02_nor_gl_256.png"
-dest_files=["res://.godot/imported/Tower_medieval_wall_02_nor_gl_256.png-a8da85f10e6837f83476f673b91ec189.s3tc.ctex"]
+source_file="res://Textures/Tower_medieval_wall_02_diff_256.jpg"
+dest_files=["res://.godot/imported/Tower_medieval_wall_02_diff_256.jpg-c9f7ed063d8ba51ec229c3b23b80ecd9.s3tc.ctex"]
 
 [params]
 
@@ -23,12 +23,12 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=1
-roughness/src_normal="res://Meshes/Tower_medieval_wall_02_nor_gl_256.png"
+roughness/mode=0
+roughness/src_normal=""
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

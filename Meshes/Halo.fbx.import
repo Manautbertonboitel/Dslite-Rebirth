@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bannkjitj3xwk"
-path="res://.godot/imported/Tower.glb-31fb8657901074588053323fab6e64e7.scn"
+uid="uid://ds2iw6520stfa"
+path="res://.godot/imported/Halo.fbx-01dae96241421903a61de0b12fea6dc4.scn"
 
 [deps]
 
-source_file="res://scenes/Tower.glb"
-dest_files=["res://.godot/imported/Tower.glb-31fb8657901074588053323fab6e64e7.scn"]
+source_file="res://Meshes/Halo.fbx"
+dest_files=["res://.godot/imported/Halo.fbx-01dae96241421903a61de0b12fea6dc4.scn"]
 
 [params]
 
@@ -28,10 +28,11 @@ meshes/force_disable_compression=false
 skins/use_named_skins=true
 animation/import=true
 animation/fps=30
-animation/trimming=false
+animation/trimming=true
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={}
-gltf/naming_version=1
-gltf/embedded_image_handling=1
+fbx/importer=0
+fbx/allow_geometry_helper_nodes=false
+fbx/embedded_image_handling=1

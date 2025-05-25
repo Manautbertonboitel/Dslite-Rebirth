@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjd5egmj8i8wy"
-path.s3tc="res://.godot/imported/Tower_medieval_wall_02_nor_gl_256.png-a8da85f10e6837f83476f673b91ec189.s3tc.ctex"
+uid="uid://wcbnamct5i0j"
+path.s3tc="res://.godot/imported/Tower_medieval_wall_02_nor_gl_256.png-b162b2919091d048c5eae684ed7a0a05.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://scenes/Tower_medieval_wall_02_nor_gl_256.png"
-dest_files=["res://.godot/imported/Tower_medieval_wall_02_nor_gl_256.png-a8da85f10e6837f83476f673b91ec189.s3tc.ctex"]
+source_file="res://Textures/Tower_medieval_wall_02_nor_gl_256.png"
+dest_files=["res://.godot/imported/Tower_medieval_wall_02_nor_gl_256.png-b162b2919091d048c5eae684ed7a0a05.s3tc.ctex"]
 
 [params]
 
@@ -28,7 +28,7 @@ compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=1
-roughness/src_normal="res://Meshes/Tower_medieval_wall_02_nor_gl_256.png"
+roughness/src_normal="res://scenes/Tower_medieval_wall_02_nor_gl_256.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
