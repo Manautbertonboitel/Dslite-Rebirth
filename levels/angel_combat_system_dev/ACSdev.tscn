@@ -1,10 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://dovhtr54cxoy8"]
+[gd_scene load_steps=5 format=3 uid="uid://dovhtr54cxoy8"]
 
-[ext_resource type="Script" uid="uid://cnkp5d0n06omu" path="res://scripts/combat_manager.gd" id="1_n1emr"]
+[ext_resource type="Script" uid="uid://cnkp5d0n06omu" path="res://scripts/angel_combat_system/combat_manager.gd" id="1_n1emr"]
 [ext_resource type="Resource" uid="uid://dlx511usvvnyl" path="res://characters/pools/heroes_pool.tres" id="2_8evuu"]
 [ext_resource type="Resource" uid="uid://q0b2halbsdvk" path="res://characters/pools/slime_pool_1.tres" id="3_d3obp"]
+[ext_resource type="Script" uid="uid://bnwj20lgxfhqw" path="res://scripts/angel_combat_system/action_panel.gd" id="4_8evuu"]
 
 [node name="ACSDev" type="Node3D"]
+
+[node name="CombatManager" type="Node" parent="." node_paths=PackedStringArray("action_panel")]
 script = ExtResource("1_n1emr")
-heroesPool = ExtResource("2_8evuu")
-enemiesPool = ExtResource("3_d3obp")
+heroes_pool = ExtResource("2_8evuu")
+enemies_pool = ExtResource("3_d3obp")
+action_panel = NodePath("../ActionPanel")
+
+[node name="ActionPanel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_8evuu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ActionPanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

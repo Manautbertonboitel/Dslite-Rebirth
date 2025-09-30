@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://biwa2dsmb32el" path="res://characters/enemies/slime.tscn" id="1_cobl4"]
 [ext_resource type="PackedScene" uid="uid://cqtbmsrctuqjv" path="res://characters/enemies/grumpy_slime.tscn" id="2_d6j7s"]
-[ext_resource type="Script" uid="uid://c0dv0pdupe1eb" path="res://scripts/fighter_pool.gd" id="3_gx8ev"]
+[ext_resource type="Script" uid="uid://c0dv0pdupe1eb" path="res://scripts/angel_combat_system/fighter_pool.gd" id="3_gx8ev"]
 
 [resource]
 script = ExtResource("3_gx8ev")

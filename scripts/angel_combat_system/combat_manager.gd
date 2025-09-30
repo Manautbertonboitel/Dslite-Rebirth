@@ -6,28 +6,29 @@ var turn_queue = []          # Ordre de tour (FIFO)
 var state = BattleState.START
 var current_character = null
 
-@export var heroesPool : FighterPool
-@export var enemiesPool : FighterPool
+@export var heroes_pool : FighterPool
+@export var enemies_pool : FighterPool
+@export var action_panel : Control
 
 func _ready():
-	start_battle(heroesPool, enemiesPool)
+	start_battle(heroes_pool, enemies_pool)
 
-func start_battle(heroes_pool: FighterPool, enemies_pool: FighterPool):
+func start_battle(_heroes_pool: FighterPool, _enemies_pool: FighterPool):
 	print("=== Combat Start ===")
 	
-	if enemies_pool == null and heroes_pool == null: 
+	if _enemies_pool == null and _heroes_pool == null: 
 		print("Combat couldn't start, no heroes and no enemies")
 		return
-	elif enemies_pool == null:
+	elif _enemies_pool == null:
 		print("Combat couldn't start, no enemies")
 		return
-	elif heroes_pool == null:
+	elif _heroes_pool == null:
 		print("Combat couldn't start, no heroes")
 		return
 
 	# Récupérer les arrays de fighters
-	var heroes_data = heroes_pool.fighters
-	var enemies_data = enemies_pool.fighters
+	var heroes_data = _heroes_pool.fighters
+	var enemies_data = _enemies_pool.fighters
 
 	# Instancier chaque fighter si ce sont des scènes
 	var heroes = []
@@ -48,7 +49,7 @@ func start_battle(heroes_pool: FighterPool, enemies_pool: FighterPool):
 	state = BattleState.TURN
 	
 	for character in turn_queue:
-		print("Loaded fighter: ", character.characterName, " | HP=", character.hp, " | enemy=", character.is_enemy)
+		print("Loaded fighter: ", character.character_name, " | HP=", character.hp, " | enemy=", character.is_enemy)
 	
 	next_turn()
 
@@ -72,7 +73,7 @@ func next_turn():
 		next_turn()
 		return
 
-	print("\nC'est au tour de %s !" % current_character.characterName)
+	print("\nC'est au tour de %s !" % current_character.character_name)
 
 	if current_character.is_enemy:
 		# IA simple = attaque un héros vivant
@@ -88,10 +89,26 @@ func next_turn():
 		# Joueur → pour test on attaque toujours l'ennemi
 		var target = get_first_enemy_alive()
 		if target != null:
-			var action = current_character.actions[0]
-			execute_action(current_character, target, action)
+			# print("Attaques disponibles :")
+			# Lister les attaques
+			# choisir une attaque
+			# attaquer
+			#var action = current_character.actions[0]
+			# attaquer
+			#execute_action(current_character, target, action)
+			
+			# Tour du joueur → on affiche l’UI
+
+			action_panel.show_actions(current_character)
+			action_panel.action_chosen.connect(_on_action_chosen, CONNECT_ONE_SHOT)
 		else:
 			print("Plus aucun ennemi à attaquer !")
+
+func _on_action_chosen(action):
+	action_panel.visible = false
+	var target = get_first_enemy_alive()
+	if target:
+		execute_action(current_character, target, action)
 
 func get_first_hero_alive():
 	for c in fighters:
@@ -104,6 +121,7 @@ func get_first_enemy_alive():
 		if c.is_enemy and c.is_alive():
 			return c
 	return null  # si aucun ennemi vivant
+	
 
 func execute_action(caster, target, action):
 	state = BattleState.ACTION

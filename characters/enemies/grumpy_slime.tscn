@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cqtbmsrctuqjv"]
 
-[ext_resource type="Script" uid="uid://dp1dqpdpk6vo6" path="res://scripts/fighter.gd" id="1_l76tl"]
+[ext_resource type="Script" uid="uid://dp1dqpdpk6vo6" path="res://scripts/angel_combat_system/fighter.gd" id="1_l76tl"]
 [ext_resource type="Resource" uid="uid://7dsedw0bk4nm" path="res://characters/actions/biffle.tres" id="2_m3qe7"]
 
 [node name="Fighter" type="Node"]

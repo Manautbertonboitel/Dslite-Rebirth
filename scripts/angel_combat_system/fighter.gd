@@ -1,7 +1,7 @@
 extends Node
 class_name Fighter
 
-@export var characterName : String
+@export var character_name : String
 @export var max_hp : int
 @export var hp : int
 @export var max_mp : int
@@ -15,7 +15,7 @@ func _ready():
 
 func take_damage(amount: int):
 	hp = max(0, hp - amount)
-	print("%s subit %d dégâts (HP restants : %d)" % [characterName, amount, hp])
+	print("%s subit %d dégâts (HP restants : %d)" % [character_name, amount, hp])
 
 func is_alive() -> bool:
 	return hp > 0
