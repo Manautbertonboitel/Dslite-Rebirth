@@ -4,20 +4,22 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://b8wndcwtnvkbh"
-path="res://.godot/imported/grass.glb-5c36d616197462eb3edbce55c437b235.scn"
+path="res://.godot/imported/grass.glb-af2dc8b06fe578440af1b2749bf0e88f.scn"
 
 [deps]
 
-source_file="res://Meshes/grass.glb"
-dest_files=["res://.godot/imported/grass.glb-5c36d616197462eb3edbce55c437b235.scn"]
+source_file="res://meshes/grass.glb"
+dest_files=["res://.godot/imported/grass.glb-af2dc8b06fe578440af1b2749bf0e88f.scn"]
 
 [params]
 
 nodes/root_type=""
 nodes/root_name=""
+nodes/root_script=null
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
 nodes/use_node_type_suffixes=true
 meshes/ensure_tangents=true
 meshes/generate_lods=true
@@ -32,6 +34,9 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
 _subresources={
 "meshes": {
 "grass_Plane_005": {
@@ -40,7 +45,8 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "save_to_file/enabled": true,
-"save_to_file/path": "res://Meshes/grass.res"
+"save_to_file/fallback_path": "res://Meshes/grass.res",
+"save_to_file/path": "uid://b8w45rwknyifm"
 }
 }
 }

@@ -4,20 +4,22 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bannkjitj3xwk"
-path="res://.godot/imported/Tower.glb-e2571592e19f4d7331a50b3b1c3c29c7.scn"
+path="res://.godot/imported/Tower.glb-08fffcb1ef27e9d6986cbb663af3e4b5.scn"
 
 [deps]
 
-source_file="res://Meshes/Tower.glb"
-dest_files=["res://.godot/imported/Tower.glb-e2571592e19f4d7331a50b3b1c3c29c7.scn"]
+source_file="res://meshes/Tower.glb"
+dest_files=["res://.godot/imported/Tower.glb-08fffcb1ef27e9d6986cbb663af3e4b5.scn"]
 
 [params]
 
 nodes/root_type=""
 nodes/root_name=""
+nodes/root_script=null
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
 nodes/use_node_type_suffixes=true
 meshes/ensure_tangents=true
 meshes/generate_lods=true
@@ -32,6 +34,9 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
 _subresources={}
 gltf/naming_version=1
 gltf/embedded_image_handling=1

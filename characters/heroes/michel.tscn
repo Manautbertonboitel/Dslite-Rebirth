@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3rulo1wh6fpv"]
+
+[ext_resource type="Script" uid="uid://dp1dqpdpk6vo6" path="res://scripts/fighter.gd" id="1_pvsun"]
+[ext_resource type="Resource" uid="uid://43mcg5ogpsrx" path="res://characters/actions/slash.tres" id="2_1rgi2"]
+
+[node name="Fighter" type="Node"]
+script = ExtResource("1_pvsun")
+characterName = "Michel"
+max_hp = 30
+hp = 30
+max_mp = 30
+mp = 30
+actions = Array[Resource]([ExtResource("2_1rgi2")])
