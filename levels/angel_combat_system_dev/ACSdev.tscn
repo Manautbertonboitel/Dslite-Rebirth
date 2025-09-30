@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://dovhtr54cxoy8"]
 
-[ext_resource type="Script" uid="uid://cnkp5d0n06omu" path="res://scripts/combat_manager.gd" id="1_tb7su"]
-[ext_resource type="Resource" uid="uid://dlx511usvvnyl" path="res://characters/pools/heroes_pool.tres" id="2_0u8q8"]
-[ext_resource type="Resource" uid="uid://q0b2halbsdvk" path="res://characters/pools/slime_pool_1.tres" id="3_de4ne"]
+[ext_resource type="Script" uid="uid://cnkp5d0n06omu" path="res://scripts/combat_manager.gd" id="1_n1emr"]
+[ext_resource type="Resource" uid="uid://dlx511usvvnyl" path="res://characters/pools/heroes_pool.tres" id="2_8evuu"]
+[ext_resource type="Resource" uid="uid://q0b2halbsdvk" path="res://characters/pools/slime_pool_1.tres" id="3_d3obp"]
 
 [node name="ACSDev" type="Node3D"]
-script = ExtResource("1_tb7su")
-heroesPool = ExtResource("2_0u8q8")
-enemiesPool = ExtResource("3_de4ne")
+script = ExtResource("1_n1emr")
+heroesPool = ExtResource("2_8evuu")
+enemiesPool = ExtResource("3_d3obp")

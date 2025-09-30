@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_sf68c")
-aName = "Coup d'épée"
+actionName = "Coup d'épée enflammée de la mort qui tue"
 power = 5
 metadata/_custom_type_script = "uid://bs0mfywd5eycu"

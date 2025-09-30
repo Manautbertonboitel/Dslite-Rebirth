@@ -1,9 +1,0 @@
-[gd_scene load_steps=4 format=3 uid="uid://cyflkir7bnb5"]
-
-[ext_resource type="Script" uid="uid://c0dv0pdupe1eb" path="res://scripts/fighter_pool.gd" id="1_oq6yy"]
-[ext_resource type="PackedScene" uid="uid://d3rulo1wh6fpv" path="res://characters/heroes/michel.tscn" id="2_kh4k2"]
-[ext_resource type="PackedScene" uid="uid://crvwyow66xyih" path="res://characters/heroes/salope.tscn" id="3_i2ski"]
-
-[node name="FighterPool" type="Node"]
-script = ExtResource("1_oq6yy")
-fighters = Array[PackedScene]([ExtResource("2_kh4k2"), ExtResource("3_i2ski")])

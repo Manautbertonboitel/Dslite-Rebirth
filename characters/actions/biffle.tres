@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_45328")
-aName = "Coup de bite"
+actionName = "Coup de bite"
 power = 4
 metadata/_custom_type_script = "uid://bs0mfywd5eycu"
