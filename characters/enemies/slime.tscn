@@ -5,7 +5,7 @@
 
 [node name="Fighter" type="Node"]
 script = ExtResource("1_vn85f")
-characterName = "Slime"
+character_name = "Slime"
 max_hp = 15
 hp = 15
 max_mp = 30

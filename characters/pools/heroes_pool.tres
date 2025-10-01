@@ -6,6 +6,5 @@
 
 [resource]
 script = ExtResource("1_257ow")
-poolName = "Heroes Group"
 fighters = Array[Resource]([ExtResource("1_uvwrm"), ExtResource("2_qy302")])
 metadata/_custom_type_script = "uid://c0dv0pdupe1eb"

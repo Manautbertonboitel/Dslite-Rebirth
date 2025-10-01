@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Action" load_steps=2 format=3 uid="uid://dsbiqs3aki1vq"]
+
+[ext_resource type="Script" uid="uid://bs0mfywd5eycu" path="res://scripts/angel_combat_system/action.gd" id="1_q3v35"]
+
+[resource]
+script = ExtResource("1_q3v35")
+action_name = "Dissolution de l'assemblée"
+power = 50
+metadata/_custom_type_script = "uid://bs0mfywd5eycu"

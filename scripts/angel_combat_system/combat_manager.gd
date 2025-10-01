@@ -9,6 +9,7 @@ var current_character = null
 @export var heroes_pool : FighterPool
 @export var enemies_pool : FighterPool
 @export var action_panel : Control
+@export var target_panel : Control
 
 func _ready():
 	start_battle(heroes_pool, enemies_pool)
@@ -89,16 +90,6 @@ func next_turn():
 		# Joueur → pour test on attaque toujours l'ennemi
 		var target = get_first_enemy_alive()
 		if target != null:
-			# print("Attaques disponibles :")
-			# Lister les attaques
-			# choisir une attaque
-			# attaquer
-			#var action = current_character.actions[0]
-			# attaquer
-			#execute_action(current_character, target, action)
-			
-			# Tour du joueur → on affiche l’UI
-
 			action_panel.show_actions(current_character)
 			action_panel.action_chosen.connect(_on_action_chosen, CONNECT_ONE_SHOT)
 		else:
@@ -106,9 +97,17 @@ func next_turn():
 
 func _on_action_chosen(action):
 	action_panel.visible = false
-	var target = get_first_enemy_alive()
-	if target:
-		execute_action(current_character, target, action)
+	# Sauvegarder l’action choisie
+	current_character.selected_action = action
+	
+	# Afficher la liste des cibles
+	var enemies = fighters.filter(func(c): return c.is_enemy and c.is_alive())
+	target_panel.show_targets(enemies)
+	target_panel.target_chosen.connect(_on_target_chosen, CONNECT_ONE_SHOT)
+
+func _on_target_chosen(target):
+	target_panel.visible = false
+	execute_action(current_character, target, current_character.selected_action)
 
 func get_first_hero_alive():
 	for c in fighters:

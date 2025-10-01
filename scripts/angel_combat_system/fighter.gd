@@ -8,6 +8,7 @@ class_name Fighter
 @export var mp : int
 @export var is_enemy : bool = false
 @export var actions : Array[Resource] = []  # liste d’actions (qu’on configure dans l’Inspector)
+var selected_action : Resource = null  # action en cours choisie par le joueur
 
 func _ready():
 	hp = max_hp
