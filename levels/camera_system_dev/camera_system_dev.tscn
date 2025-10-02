@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbrxswu30677a"]
+
+[ext_resource type="PackedScene" uid="uid://cnedxfn2pxh2t" path="res://addons/level/level.tscn" id="1_vq1bd"]
+[ext_resource type="PackedScene" uid="uid://cq0wq2tirpdqa" path="res://characters/heroes/player/player_3d_no_camera.tscn" id="2_2x0pp"]
+[ext_resource type="Script" uid="uid://bee4n1ld0v3ma" path="res://scripts/character_camera_controller/camera_system.gd" id="3_2x0pp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vq1bd"]
+size = Vector3(5.407715, 8.083984, 7.955078)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Level" parent="." instance=ExtResource("1_vq1bd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.270674, 0.228707, 0.309135)
+
+[node name="Player3DNoCamera" parent="." node_paths=PackedStringArray("_current_camera") instance=ExtResource("2_2x0pp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -35.97648)
+_current_camera = NodePath("../Camera3D")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.9996992, -0.00969554, 0.02252994, -0.013125736, 0.9874345, -0.1574828, -0.020719957, -0.15773118, -0.9872647, 2.55649, 3.7227578, -50.67094)
+fov = 64.1
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(-0.008382972, 0.020964118, 0.99974513, -0.014406222, 0.99967396, -0.021083422, -0.9998611, -0.014579291, -0.008078226, 16.938202, 7.474741, -26.355242)
+fov = 64.1
+
+[node name="Area3D" type="Area3D" parent="." node_paths=PackedStringArray("linked_camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.502579, 0.02958417, -29.176977)
+script = ExtResource("3_2x0pp")
+linked_camera = NodePath("../Camera3D2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.54907227, 1.5644531, 2.168396)
+shape = SubResource("BoxShape3D_vq1bd")
+
+[node name="Area3D2" type="Area3D" parent="." node_paths=PackedStringArray("linked_camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.502579, 0.02958417, -37.17698)
+script = ExtResource("3_2x0pp")
+linked_camera = NodePath("../Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.54907227, 1.5644531, 2.168396)
+shape = SubResource("BoxShape3D_vq1bd")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
+[connection signal="body_entered" from="Area3D2" to="Area3D2" method="_on_body_entered"]
+
+[editable path="Player3DNoCamera"]
