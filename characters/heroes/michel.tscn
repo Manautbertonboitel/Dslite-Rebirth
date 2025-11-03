@@ -12,3 +12,4 @@ hp = 30
 max_mp = 30
 mp = 30
 actions = Array[Resource]([ExtResource("2_1rgi2"), ExtResource("3_bftkm")])
+atb_speed = 20.0

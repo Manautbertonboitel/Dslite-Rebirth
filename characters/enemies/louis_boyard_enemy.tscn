@@ -7,9 +7,10 @@
 [node name="Fighter" type="Node"]
 script = ExtResource("1_odtsp")
 character_name = "Louis Boyard"
+is_enemy = true
 max_hp = 15
 hp = 15
 max_mp = 30
 mp = 30
-is_enemy = true
 actions = Array[Resource]([ExtResource("2_wwk4p"), ExtResource("3_wwk4p")])
+atb_speed = 10.0
