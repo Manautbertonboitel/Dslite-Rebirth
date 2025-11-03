@@ -6,14 +6,15 @@ extends CharacterBody3D
 @export var rotation_speed := 12.0
 @export var jump_impulse := 12.0
 
-var _last_movement_direction := Vector3.BACK 
 var _gravity := -30.0
 @export var _current_camera : Camera3D = null   # caméra fixe active
 
 @onready var _skin: SophiaSkin = %SophiaSkin
 
+var _last_input := Vector2.ZERO           # dernier input (WASD)
+var _current_move_direction := Vector3.ZERO  # direction monde calculée
+
 func set_active_camera(cam: Camera3D) -> void:
-	# Appelé depuis un trigger pour changer de caméra
 	if _current_camera:
 		_current_camera.current = false
 	_current_camera = cam
@@ -23,38 +24,45 @@ func set_active_camera(cam: Camera3D) -> void:
 
 func _physics_process(delta: float) -> void:
 	if _current_camera == null:
-		return # pas de caméra active = pas de mouvement
+		return
 
-	# Input WASD
+	# --- 1. Lire l'input
 	var raw_input := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
-	# Récupère orientation de la caméra fixe
-	var forward := _current_camera.global_basis.z
-	forward = forward.normalized()
+	# --- 2. Recalculer la direction seulement si l'input a changé
+	if raw_input != _last_input:
+		_last_input = raw_input
 
-	var right := _current_camera.global_basis.x
-	right = right.normalized()
+		if raw_input != Vector2.ZERO:
+			# Transformer l’input caméra -> monde
+			var forward := _current_camera.global_basis.z
+			forward.y = 0
+			forward = forward.normalized()
 
-	# Calcule la direction en monde à partir de l’input
-	var move_direction := (forward * raw_input.y + right * raw_input.x).normalized()
+			var right := _current_camera.global_basis.x
+			right.y = 0
+			right = right.normalized()
 
-	# Gère la vitesse
+			_current_move_direction = (forward * raw_input.y + right * raw_input.x).normalized()
+		else:
+			_current_move_direction = Vector3.ZERO
+
+	# --- 3. Déplacement
 	var y_velocity := velocity.y
-	velocity.y = 0.0
-	velocity = velocity.move_toward(move_direction * move_speed, acceleration * delta)
+	velocity.y = 0
+	velocity = velocity.move_toward(_current_move_direction * move_speed, acceleration * delta)
 	velocity.y = y_velocity + _gravity * delta
-
-	# Saut
+	
+		# Saut
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y += jump_impulse
 
 	move_and_slide()
 
-	# Rotation + animations
-	if move_direction.length() > 0.5:
-		_last_movement_direction = move_direction
-	var target_angle := Vector3.BACK.signed_angle_to(_last_movement_direction, Vector3.UP)
-	_skin.global_rotation.y = lerp_angle(_skin.rotation.y, target_angle, rotation_speed * delta)
+	# --- 4. Rotation du skin
+	if _current_move_direction.length() > 0.01:
+		var target_rot = atan2(_current_move_direction.x, _current_move_direction.z)
+		_skin.rotation.y = lerp_angle(_skin.rotation.y, target_rot, rotation_speed * delta)
 
 	if Input.is_action_just_pressed("jump"):
 		_skin.jump()
