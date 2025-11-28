@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://ds2iw6520stfa"
-path="res://.godot/imported/Halo.fbx-e70facb27db199cfdc5625cafd8bde4e.scn"
+path="res://.godot/imported/Halo.fbx-01dae96241421903a61de0b12fea6dc4.scn"
 
 [deps]
 
-source_file="res://meshes/Halo.fbx"
-dest_files=["res://.godot/imported/Halo.fbx-e70facb27db199cfdc5625cafd8bde4e.scn"]
+source_file="res://Meshes/Halo.fbx"
+dest_files=["res://.godot/imported/Halo.fbx-01dae96241421903a61de0b12fea6dc4.scn"]
 
 [params]
 
