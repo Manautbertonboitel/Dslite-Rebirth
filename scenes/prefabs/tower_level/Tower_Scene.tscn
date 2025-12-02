@@ -1,12 +1,12 @@
 [gd_scene load_steps=18 format=4 uid="uid://cx0b1v3saxxvy"]
 
-[ext_resource type="Shader" uid="uid://d1q3ratm6ww8o" path="res://materials/PS1Scene.gdshader" id="1_jd2gf"]
-[ext_resource type="PackedScene" uid="uid://l5boluq4n37e" path="res://characters/heroes/lapine/lapine.tscn" id="2_d01xq"]
+[ext_resource type="Shader" uid="uid://d1q3ratm6ww8o" path="res://art/materials/PS1Scene.gdshader" id="1_jd2gf"]
+[ext_resource type="PackedScene" uid="uid://l5boluq4n37e" path="res://art/lapine/lapine.tscn" id="2_d01xq"]
 [ext_resource type="PackedScene" uid="uid://c0dsmo2w7aenb" path="res://scenes/prefabs/random_scenes/objects/tower.tscn" id="3_82pjk"]
-[ext_resource type="PackedScene" uid="uid://b2mt87uhqd08p" path="res://characters/heroes/player/player_3d.tscn" id="4_0jwve"]
+[ext_resource type="PackedScene" uid="uid://b2mt87uhqd08p" path="res://art/player/player_3d.tscn" id="4_0jwve"]
 [ext_resource type="PackedScene" uid="uid://bv15uf6eftdsw" path="res://scenes/prefabs/random_scenes/objects/halo.tscn" id="5_vteis"]
-[ext_resource type="Shader" uid="uid://d2wd8xb232v00" path="res://materials/halo.gdshader" id="6_f6xj4"]
-[ext_resource type="ArrayMesh" uid="uid://b8w45rwknyifm" path="res://meshes/grass.res" id="7_t5y5l"]
+[ext_resource type="Shader" uid="uid://d2wd8xb232v00" path="res://art/materials/halo.gdshader" id="6_f6xj4"]
+[ext_resource type="ArrayMesh" uid="uid://b8w45rwknyifm" path="res://art/meshes/grass.res" id="7_t5y5l"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ab3st"]
 shader = ExtResource("1_jd2gf")

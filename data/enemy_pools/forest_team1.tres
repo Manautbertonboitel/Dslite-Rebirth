@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="FighterPool" load_steps=4 format=3 uid="uid://dxryfnna46ibl"]
+
+[ext_resource type="Resource" uid="uid://rwlloviuqfec" path="res://data/enemies/enemy1.tres" id="1_a0f64"]
+[ext_resource type="Script" uid="uid://cvpf5ti0muw4u" path="res://scripts/fighter_data.gd" id="1_ld2m0"]
+[ext_resource type="Script" uid="uid://c0dv0pdupe1eb" path="res://scripts/angelic_combat_system/fighter_pool.gd" id="1_wouts"]
+
+[resource]
+script = ExtResource("1_wouts")
+pool_name = "Enemy de la foret"
+fighters = Array[ExtResource("1_ld2m0")]([ExtResource("1_a0f64")])
+metadata/_custom_type_script = "uid://c0dv0pdupe1eb"

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bv15uf6eftdsw"]
 
-[ext_resource type="PackedScene" uid="uid://ds2iw6520stfa" path="res://meshes/Halo.fbx" id="1_pndpu"]
-[ext_resource type="Shader" uid="uid://d2wd8xb232v00" path="res://materials/halo.gdshader" id="2_tb2ds"]
+[ext_resource type="PackedScene" uid="uid://ds2iw6520stfa" path="res://art/meshes/Halo.fbx" id="1_pndpu"]
+[ext_resource type="Shader" uid="uid://d2wd8xb232v00" path="res://art/materials/halo.gdshader" id="2_tb2ds"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_frsjv"]
 render_priority = 0

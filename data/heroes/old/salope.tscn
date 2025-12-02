@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://crvwyow66xyih"]
+
+[ext_resource type="Script" uid="uid://dp1dqpdpk6vo6" path="res://scripts/angelic_combat_system/fighter.gd" id="1_nd1lq"]
+[ext_resource type="Resource" uid="uid://43mcg5ogpsrx" path="res://data/actions/slash.tres" id="2_iw2v7"]
+[ext_resource type="Resource" uid="uid://7dsedw0bk4nm" path="res://data/actions/biffle.tres" id="3_x4wgw"]
+[ext_resource type="Resource" uid="uid://dsbiqs3aki1vq" path="res://data/actions/assembly_dissolution.tres" id="4_chl3t"]
+
+[node name="Fighter" type="Node"]
+script = ExtResource("1_nd1lq")
+character_name = "Salope"
+max_hp = 15
+hp = 15
+max_mp = 30
+mp = 30
+actions = Array[Resource]([ExtResource("2_iw2v7"), ExtResource("3_x4wgw"), ExtResource("4_chl3t")])
+atb_speed = 22.0

@@ -6,6 +6,9 @@ extends CharacterBody3D
 @export var rotation_speed := 12.0
 @export var jump_impulse := 12.0
 
+@export var attack_range: float = 3.0
+@export var attack_raycast: RayCast3D
+
 var _gravity := -30.0
 @export var _current_camera : Camera3D = null   # caméra fixe active
 
@@ -14,13 +17,14 @@ var _gravity := -30.0
 var _last_input := Vector2.ZERO           # dernier input (WASD)
 var _current_move_direction := Vector3.ZERO  # direction monde calculée
 
-func set_active_camera(cam: Camera3D) -> void:
-	if _current_camera:
-		_current_camera.current = false
-	_current_camera = cam
-	if _current_camera:
-		_current_camera.current = true
-
+func _ready():
+	add_to_group("player")
+	
+	# Restore position after combat
+	if GameManager.return_position != Vector3.ZERO:
+		global_position = GameManager.return_position
+		rotation = GameManager.return_rotation
+		GameManager.return_position = Vector3.ZERO  # Clear
 
 func _physics_process(delta: float) -> void:
 	if _current_camera == null:
@@ -74,3 +78,36 @@ func _physics_process(delta: float) -> void:
 			_skin.move()
 		else:
 			_skin.idle()
+			
+	# Attack input
+	if Input.is_action_just_pressed("attack"):  # Map this in Input Map
+		perform_attack()
+
+func perform_attack():
+	"""Attack an enemy in range - triggers combat with advantage"""
+	print("Player attacks!")
+	
+	# Raycast or sphere check for enemies
+	var space_state = get_world_3d().direct_space_state
+	var query = PhysicsShapeQueryParameters3D.new()
+	var sphere = SphereShape3D.new()
+	sphere.radius = attack_range
+	query.shape = sphere
+	query.transform = global_transform
+	query.collision_mask = 2  # Assuming enemies are on layer 2
+	
+	var results = space_state.intersect_shape(query)
+	
+	if results.size() > 0:
+		var enemy = results[0].collider
+		if enemy.has_method("take_preemptive_hit"):
+			enemy.take_preemptive_hit()
+	else:
+		print("No enemy in range")
+
+func set_active_camera(cam: Camera3D) -> void:
+	if _current_camera:
+		_current_camera.current = false
+	_current_camera = cam
+	if _current_camera:
+		_current_camera.current = true

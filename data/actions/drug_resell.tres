@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Action" load_steps=2 format=3 uid="uid://ccnhhcn7t7mrx"]
+
+[ext_resource type="Script" uid="uid://bs0mfywd5eycu" path="res://scripts/angelic_combat_system/action.gd" id="1_wdvto"]
+
+[resource]
+script = ExtResource("1_wdvto")
+action_name = "Vente de Drogue"
+power = 25
+metadata/_custom_type_script = "uid://bs0mfywd5eycu"

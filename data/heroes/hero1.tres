@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="FighterData" load_steps=6 format=3 uid="uid://cu8ibno8qactw"]
+
+[ext_resource type="Script" uid="uid://bs0mfywd5eycu" path="res://scripts/angelic_combat_system/action.gd" id="1_fgrbo"]
+[ext_resource type="Script" uid="uid://cvpf5ti0muw4u" path="res://scripts/fighter_data.gd" id="2_ce8jd"]
+[ext_resource type="Resource" uid="uid://43mcg5ogpsrx" path="res://data/actions/slash.tres" id="2_lkafn"]
+[ext_resource type="Resource" uid="uid://b5gh2iwtsdaal" path="res://data/actions/power_slash.tres" id="3_nj3kn"]
+[ext_resource type="PackedScene" uid="uid://djstn15csah1r" path="res://scenes/combat/fighter_scene.tscn" id="4_nj3kn"]
+
+[resource]
+script = ExtResource("2_ce8jd")
+character_name = "Hero 1"
+fighter_scene = ExtResource("4_nj3kn")
+atb_speed = 15.0
+available_actions = Array[ExtResource("1_fgrbo")]([ExtResource("2_lkafn"), ExtResource("3_nj3kn")])
+metadata/_custom_type_script = "uid://cvpf5ti0muw4u"

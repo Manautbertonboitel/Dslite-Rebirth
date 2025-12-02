@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="Action" load_steps=2 format=3 uid="uid://7dsedw0bk4nm"]
-
-[ext_resource type="Script" uid="uid://bs0mfywd5eycu" path="res://scripts/angel_combat_system/action.gd" id="1_q7a1u"]
-
-[resource]
-script = ExtResource("1_q7a1u")
-action_name = "Coup de bite"
-power = 4
-metadata/_custom_type_script = "uid://bs0mfywd5eycu"

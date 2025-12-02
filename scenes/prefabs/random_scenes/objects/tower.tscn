@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://c0dsmo2w7aenb"]
 
-[ext_resource type="PackedScene" uid="uid://bannkjitj3xwk" path="res://meshes/Tower.glb" id="1_ay4al"]
-[ext_resource type="Texture2D" uid="uid://ba6sltjno7leb" path="res://textures/Tower_medieval_wall_02_diff_256.jpg" id="2_ktxwe"]
-[ext_resource type="Material" uid="uid://cyqjfyxoc1jh8" path="res://materials/Tower_PS1.tres" id="2_qrbg1"]
-[ext_resource type="Shader" uid="uid://diwg8kbsjjmcw" path="res://materials/PS1.gdshader" id="4_qrbg1"]
+[ext_resource type="PackedScene" uid="uid://bannkjitj3xwk" path="res://art/meshes/Tower.glb" id="1_ay4al"]
+[ext_resource type="Texture2D" uid="uid://0d3i74lhkpdd" path="res://art/textures/Tower_medieval_wall_02_diff_256.jpg" id="2_ktxwe"]
+[ext_resource type="Material" uid="uid://cyqjfyxoc1jh8" path="res://art/materials/Tower_PS1.tres" id="2_qrbg1"]
+[ext_resource type="Shader" uid="uid://diwg8kbsjjmcw" path="res://art/materials/PS1.gdshader" id="4_qrbg1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ay4al"]
 size = Vector3(2.23489, 7.82934, 5.0527)

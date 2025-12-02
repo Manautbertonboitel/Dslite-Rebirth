@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3rulo1wh6fpv"]
+
+[ext_resource type="Script" uid="uid://dp1dqpdpk6vo6" path="res://scripts/angelic_combat_system/fighter.gd" id="1_pvsun"]
+[ext_resource type="Resource" uid="uid://43mcg5ogpsrx" path="res://data/actions/slash.tres" id="2_1rgi2"]
+[ext_resource type="Resource" uid="uid://b5gh2iwtsdaal" path="res://data/actions/power_slash.tres" id="3_bftkm"]
+
+[node name="Fighter" type="Node"]
+script = ExtResource("1_pvsun")
+character_name = "Michel"
+max_hp = 30
+hp = 30
+max_mp = 30
+mp = 30
+actions = Array[Resource]([ExtResource("2_1rgi2"), ExtResource("3_bftkm")])
+atb_speed = 20.0

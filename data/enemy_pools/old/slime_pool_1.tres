@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="FighterPool" load_steps=4 format=3 uid="uid://q0b2halbsdvk"]
+
+[ext_resource type="PackedScene" uid="uid://biwa2dsmb32el" path="res://data/enemies/old/slime.tscn" id="1_cobl4"]
+[ext_resource type="PackedScene" uid="uid://cqtbmsrctuqjv" path="res://data/enemies/old/grumpy_slime.tscn" id="2_d6j7s"]
+[ext_resource type="Script" uid="uid://c0dv0pdupe1eb" path="res://scripts/angelic_combat_system/fighter_pool.gd" id="3_gx8ev"]
+
+[resource]
+script = ExtResource("3_gx8ev")
+poolName = "Group of Slimes"
+fighters = Array[Resource]([ExtResource("1_cobl4"), ExtResource("2_d6j7s")])
+metadata/_custom_type_script = "uid://c0dv0pdupe1eb"
