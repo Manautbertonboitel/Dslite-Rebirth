@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="FighterData" load_steps=5 format=3 uid="uid://rwlloviuqfec"]
+
+[ext_resource type="Script" uid="uid://bs0mfywd5eycu" path="res://data/systems/angelic_combat_system/actions/action.gd" id="1_h14aj"]
+[ext_resource type="Resource" uid="uid://7dsedw0bk4nm" path="res://data/systems/angelic_combat_system/actions/biffle.tres" id="2_yk2tt"]
+[ext_resource type="PackedScene" uid="uid://djstn15csah1r" path="res://data/characters/lapine/Lapine_fighter_scene.tscn" id="3_4ftke"]
+[ext_resource type="Script" uid="uid://cvpf5ti0muw4u" path="res://data/systems/angelic_combat_system/fighter_data.gd" id="4_6v2sh"]
+
+[resource]
+script = ExtResource("4_6v2sh")
+character_name = "Dark Lapine"
+is_enemy = true
+fighter_scene = ExtResource("3_4ftke")
+max_hp = 10
+available_actions = Array[ExtResource("1_h14aj")]([ExtResource("2_yk2tt")])
+loot_table = "forest"
+metadata/_custom_type_script = "uid://cvpf5ti0muw4u"

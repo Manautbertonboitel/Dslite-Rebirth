@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://hqbkteiimfem"]
+
+[ext_resource type="PackedScene" uid="uid://cnedxfn2pxh2t" path="res://addons/level/level.tscn" id="1_2p72c"]
+[ext_resource type="PackedScene" uid="uid://b2mt87uhqd08p" path="res://data/characters/player/player_3d.tscn" id="2_rl6l6"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Level" parent="." instance=ExtResource("1_2p72c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.270674, 0.228707, 0.309135)
+
+[node name="Player3D" parent="." instance=ExtResource("2_rl6l6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.270674, 0.228707, -40.4116)
+acceleration = 99.0
+rotation_speed = 60.0
+jump_impulse = 20.0

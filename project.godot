@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="DSLite"
-run/main_scene="res://scenes/world/main_level/main_scene.tscn"
+run/main_scene="res://data/maps/world/main_level/main_scene.tscn"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://scripts/autoload/game_manager.gd"
-TransitionManager="*res://scripts/autoload/transition_manager.gd"
+GameManager="*res://data/systems/autoload/game_manager.gd"
+TransitionManager="*res://data/systems/autoload/transition_manager.gd"
 
 [display]
 

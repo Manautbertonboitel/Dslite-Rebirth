@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="FighterData" load_steps=6 format=3 uid="uid://dqcfjvsiatuk1"]
+
+[ext_resource type="Script" uid="uid://bs0mfywd5eycu" path="res://data/systems/angelic_combat_system/actions/action.gd" id="1_0cpo7"]
+[ext_resource type="Resource" uid="uid://ccnhhcn7t7mrx" path="res://data/systems/angelic_combat_system/actions/drug_resell.tres" id="2_hrgk8"]
+[ext_resource type="Script" uid="uid://cvpf5ti0muw4u" path="res://data/systems/angelic_combat_system/fighter_data.gd" id="2_mxl8c"]
+[ext_resource type="Resource" uid="uid://43mcg5ogpsrx" path="res://data/systems/angelic_combat_system/actions/slash.tres" id="3_4p7np"]
+[ext_resource type="PackedScene" uid="uid://bic7x4wo8em6" path="res://data/characters/lapine_2/Lapine_2_fighter_scene.tscn" id="4_0cpo7"]
+
+[resource]
+script = ExtResource("2_mxl8c")
+character_name = "Lapine 2"
+fighter_scene = ExtResource("4_0cpo7")
+atb_speed = 15.0
+available_actions = Array[ExtResource("1_0cpo7")]([ExtResource("2_hrgk8"), ExtResource("3_4p7np")])
+metadata/_custom_type_script = "uid://cvpf5ti0muw4u"
