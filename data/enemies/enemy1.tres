@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bs0mfywd5eycu" path="res://scripts/angelic_combat_system/action.gd" id="1_mt4vc"]
 [ext_resource type="Resource" uid="uid://7dsedw0bk4nm" path="res://data/actions/biffle.tres" id="2_bkkyb"]
-[ext_resource type="Script" uid="uid://cvpf5ti0muw4u" path="res://scripts/fighter_data.gd" id="2_s77tj"]
+[ext_resource type="Script" uid="uid://cvpf5ti0muw4u" path="res://scripts/angelic_combat_system/fighter_data.gd" id="2_s77tj"]
 [ext_resource type="PackedScene" uid="uid://djstn15csah1r" path="res://scenes/combat/fighter_scene.tscn" id="3_bkkyb"]
 
 [resource]

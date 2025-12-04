@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="LootEntry" load_steps=3 format=3 uid="uid://da2vk1qfxq1ae"]
 
-[ext_resource type="Script" uid="uid://cnpwrk7icvegv" path="res://scripts/loot_entry.gd" id="1_b57uu"]
+[ext_resource type="Script" uid="uid://cnpwrk7icvegv" path="res://scripts/loot/loot_entry.gd" id="1_b57uu"]
 [ext_resource type="Resource" uid="uid://cutdygfjfaqro" path="res://data/items/item1.tres" id="1_i462i"]
 
 [resource]

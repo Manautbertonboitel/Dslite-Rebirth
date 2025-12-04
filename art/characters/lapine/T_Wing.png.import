@@ -2,20 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dy8ya8nrwd4jb"
-path.s3tc="res://.godot/imported/Tower_medieval_wall_02_diff_256.jpg-4eddc44122f3d986f96d19a1f457b5c8.s3tc.ctex"
+uid="uid://dk3hu7xla5os"
+path.s3tc="res://.godot/imported/T_Wing.png-22e009fe6202d0df3dc66ed270283101.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "0f2f00a1f3eafab94dc6eeba6da1ed62"
-}
 
 [deps]
 
-source_file="res://art/meshes/Tower_medieval_wall_02_diff_256.jpg"
-dest_files=["res://.godot/imported/Tower_medieval_wall_02_diff_256.jpg-4eddc44122f3d986f96d19a1f457b5c8.s3tc.ctex"]
+source_file="res://art/characters/lapine/T_Wing.png"
+dest_files=["res://.godot/imported/T_Wing.png-22e009fe6202d0df3dc66ed270283101.s3tc.ctex"]
 
 [params]
 

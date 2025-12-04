@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cip1awte2184j" path="res://addons/level/cactus/cactus_small_2.tscn" id="6_ona4a"]
 [ext_resource type="Material" uid="uid://da188d7yrcfr8" path="res://addons/level/platforms.tres" id="7_njuj4"]
 [ext_resource type="PackedScene" uid="uid://c6uew1wfpkt16" path="res://addons/level/interactable/flag/flag_3d.tscn" id="8_kebk2"]
-[ext_resource type="PackedScene" uid="uid://l5boluq4n37e" path="res://art/lapine/lapine.tscn" id="12_0g8ro"]
+[ext_resource type="PackedScene" uid="uid://l5boluq4n37e" path="res://art/characters/lapine/lapine.tscn" id="12_0g8ro"]
 
 [sub_resource type="Curve" id="Curve_k4wis"]
 _data = [Vector2(0.331719, 0.0391753), 0.0, 0.0, 0, 0, Vector2(0.697336, 1), 0.51276, 0.0, 0, 0]
@@ -33,9 +33,9 @@ cellular_distance_function = 2
 width = 1024
 height = 1024
 generate_mipmaps = false
-seamless = true
-color_ramp = SubResource("Gradient_4p0vt")
 noise = SubResource("FastNoiseLite_jnnrx")
+color_ramp = SubResource("Gradient_4p0vt")
+seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g8ud2"]
 shader = ExtResource("1_hwp5q")

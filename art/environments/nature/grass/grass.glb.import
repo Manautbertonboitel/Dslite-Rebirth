@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bannkjitj3xwk"
-path="res://.godot/imported/Tower.glb-965a609c4a3a363c4924e875d57477c1.scn"
+uid="uid://b8wndcwtnvkbh"
+path="res://.godot/imported/grass.glb-bfa05880a8f6583adc0335da66f160ac.scn"
 
 [deps]
 
-source_file="res://art/meshes/Tower.glb"
-dest_files=["res://.godot/imported/Tower.glb-965a609c4a3a363c4924e875d57477c1.scn"]
+source_file="res://art/environments/nature/grass/grass.glb"
+dest_files=["res://.godot/imported/grass.glb-bfa05880a8f6583adc0335da66f160ac.scn"]
 
 [params]
 
@@ -37,6 +37,18 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={}
+_subresources={
+"meshes": {
+"grass_Plane_005": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://art/environments/nature/grass/grass.res",
+"save_to_file/path": "uid://b8w45rwknyifm"
+}
+}
+}
 gltf/naming_version=1
 gltf/embedded_image_handling=1

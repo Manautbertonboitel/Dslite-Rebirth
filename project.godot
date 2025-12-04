@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameManager="*res://autoload/game_manager.gd"
-TransitionManager="*res://autoload/transition_manager.gd"
+GameManager="*res://scripts/autoload/game_manager.gd"
+TransitionManager="*res://scripts/autoload/transition_manager.gd"
 
 [display]
 

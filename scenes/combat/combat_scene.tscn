@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://cnkp5d0n06omu" path="res://scripts/angelic_combat_system/combat_manager.gd" id="1_pbkuh"]
 [ext_resource type="PackedScene" uid="uid://ch2xa71k3v65b" path="res://scenes/prefabs/angel_combat_system/character_ui.tscn" id="4_ptoiq"]
 [ext_resource type="Script" uid="uid://bnwj20lgxfhqw" path="res://scripts/angelic_combat_system/action_panel.gd" id="5_3c7v3"]
-[ext_resource type="Script" uid="uid://dac6xgeuf84cj" path="res://scripts/victory_panel.gd" id="5_kltxb"]
+[ext_resource type="Script" uid="uid://dac6xgeuf84cj" path="res://scripts/angelic_combat_system/victory_panel.gd" id="5_kltxb"]
 [ext_resource type="Script" uid="uid://dpmsmv0miv5nu" path="res://scripts/angelic_combat_system/target_panel.gd" id="6_etgvb"]
-[ext_resource type="Script" uid="uid://dnudpbi6dhsfn" path="res://scripts/defeat_panel.gd" id="6_pbkuh"]
+[ext_resource type="Script" uid="uid://dnudpbi6dhsfn" path="res://scripts/angelic_combat_system/defeat_panel.gd" id="6_pbkuh"]
 
 [node name="CombatScene" type="Node3D"]
 
