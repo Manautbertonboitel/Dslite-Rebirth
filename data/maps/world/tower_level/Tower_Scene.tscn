@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://b2mt87uhqd08p" path="res://data/characters/player/player_3d.tscn" id="4_0jwve"]
 [ext_resource type="PackedScene" uid="uid://bv15uf6eftdsw" path="res://data/environments/common/halo.tscn" id="5_vteis"]
 [ext_resource type="Shader" uid="uid://d2wd8xb232v00" path="res://data/environments/common/halo.gdshader" id="6_f6xj4"]
-[ext_resource type="Shader" uid="uid://d3jhj6gewcncf" path="res://data/environments/nature/grass/grass.gdshader" id="7_d01xq"]
-[ext_resource type="ArrayMesh" uid="uid://b8w45rwknyifm" path="res://data/environments/nature/grass/grass.res" id="7_t5y5l"]
-[ext_resource type="PackedScene" path="res://data/characters/anno/anno.tscn" id="9_82pjk"]
+[ext_resource type="Shader" uid="uid://d3jhj6gewcncf" path="res://data/environments/vegetation/grass/grass.gdshader" id="7_d01xq"]
+[ext_resource type="ArrayMesh" uid="uid://b8w45rwknyifm" path="res://data/environments/vegetation/grass/grass.res" id="7_t5y5l"]
+[ext_resource type="PackedScene" uid="uid://dtfhci3vvkfgr" path="res://data/characters/anno/anno.tscn" id="9_82pjk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ab3st"]
 shader = ExtResource("1_jd2gf")
@@ -84,6 +84,11 @@ shader_parameter/rotation_speed = 0.1
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_82pjk"]
 render_priority = 0
 shader = ExtResource("7_d01xq")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/color2 = Color(0, 0, 0, 1)
+shader_parameter/noiseScale = 20.0
+shader_parameter/wind_speed = 0.1
+shader_parameter/wind_strength = 0.01
 
 [sub_resource type="MultiMesh" id="MultiMesh_8p3ke"]
 transform_format = 1
@@ -144,7 +149,6 @@ skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_j1ugm")
 
 [node name="grass" type="MultiMeshInstance3D" parent="SubViewportContainer/SubViewport"]
-visible = false
 material_override = SubResource("ShaderMaterial_82pjk")
 cast_shadow = 0
 multimesh = SubResource("MultiMesh_8p3ke")
