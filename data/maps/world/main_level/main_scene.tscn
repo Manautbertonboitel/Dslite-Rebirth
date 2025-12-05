@@ -1,15 +1,91 @@
-[gd_scene load_steps=3 format=3 uid="uid://hqbkteiimfem"]
+[gd_scene load_steps=7 format=3 uid="uid://hqbkteiimfem"]
 
-[ext_resource type="PackedScene" uid="uid://cnedxfn2pxh2t" path="res://addons/level/level.tscn" id="1_2p72c"]
-[ext_resource type="PackedScene" uid="uid://b2mt87uhqd08p" path="res://data/characters/player/player_3d.tscn" id="2_rl6l6"]
+[ext_resource type="PackedScene" uid="uid://cnedxfn2pxh2t" path="res://addons/level/level.tscn" id="1_gcxt2"]
+[ext_resource type="PackedScene" uid="uid://b2mt87uhqd08p" path="res://characters/heroes/player/player_3d.tscn" id="2_a3724"]
+[ext_resource type="PackedScene" uid="uid://l5boluq4n37e" path="res://characters/heroes/lapine/lapine.tscn" id="2_tkk60"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7ju2i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4t1tp"]
+albedo_color = Color(0.41568628, 0.45882353, 0.47058824, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_sv2kj"]
+material = SubResource("StandardMaterial3D_4t1tp")
 
 [node name="Node3D" type="Node3D"]
 
-[node name="Level" parent="." instance=ExtResource("1_2p72c")]
+[node name="Level" parent="." instance=ExtResource("1_gcxt2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.270674, 0.228707, 0.309135)
 
-[node name="Player3D" parent="." instance=ExtResource("2_rl6l6")]
+[node name="Level2" parent="." instance=ExtResource("1_gcxt2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.548183, 0.228707, -26.042665)
+
+[node name="Lapine2" parent="Level2" instance=ExtResource("2_tkk60")]
+transform = Transform3D(1.6951046, 0, -0.13191926, 0, 1.7002301, 0, 0.13191926, 0, 1.6951046, -5.377413, 0.3160553, -55.961777)
+
+[node name="Lapine3" parent="Level2" instance=ExtResource("2_tkk60")]
+transform = Transform3D(1.6951046, 0, -0.13191926, 0, 1.7002301, 0, 0.13191926, 0, 1.6951046, -4.6466217, 0.3160553, -53.633812)
+
+[node name="Lapine4" parent="Level2" instance=ExtResource("2_tkk60")]
+transform = Transform3D(1.6951046, 0, -0.13191926, 0, 1.7002301, 0, 0.13191926, 0, 1.6951046, -2.5011234, 0.3160553, -55.05889)
+
+[node name="Lapine5" parent="Level2" instance=ExtResource("2_tkk60")]
+transform = Transform3D(1.6951046, 0, -0.13191926, 0, 1.7002301, 0, 0.13191926, 0, 1.6951046, -3.4853954, 0.3160553, -56.836914)
+
+[node name="Lapine6" parent="Level2" instance=ExtResource("2_tkk60")]
+transform = Transform3D(-1.5456014, 0, -0.7084476, 0, 1.7002301, 0, 0.7084476, 0, -1.5456014, -2.0508099, 0.3160553, -46.598015)
+
+[node name="Lapine7" parent="Level2" instance=ExtResource("2_tkk60")]
+transform = Transform3D(-1.5456014, 0, -0.7084476, 0, 1.7002301, 0, 0.7084476, 0, -1.5456014, -4.1384773, 0.3160553, -48.167175)
+
+[node name="Lapine8" parent="Level2" instance=ExtResource("2_tkk60")]
+transform = Transform3D(-1.5456014, 0, -0.7084476, 0, 1.7002301, 0, 0.7084476, 0, -1.5456014, -5.9305153, 0.3160553, -45.750763)
+
+[node name="Lapine9" parent="Level2" instance=ExtResource("2_tkk60")]
+transform = Transform3D(-1.5456014, 0, -0.7084476, 0, 1.7002301, 0, 0.7084476, 0, -1.5456014, -3.596815, 0.3160553, -44.803413)
+
+[node name="Lapine2" parent="." instance=ExtResource("2_tkk60")]
+transform = Transform3D(-1.6176189, 0, -0.523537, 0, 1.7002301, 0, 0.523537, 0, -1.6176189, -58.273132, 0.54476184, -109.11031)
+
+[node name="Lapine3" parent="." instance=ExtResource("2_tkk60")]
+transform = Transform3D(1.0566521, 0, -1.3320166, 0, 1.7002301, 0, 1.3320166, 0, 1.0566521, -57.13531, 0.54476184, -106.93656)
+
+[node name="Lapine4" parent="." instance=ExtResource("2_tkk60")]
+transform = Transform3D(1.6951046, 0, -0.13191926, 0, 1.7002301, 0, 0.13191926, 0, 1.6951046, -55.396843, 0.54476184, -108.20743)
+
+[node name="Lapine5" parent="." instance=ExtResource("2_tkk60")]
+transform = Transform3D(-1.1487242, 0, 1.2534808, 0, 1.7002301, 0, -1.2534808, 0, -1.1487242, -56.38111, 0.54476184, -109.98545)
+
+[node name="Lapine6" parent="." instance=ExtResource("2_tkk60")]
+transform = Transform3D(-1.5456014, 0, -0.7084476, 0, 1.7002301, 0, 0.7084476, 0, -1.5456014, -51.573597, 0.54476327, -107.29175)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lapine6"]
+transform = Transform3D(1, 0, 2.9802322e-08, 0, 1, 0, -2.9802322e-08, 0, 1, 0, 0.5031047, 0)
+shape = SubResource("CapsuleShape3D_7ju2i")
+
+[node name="Lapine7" parent="." instance=ExtResource("2_tkk60")]
+transform = Transform3D(-1.5230083, 0, 0.75579584, 0, 1.7002301, 0, -0.75579584, 0, -1.5230083, -58.37575, 0.54476374, -101.85636)
+
+[node name="Lapine8" parent="." instance=ExtResource("2_tkk60")]
+transform = Transform3D(1.1265621, 0, -1.2734361, 0, 1.70023, 0, 1.2734361, 0, 1.1265621, -54.87957, 0.54476327, -113.427704)
+
+[node name="Lapine9" parent="." instance=ExtResource("2_tkk60")]
+transform = Transform3D(1.0755147, 0, 1.3168334, 0, 1.7002301, 0, -1.3168334, 0, 1.0755147, -62.868355, 0.54476374, -109.114174)
+
+[node name="Level3" parent="." instance=ExtResource("1_gcxt2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -135.64528, -14.509782, 45.27063)
+
+[node name="Player3D" parent="." instance=ExtResource("2_a3724")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.270674, 0.228707, -40.4116)
 acceleration = 99.0
 rotation_speed = 60.0
 jump_impulse = 20.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(19.85, 0, 0, 0, 0.94, 0, 0, 0, 32.105, -25.960022, 0.02663374, -71.36897)
+mesh = SubResource("BoxMesh_sv2kj")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(19.85, 0, 0, 0, 0.94, 0, 0, 0, 32.105, -55.862675, -0.26859903, -100.00949)
+mesh = SubResource("BoxMesh_sv2kj")
+metadata/_edit_lock_ = true

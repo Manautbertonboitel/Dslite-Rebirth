@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtfhci3vvkfgr"]
+
+[ext_resource type="PackedScene" uid="uid://cdbfu4rbirln1" path="res://Meshes/Anno.fbx" id="1_8jaq5"]
+[ext_resource type="Texture2D" uid="uid://clnp4imx23k8e" path="res://Textures/T_Anno.png" id="2_isiuv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d2r3y"]
+albedo_texture = ExtResource("2_isiuv")
+
+[node name="Anno" instance=ExtResource("1_8jaq5")]
+
+[node name="Anno" parent="." index="0"]
+transform = Transform3D(60, 9.775242e-06, 4.272894e-13, 0, -2.6226833e-06, 60, 9.775242e-06, -60, -2.6226833e-06, -0.5, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_d2r3y")
