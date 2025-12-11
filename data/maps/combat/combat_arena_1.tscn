@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ce6xqcfyhxyut"]
+[gd_scene load_steps=8 format=3 uid="uid://ce6xqcfyhxyut"]
 
 [ext_resource type="Script" uid="uid://cnkp5d0n06omu" path="res://data/systems/angelic_combat_system/combat_manager.gd" id="1_pbkuh"]
 [ext_resource type="PackedScene" uid="uid://ch2xa71k3v65b" path="res://data/systems/angelic_combat_system/UI/character_ui.tscn" id="4_ptoiq"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://dac6xgeuf84cj" path="res://data/systems/angelic_combat_system/UI/victory_panel.gd" id="5_kltxb"]
 [ext_resource type="Script" uid="uid://dpmsmv0miv5nu" path="res://data/systems/angelic_combat_system/UI/target_panel.gd" id="6_etgvb"]
 [ext_resource type="Script" uid="uid://dnudpbi6dhsfn" path="res://data/systems/angelic_combat_system/UI/defeat_panel.gd" id="6_pbkuh"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dj5a4"]
 
 [node name="CombatScene" type="Node3D"]
 
@@ -113,3 +115,12 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 0
 offset_right = 551.0
 offset_bottom = 40.0
+
+[node name="level" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.32774496, 0)
+mesh = SubResource("PlaneMesh_dj5a4")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.7978857, -0.04870585, 0.600838, -0.002460366, 0.99645907, 0.08404343, -0.602804, -0.068535306, 0.7949406, 0.7423706, 0.34279668, 1.2975461)

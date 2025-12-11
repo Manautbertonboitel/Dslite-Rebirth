@@ -1,15 +1,25 @@
 extends Node
 enum BattleState { START, WAITING, ACTION_SELECT, ACTION_EXECUTE, CHECK, END }
 
-var fighters = []          # Tous les personnages (alliés + ennemis)
-var ready_queue = []       # Personnages avec ATB pleine, prêts à agir
+var fighters: Array[Fighter] = []  # Tous les personnages (alliés + ennemis)
+var ready_queue: Array[Fighter] = [] # Personnages avec ATB pleine, prêts à agir
 var state = BattleState.START
-var current_character = null
-var time_paused = false    # Pour pause ATB pendant sélection
+var current_character: Fighter = null
+# TODO sûrement désactiver ça si on veut un combat bcp plus dynamique et pouvoir  esquiver les attaques
+var time_paused: bool = false # Pour pause ATB pendant sélection d'actions de chaque perso.
 
-var defeated_enemies_data: Array = []  # Store enemy data for rewards
+# TODO FORMATION SYSTEM 
+#var hero_formation: Formation
+#var enemy_formation: Formation
+#
+# TODO TEAM RESOURCES 
+#var hero_resources: TeamResources
+#var enemy_resources: TeamResources
 
-#UI
+# REWARDS - Only enemies actually defeated
+var defeated_enemies_data: Array[FighterData] = []
+
+#UI References
 @export var action_panel : Control
 @export var target_panel : Control
 @export var defeat_panel : Control
@@ -47,51 +57,91 @@ func start_battle(heroes_pool: FighterPool, enemies_pool: FighterPool, atb_advan
 	var heroes_data = heroes_pool.fighters
 	var enemies_data = enemies_pool.fighters
 
-	defeated_enemies_data = enemies_data.duplicate()
-
-	var heroes = []
+	# Clear defeated list (only fill when enemies actually die)
+	defeated_enemies_data.clear()
+	
+	# Create heroes (merged instantiation + UI)
+	var heroes: Array[Fighter] = []
 	for data in heroes_data:
-		# On instancie la scène de base du combattant
-		var hero_scene = data.fighter_scene.instantiate()  # Uses PackedScene from data
-		add_child(hero_scene)
-		
-		# On assigne la ressource FighterData
-		hero_scene.setup_from_data(data)
-		
-		# On applique un éventuel avantage ATB
-		if atb_advantage:
-			hero_scene.atb = 50.0
-
-		heroes.append(hero_scene)
+		var hero = instantiate_fighter_with_ui(
+			data,
+			heroes_ui_container,
+			atb_advantage
+		)
+		if hero:
+			heroes.append(hero)
 	
-	var enemies = []
+	# Create enemies (merged instantiation + UI)
+	var enemies: Array[Fighter] = []
 	for data in enemies_data:
-		var enemy_scene = data.fighter_scene.instantiate()  # Uses PackedScene from data
-		add_child(enemy_scene)
-		enemy_scene.setup_from_data(data)
-		enemies.append(enemy_scene)
+		var enemy = instantiate_fighter_with_ui(
+			data,
+			enemies_ui_container,
+			false  # Enemies don't get advantage
+		)
+		if enemy:
+			enemies.append(enemy)
 	
-	fighters = heroes + enemies
-		
-	# Créer l'UI pour chaque héros
-	for hero in heroes:
-		var hero_ui = character_ui_prefab.instantiate()
-		heroes_ui_container.add_child(hero_ui)
-		hero_ui.fighter = hero
-	
-	# Créer l'UI pour chaque ennemi
-	for enemy in enemies:
-		var enemy_ui = character_ui_prefab.instantiate()
-		enemies_ui_container.add_child(enemy_ui)
-		enemy_ui.fighter = enemy
-	
-	# Connecter le signal ready_to_act de chaque fighter
+	# Connect fighter signals
 	for fighter in fighters:
 		fighter.ready_to_act.connect(_on_fighter_ready)
-		print("Loaded fighter: ", fighter.character_name, " | HP=", fighter.hp, " | Speed=", fighter.atb_speed, " | enemy=", fighter.is_enemy)
+		
+		# Connect death signal for reward tracking
+		if fighter.is_enemy:
+			fighter.tree_exiting.connect(_on_enemy_died.bind(fighter))
+		
+		print("Fighter: %s | HP=%d | Enemy=%s" % [
+			fighter.character_name,
+			fighter.hp,
+			fighter.is_enemy
+		])
 		
 	state = BattleState.WAITING
 	print("\n=== ATB bars charging... ===")
+
+func instantiate_fighter_with_ui(data: FighterData, ui_container: VBoxContainer, atb_advantage: bool) -> Fighter:
+	"""
+	Create fighter instance AND its UI in one function
+	Returns the fighter instance
+	"""
+	# 1. Instantiate fighter
+	var fighter = data.instantiate()
+	if fighter == null:
+		push_error("Failed to instantiate fighter: %s" % data.character_name)
+		return null
+	
+	add_child(fighter)
+	
+	# 2. TODO Add standard actions
+	#ensure_has_basic_actions(fighter, not data.is_enemy)
+	
+	# 3. Apply ATB advantage if applicable
+	if atb_advantage:
+		fighter.atb = 50.0
+	
+	# 4. Create UI immediately
+	if character_ui_prefab:
+		var ui = character_ui_prefab.instantiate()
+		ui_container.add_child(ui)
+		ui.fighter = fighter
+	else:
+		push_warning("No character_ui_prefab set!")
+	
+	# 5. Add to fighters list
+	fighters.append(fighter)
+	
+	return fighter
+
+func _on_enemy_died(enemy: Fighter):
+	"""
+	Called when an enemy dies (tree_exiting signal)
+	Only adds to defeated list if enemy actually died in combat
+	"""
+	if not enemy.is_alive() and enemy.original_data:
+		# Check if not already in list
+		if not defeated_enemies_data.has(enemy.original_data):
+			defeated_enemies_data.append(enemy.original_data)
+			print("💀 Enemy defeated: %s (Rewards will be granted)" % enemy.character_name)
 
 func _process(_delta):
 	# Pause ATB pendant la sélection d'action
@@ -141,7 +191,12 @@ func process_next_ready_fighter():
 	else:
 		# Joueur → pause ATB et affiche menu
 		time_paused = true
-		action_panel.show_actions(current_character)
+		show_action_menu(current_character)
+
+func show_action_menu(fighter: Fighter):
+	"""Show action selection menu"""
+	if action_panel:
+		action_panel.show_actions(fighter)
 		action_panel.action_chosen.connect(_on_action_chosen, CONNECT_ONE_SHOT)
 
 func _on_action_chosen(action):
@@ -191,30 +246,35 @@ func check_victory():
 
 	if not heroes_alive:
 		end_battle(false)
-		print("\n--- DEFEAT... ---")
 	elif not enemies_alive:
 		end_battle(true)
-		print("\n*** VICTORY! ***")
 
 func end_battle(victory: bool):
 	state = BattleState.END
 	time_paused = true
 	
-	# Arrêter tous les fighters
 	for fighter in fighters:
 		fighter.set_process(false)
 	
 	if victory:
-		victory_panel.visible = true
-		victory_panel.continue_pressed.connect(_on_victory_continue)
+		print("\n*** VICTORY! ***")
+		print("Defeated enemies: %d" % defeated_enemies_data.size())
+		for enemy_data in defeated_enemies_data:
+			print("  - %s" % enemy_data.character_name)
+		
+		if victory_panel:
+			victory_panel.visible = true
+			victory_panel.continue_pressed.connect(_on_victory_continue)
 	else:
-		defeat_panel.visible = true
-		defeat_panel.retry_pressed.connect(_on_defeat_retry)
+		print("\n--- DEFEAT ---")
+		if defeat_panel:
+			defeat_panel.visible = true
+			defeat_panel.retry_pressed.connect(_on_defeat_retry)
 
 func _on_victory_continue():
-	# Pass defeated enemies data to GameManager for rewards
+	# Calculate and pass defeated enemies data to GameManager for rewards
 	GameManager.end_combat(true, defeated_enemies_data)
 
 func _on_defeat_retry():
-	# Handle defeat - could restart battle or return to checkpoint
+	# TODO Handle defeat - could restart battle or return to checkpoint
 	GameManager.end_combat(false, [])

@@ -1,5 +1,4 @@
 extends Node
-# AutoLoad: Project > Project Settings > AutoLoad > Add this script as "GameManager"
 
 # === SAVING ===
 const SAVE_PATH = "C/Users/Manaut/Desktop"
@@ -53,7 +52,7 @@ func initialize_default_party():
 		load("res://data/characters/lapine/DT_Lapine.tres"),
 		load("res://data/characters/lapine_2/DT_Lapine_2.tres")
 	]
-	print("Warning: No party loaded, initialize your heroes!")
+	print("Warning: No party loaded, initialized a default heroes pool! (party configuration TODO)")
 
 func load_loot_tables():
 	# Load your loot table resources
@@ -91,6 +90,7 @@ func start_combat(enemies_pool: FighterPool, atb_advantage: bool = false):
 	
 	# Optional: Show enemy name
 	if enemies_pool.fighters.size() > 0:
+		#TODO actuellement on affiche que le name du premier enemy de la pool, faudrait les afficher tous (oupas mdr)
 		var enemy_name = enemies_pool.fighters[0].character_name
 		TransitionManager.show_encounter_text(enemy_name)
 
@@ -172,6 +172,7 @@ func return_to_world():
 		get_tree().change_scene_to_file(return_scene_path)
 		# Position will be restored in the world scene's _ready()
 
+# === TRIGGER MANAGEMENT - make sure the player doens't encounter the same triggers (e.g. enemy teams or closed already looted chests) ===
 func register_defeated_trigger(trigger_id: String) -> void:
 	defeated_triggers[trigger_id] = Time.get_unix_time_from_system()
 
@@ -296,11 +297,11 @@ func load_game() -> bool:
 	return true
 
 func serialize_party() -> Array:
-	"""Convert party to saveable format"""
+	"""Convert player's heroes team stats to saveable format"""
 	var party_data = []
 	
 	for fighter_data in player_party:
-		if fighter_data == null:
+		if fighter_data == null: #devrait être =!= null à la place non ??? à tester
 			continue
 		
 		# Save all relevant stats
@@ -312,14 +313,14 @@ func serialize_party() -> Array:
 			"base_attack": fighter_data.base_attack,
 			"base_defense": fighter_data.base_defense,
 			"atb_speed": fighter_data.atb_speed,
-			# Add any custom modifications here
+			# TODO Add other heroes stats
 		}
 		party_data.append(fighter_dict)
 	
 	return party_data
 
 func deserialize_party(party_data: Array) -> void:
-	"""Restore party from saved data"""
+	"""Restore player's heroes team stats from saved data"""
 	player_party.clear()
 	
 	for fighter_dict in party_data:
@@ -376,7 +377,6 @@ func deserialize_inventory(inventory_data: Array) -> void:
 			player_inventory.append(item)
 
 # === UTILITY FUNCTIONS ===
-
 func has_save_file() -> bool:
 	"""Check if a save file exists"""
 	return FileAccess.file_exists(SAVE_PATH)

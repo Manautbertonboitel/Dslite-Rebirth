@@ -7,13 +7,15 @@ class_name FighterData
 @export var fighter_scene: PackedScene  # Scene to instantiate
 
 # === COMBAT STATS ===
+@export var hp : int = 100
 @export var max_hp: int = 100
 @export var base_attack: int = 10
 @export var base_defense: int = 5
+@export var atb: float = 0.0
 @export var atb_speed: float = 1.0
 
 # === ACTIONS ===
-@export var available_actions: Array[Action] = []  # Actions this fighter can use
+@export var actions: Array[Action] = []  # Actions this fighter can use
 
 # === PROGRESSION (Heroes only) ===
 @export var level: int = 1
@@ -73,22 +75,17 @@ func level_up():
 	
 	print("%s reached level %d!" % [character_name, level])
 
-func get_current_hp() -> int:
-	"""Get current HP (stored in instance, not data)"""
-	# This is handled by the Fighter instance
-	return max_hp
-
 func duplicate_fighter_data() -> FighterData:
 	"""Create a true copy of this data"""
 	var copy = self.duplicate(true)
 	
 	#old actions auto copy code:
-	#copy.available_actions = available_actions.duplicate(true)
+	#copy.actions = actions.duplicate(true)
 	
 	# Manually deep copy the actions array
-	copy.available_actions = []
-	for action in available_actions:
+	copy.actions = []
+	for action in actions:
 		if action != null:
-			copy.available_actions.append(action.duplicate(true))
+			copy.actions.append(action.duplicate(true))
 			
 	return copy
