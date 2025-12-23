@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dqeo224bhlh8s"
-path="res://.godot/imported/Lapine.fbx-9abd6cf9d148f53e1fa2221c7ebdc118.scn"
+path="res://.godot/imported/Lapine.fbx-a7340fd75ed78400e8b85ff59a5f8470.scn"
 
 [deps]
 
-source_file="res://data/characters/dark_lapine (enemy)/Lapine.fbx"
-dest_files=["res://.godot/imported/Lapine.fbx-9abd6cf9d148f53e1fa2221c7ebdc118.scn"]
+source_file="res://data/characters/dark_lapine (enemy)/art/Lapine.fbx"
+dest_files=["res://.godot/imported/Lapine.fbx-a7340fd75ed78400e8b85ff59a5f8470.scn"]
 
 [params]
 

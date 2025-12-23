@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://dq1e0jveol8k1"]
 
-[ext_resource type="PackedScene" uid="uid://dqeo224bhlh8s" path="res://data/characters/dark_lapine (enemy)/Lapine.fbx" id="1_svn0s"]
+[ext_resource type="PackedScene" uid="uid://dqeo224bhlh8s" path="res://data/characters/dark_lapine (enemy)/art/Lapine.fbx" id="1_svn0s"]
 [ext_resource type="Shader" uid="uid://diwg8kbsjjmcw" path="res://data/effects/postprocess/PS1.gdshader" id="2_wvypw"]
-[ext_resource type="Texture2D" uid="uid://cmru8xi561b76" path="res://data/characters/dark_lapine (enemy)/T_Wing.png" id="3_0gpri"]
-[ext_resource type="Texture2D" uid="uid://br6pjcyr84r3o" path="res://data/characters/dark_lapine (enemy)/T_Lapine.png" id="4_pcjqd"]
+[ext_resource type="Texture2D" uid="uid://cmru8xi561b76" path="res://data/characters/dark_lapine (enemy)/art/T_Wing.png" id="3_0gpri"]
+[ext_resource type="Texture2D" uid="uid://br6pjcyr84r3o" path="res://data/characters/dark_lapine (enemy)/art/T_Lapine.png" id="4_pcjqd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cot0g"]
 render_priority = 0

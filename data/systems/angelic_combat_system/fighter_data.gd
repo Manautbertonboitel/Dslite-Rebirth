@@ -1,91 +1,73 @@
 extends Resource
 class_name FighterData
 
-# === BASE STATS ===
-@export var character_name: String = "Fighter"
-@export var is_enemy: bool = false
-@export var fighter_scene: PackedScene  # Scene to instantiate
+# --------------------------------------------------------------------
+# IDENTITY
+# --------------------------------------------------------------------
 
-# === COMBAT STATS ===
-@export var hp : int = 100
+@export var character_name: String = "Fighter"
+
+@export var faction: Faction.Type = Faction.Type.ENEMY
+
+@export var fighter_scene: PackedScene
+
+
+# --------------------------------------------------------------------
+# COMBAT STATS (BASE TEMPLATE)
+# --------------------------------------------------------------------
+
+@export var base_hp: int = 100
 @export var max_hp: int = 100
 @export var base_attack: int = 10
 @export var base_defense: int = 5
-@export var atb: float = 0.0
-@export var atb_speed: float = 1.0
+@export var base_atb: float = 0.0
+@export var base_atb_speed: float = 1.0
 
-# === ACTIONS ===
-@export var actions: Array[Action] = []  # Actions this fighter can use
 
-# === PROGRESSION (Heroes only) ===
-@export var level: int = 1
-@export var current_xp: int = 0
-@export var xp_to_next_level: int = 100
+# --------------------------------------------------------------------
+# ACTIONS
+# --------------------------------------------------------------------
 
-# === STAT GROWTH (Heroes only) ===
-@export var hp_growth: int = 10  # HP gained per level
-@export var attack_growth: int = 2
-@export var defense_growth: int = 1
-@export var speed_growth: float = 0.05
+@export var actions: Array[Action] = []
 
-# === REWARDS (Enemies only) ===
-@export var xp_reward: int = 50
-@export var gold_reward: int = 10
-@export var loot_table: String = "common"  # Which loot table to use
 
-func instantiate() -> Node:
-	"""Create a Fighter instance from this data"""
+# --------------------------------------------------------------------
+# REWARDS (DATA ONLY)
+# --------------------------------------------------------------------
+
+@export var xp_reward: int = 0
+@export var gold_reward: int = 0
+@export var loot_table: String = ""
+
+
+# --------------------------------------------------------------------
+# INSTANTIATION
+# --------------------------------------------------------------------
+
+func instantiate() -> Fighter:
 	if fighter_scene == null:
 		push_error("No fighter_scene set for %s" % character_name)
 		return null
 
 	var instance = fighter_scene.instantiate()
-	# demande à l'instance de se configurer depuis ce Resource
-	if instance.has_method("setup_from_data"):
-		instance.setup_from_data(self)
-	else:
-		push_error("Instantiated scene doesn't implement setup_from_data()")
+	if not instance.has_method("setup_from_data"):
+		push_error("Fighter scene does not implement setup_from_data()")
+		return null
 
+	instance.setup_from_data(self)
 	return instance
 
-func add_xp(xp_amount: int):
-	"""Add XP and handle leveling up"""
-	if is_enemy:
-		return  # Enemies don't level up
-	
-	current_xp += xp_amount
-	
-	# Check for level up
-	while current_xp >= xp_to_next_level:
-		level_up()
 
-func level_up():
-	"""Increase level and stats"""
-	level += 1
-	current_xp -= xp_to_next_level
-	
-	# Increase stats
-	max_hp += hp_growth
-	base_attack += attack_growth
-	base_defense += defense_growth
-	atb_speed += speed_growth
-	
-	# Calculate next level XP requirement (exponential curve)
-	xp_to_next_level = int(100 * pow(1.5, level - 1))
-	
-	print("%s reached level %d!" % [character_name, level])
+# --------------------------------------------------------------------
+# DUPLICATION
+# --------------------------------------------------------------------
 
 func duplicate_fighter_data() -> FighterData:
-	"""Create a true copy of this data"""
-	var copy = self.duplicate(true)
-	
-	#old actions auto copy code:
-	#copy.actions = actions.duplicate(true)
-	
-	# Manually deep copy the actions array
-	copy.actions = []
-	for action in actions:
-		if action != null:
-			copy.actions.append(action.duplicate(true))
-			
+	var copy: FighterData = duplicate(true)
+
+	#copy.actions = []
+	#for action in actions:
+		#if action != null:
+			#copy.actions.append(action.duplicate(true))
+
 	return copy

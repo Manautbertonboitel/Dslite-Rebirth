@@ -2,7 +2,7 @@ extends Control
 
 signal target_chosen(target)
 
-func show_targets(enemies: Array):
+func show_targets(enemies: Array[Fighter]):
 	# Vider les anciens boutons
 	for child in $VBoxContainer.get_children():
 		child.queue_free()

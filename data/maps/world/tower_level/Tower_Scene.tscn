@@ -1,14 +1,14 @@
-[gd_scene load_steps=21 format=4 uid="uid://cx0b1v3saxxvy"]
+[gd_scene load_steps=23 format=4 uid="uid://cx0b1v3saxxvy"]
 
 [ext_resource type="Shader" uid="uid://d1q3ratm6ww8o" path="res://data/effects/postprocess/PS1Scene.gdshader" id="1_jd2gf"]
-[ext_resource type="PackedScene" uid="uid://l5boluq4n37e" path="res://data/characters/lapine/lapine.tscn" id="2_d01xq"]
+[ext_resource type="PackedScene" uid="uid://l5boluq4n37e" path="res://data/characters/lapine/art/lapine.tscn" id="2_d01xq"]
 [ext_resource type="PackedScene" uid="uid://c0dsmo2w7aenb" path="res://data/environments/tower/tower.tscn" id="3_82pjk"]
-[ext_resource type="PackedScene" uid="uid://b2mt87uhqd08p" path="res://data/characters/player/player_3d.tscn" id="4_0jwve"]
+[ext_resource type="PackedScene" uid="uid://b2mt87uhqd08p" path="res://data/characters/player/art/player_3d.tscn" id="4_0jwve"]
 [ext_resource type="PackedScene" uid="uid://bv15uf6eftdsw" path="res://data/environments/common/halo.tscn" id="5_vteis"]
 [ext_resource type="Shader" uid="uid://d2wd8xb232v00" path="res://data/environments/common/halo.gdshader" id="6_f6xj4"]
 [ext_resource type="Shader" uid="uid://d3jhj6gewcncf" path="res://data/environments/vegetation/grass/grass.gdshader" id="7_d01xq"]
 [ext_resource type="ArrayMesh" uid="uid://b8w45rwknyifm" path="res://data/environments/vegetation/grass/grass.res" id="7_t5y5l"]
-[ext_resource type="PackedScene" uid="uid://dtfhci3vvkfgr" path="res://data/characters/anno/anno.tscn" id="9_82pjk"]
+[ext_resource type="PackedScene" uid="uid://dtfhci3vvkfgr" path="res://data/characters/anno/art/anno.tscn" id="9_82pjk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ab3st"]
 shader = ExtResource("1_jd2gf")
@@ -32,6 +32,12 @@ fog_light_color = Color(0.650985, 0.859031, 0.947646, 1)
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0289
 volumetric_fog_albedo = Color(0.777223, 0.767115, 0.938221, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_b4pfk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1byr"]
+stencil_flags = 2
+stencil_outline_thickness = 0.296
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vncgj"]
 albedo_color = Color(0.174484, 0.309376, 0.264245, 1)
@@ -100,12 +106,16 @@ buffer = PackedFloat32Array(-0.195657, -0.0170714, 0.0876866, -16.5452, -0.00176
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 material = SubResource("ShaderMaterial_ab3st")
-offset_right = 320.0
-offset_bottom = 240.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(320, 240)
+size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
@@ -121,6 +131,10 @@ light_volumetric_fog_energy = 1.105
 [node name="Lapine" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_d01xq")]
 transform = Transform3D(1.73047, 0, 0, 0, 1.73047, 0, 0, 0, 1.73047, -2.27439, 0.489635, -1.2235)
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Lapine"]
+mesh = SubResource("BoxMesh_b4pfk")
+surface_material_override/0 = SubResource("StandardMaterial3D_b1byr")
+
 [node name="Tower" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_82pjk")]
 transform = Transform3D(0.853334, 0.0765695, -2.60334, -0.00834215, 2.73958, 0.0778423, 2.60445, -0.0163127, 0.853219, -2.39561, -0.00205469, -16.1868)
 
@@ -135,7 +149,7 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="Plane" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(21.3111, 0, 0, 0, 0.478999, 0, 0, 0, 23.6998, 0, 0.522079, 0)
+transform = Transform3D(21.3111, 0, 0, 0, 0.478999, 0, 0, 0, 23.6998, 4.6491623e-05, 0.5235343, -0.0026690364)
 mesh = SubResource("PlaneMesh_vncgj")
 skeleton = NodePath("../CSGBox3D")
 

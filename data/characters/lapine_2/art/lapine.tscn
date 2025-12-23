@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=3 uid="uid://bpc4wqseslpai"]
 
-[ext_resource type="PackedScene" uid="uid://bmlc8rrj6wt1e" path="res://data/characters/lapine_2/Lapine.fbx" id="1_hmd4j"]
+[ext_resource type="PackedScene" uid="uid://bmlc8rrj6wt1e" path="res://data/characters/lapine_2/art/Lapine.fbx" id="1_hmd4j"]
 [ext_resource type="Shader" uid="uid://diwg8kbsjjmcw" path="res://data/effects/postprocess/PS1.gdshader" id="2_ov8jk"]
-[ext_resource type="Texture2D" uid="uid://rmyaqpiy8eao" path="res://data/characters/lapine_2/T_Wing.png" id="3_38syi"]
-[ext_resource type="Texture2D" uid="uid://kgq3oqkyfec2" path="res://data/characters/lapine_2/T_Lapine.png" id="4_1t3sx"]
+[ext_resource type="Texture2D" uid="uid://rmyaqpiy8eao" path="res://data/characters/lapine_2/art/T_Wing.png" id="3_38syi"]
+[ext_resource type="Texture2D" uid="uid://kgq3oqkyfec2" path="res://data/characters/lapine_2/art/T_Lapine.png" id="4_1t3sx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cot0g"]
 render_priority = 0

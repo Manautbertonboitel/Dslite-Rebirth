@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmru8xi561b76"
-path.s3tc="res://.godot/imported/T_Wing.png-ced5295b40f59380eed4163a5289ce13.s3tc.ctex"
+uid="uid://br6pjcyr84r3o"
+path.s3tc="res://.godot/imported/T_Lapine.png-fd9a250d498049c1e581244add1d0388.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://data/characters/dark_lapine (enemy)/T_Wing.png"
-dest_files=["res://.godot/imported/T_Wing.png-ced5295b40f59380eed4163a5289ce13.s3tc.ctex"]
+source_file="res://data/characters/dark_lapine (enemy)/art/T_Lapine.png"
+dest_files=["res://.godot/imported/T_Lapine.png-fd9a250d498049c1e581244add1d0388.s3tc.ctex"]
 
 [params]
 

@@ -6,7 +6,7 @@ var auto_save_timer: Timer
 var autosave: bool = true
 
 # === PLAYER PARTY DATA ===
-var player_party: Array[FighterData] = []  # Array of FighterData resources
+var player_party: Array[PartyMember] = []  # Array of PartyMember resources
 var player_inventory: Array[ItemData] = []  # Items collected
 var player_gold: int = 0
 
@@ -46,13 +46,25 @@ func _ready():
 		initialize_default_party()
 
 func initialize_default_party():
-	# Load your default heroes here
-	# Example: player_party.append(load("res://data/heroes/hero1.tres"))
-	player_party = [
-		load("res://data/characters/lapine/DT_Lapine.tres"),
-		load("res://data/characters/lapine_2/DT_Lapine_2.tres")
-	]
-	print("Warning: No party loaded, initialized a default heroes pool! (party configuration TODO)")
+	player_party.clear()
+
+	var lapine_data: FighterData = load(
+		"res://data/characters/lapine/DT_Lapine.tres"
+	)
+	var lapine_2_data: FighterData = load(
+		"res://data/characters/lapine_2/DT_Lapine_2.tres"
+	)
+
+	var member_1 := PartyMember.new()
+	member_1.base_data = lapine_data
+
+	var member_2 := PartyMember.new()
+	member_2.base_data = lapine_2_data
+
+	player_party.append(member_1)
+	player_party.append(member_2)
+
+	print("Initialized default party with PartyMembers")
 
 func load_loot_tables():
 	# Load your loot table resources
@@ -77,11 +89,20 @@ func start_combat(enemies_pool: FighterPool, atb_advantage: bool = false):
 	
 	# Create heroes pool from party
 	combat_heroes_pool = FighterPool.new()
-	combat_heroes_pool.fighters = player_party.duplicate()
+	combat_heroes_pool.fighters.clear()
+
+	for member in player_party:
+		combat_heroes_pool.fighters.append(
+			member.create_fighter_data()
+		)
 	
 	# Transition to combat scene
 	# get_tree().change_scene_to_file("res://scenes/combat/combat_scene.tscn")
 	
+	
+# --------------------------------------------------------------------
+# TRANSITION
+# --------------------------------------------------------------------
 	# Use transition instead of direct scene change
 	await TransitionManager.transition_to_combat({
 		"enemy_team": enemies_pool,
@@ -152,14 +173,8 @@ func roll_loot(defeated_enemies: Array) -> Array[ItemData]:
 	return looted_items
 
 func award_xp(total_xp: int):
-	for hero_data in player_party:
-		if hero_data is FighterData:
-			var old_level = hero_data.get("level")
-			hero_data.add_xp(total_xp)  # You'll implement this in FighterData
-			var new_level = hero_data.get("level")
-			
-			if new_level > old_level:
-				print("%s leveled up to %d!" % [hero_data.character_name, new_level])
+	for member in player_party:
+		member.add_xp(total_xp)
 
 func return_to_world():
 	# Clear combat data

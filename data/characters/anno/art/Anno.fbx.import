@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cdbfu4rbirln1"
-path="res://.godot/imported/Anno.fbx-309e4e43fab36bc741653cfa7b03f389.scn"
+path="res://.godot/imported/Anno.fbx-afa83c64af09d3ac6ea6c2415ccc0169.scn"
 
 [deps]
 
-source_file="res://data/characters/anno/Anno.fbx"
-dest_files=["res://.godot/imported/Anno.fbx-309e4e43fab36bc741653cfa7b03f389.scn"]
+source_file="res://data/characters/anno/art/Anno.fbx"
+dest_files=["res://.godot/imported/Anno.fbx-afa83c64af09d3ac6ea6c2415ccc0169.scn"]
 
 [params]
 

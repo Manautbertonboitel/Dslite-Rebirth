@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://br6pjcyr84r3o"
-path.s3tc="res://.godot/imported/T_Lapine.png-14214e2af5bf1ab5d8374f123eb28e05.s3tc.ctex"
+uid="uid://tc1xd28kftvc"
+path.s3tc="res://.godot/imported/T_Lapine_03.png-b757495cb5138d0735c96e660b217785.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://data/characters/dark_lapine (enemy)/T_Lapine.png"
-dest_files=["res://.godot/imported/T_Lapine.png-14214e2af5bf1ab5d8374f123eb28e05.s3tc.ctex"]
+source_file="res://data/characters/dark_lapine (enemy)/art/T_Lapine_03.png"
+dest_files=["res://.godot/imported/T_Lapine_03.png-b757495cb5138d0735c96e660b217785.s3tc.ctex"]
 
 [params]
 

@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://hqbkteiimfem"]
 
 [ext_resource type="PackedScene" uid="uid://cnedxfn2pxh2t" path="res://addons/level/level.tscn" id="1_gcxt2"]
-[ext_resource type="PackedScene" uid="uid://b2mt87uhqd08p" path="res://characters/heroes/player/player_3d.tscn" id="2_a3724"]
-[ext_resource type="PackedScene" uid="uid://l5boluq4n37e" path="res://characters/heroes/lapine/lapine.tscn" id="2_tkk60"]
+[ext_resource type="PackedScene" uid="uid://b2mt87uhqd08p" path="res://data/characters/player/art/player_3d.tscn" id="2_a3724"]
+[ext_resource type="PackedScene" uid="uid://l5boluq4n37e" path="res://data/characters/lapine/art/lapine.tscn" id="2_tkk60"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7ju2i"]
 

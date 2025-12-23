@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5u88uw4dwfx0"
-path.s3tc="res://.godot/imported/T_Lapine.png-4163470fd8339cb814cb98a061a7cd98.s3tc.ctex"
+uid="uid://kgq3oqkyfec2"
+path.s3tc="res://.godot/imported/T_Lapine.png-dd76266f3c1a9f9e9215ba7ee2f5f0e7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://data/characters/lapine/T_Lapine.png"
-dest_files=["res://.godot/imported/T_Lapine.png-4163470fd8339cb814cb98a061a7cd98.s3tc.ctex"]
+source_file="res://data/characters/lapine_2/art/T_Lapine.png"
+dest_files=["res://.godot/imported/T_Lapine.png-dd76266f3c1a9f9e9215ba7ee2f5f0e7.s3tc.ctex"]
 
 [params]
 
