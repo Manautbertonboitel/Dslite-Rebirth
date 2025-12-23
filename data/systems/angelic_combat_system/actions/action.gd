@@ -8,11 +8,7 @@ signal completed
 @export var cost: int = 0
 
 func execute(caster: Fighter, target: Fighter) -> void:
-	print("%s uses %s on %s" % [
-		caster.character_name,
-		action_name,
-		target.character_name
-	])
+	print("%s uses %s on %s" % [caster.character_name, action_name, target.character_name])
 
 	# Example: simulate animation time
 	await caster.get_tree().create_timer(0.5).timeout

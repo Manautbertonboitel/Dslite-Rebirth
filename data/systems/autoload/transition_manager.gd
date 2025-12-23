@@ -66,7 +66,7 @@ func setup_animations():
 	
 	animation_player.add_animation_library("fade_out", fade_anim)
 
-func transition_to_combat(combat_data: Dictionary):
+func transition_to_combat():
 	"""
 	Start transition animation, then load combat
 	combat_data should contain: enemy_team, atb_advantage
@@ -78,16 +78,16 @@ func transition_to_combat(combat_data: Dictionary):
 	
 	# Play transition animation
 	match transition_type:
-		TransitionType.FADE:
-			await play_fade_transition()
 		TransitionType.SWIRL:
 			await play_swirl_transition()
 		TransitionType.SHATTER:
 			await play_shatter_transition()
+		TransitionType.FADE:
+			await play_fade_transition()
+		TransitionType.WIPE:
+			await play_fade_transition()
 		TransitionType.ZOOM_IN:
 			await play_zoom_transition()
-		_:
-			await play_fade_transition()
 	
 	# Actually change scene
 	get_tree().change_scene_to_file("res://data/maps/combat/combat_arena_1.tscn")

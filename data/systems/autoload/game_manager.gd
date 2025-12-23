@@ -104,10 +104,7 @@ func start_combat(enemies_pool: FighterPool, atb_advantage: bool = false):
 # TRANSITION
 # --------------------------------------------------------------------
 	# Use transition instead of direct scene change
-	await TransitionManager.transition_to_combat({
-		"enemy_team": enemies_pool,
-		"atb_advantage": atb_advantage
-	})
+	await TransitionManager.transition_to_combat()
 	
 	# Optional: Show enemy name
 	if enemies_pool.fighters.size() > 0:
