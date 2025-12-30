@@ -10,7 +10,7 @@ func take_turn(fighter: Fighter, combat_manager: Node) -> void:
 		fighter.reset_atb()
 		return
 
-	combat_manager.execute_action_async(fighter, target, action)
+	combat_manager.submit_action(fighter, target, action)
 
 
 func choose_action(fighter: Fighter) -> Action:

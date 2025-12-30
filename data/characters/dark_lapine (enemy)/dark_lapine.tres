@@ -10,6 +10,7 @@ script = ExtResource("4_6v2sh")
 character_name = "Dark Lapine"
 fighter_scene = ExtResource("3_4ftke")
 max_hp = 10
+base_atb_speed = 50.0
 actions = Array[ExtResource("1_h14aj")]([ExtResource("2_h14aj")])
 loot_table = "forest"
 metadata/_custom_type_script = "uid://cvpf5ti0muw4u"

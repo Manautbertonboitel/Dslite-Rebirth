@@ -64,10 +64,4 @@ func instantiate() -> Fighter:
 
 func duplicate_fighter_data() -> FighterData:
 	var copy: FighterData = duplicate(true)
-
-	#copy.actions = []
-	#for action in actions:
-		#if action != null:
-			#copy.actions.append(action.duplicate(true))
-
 	return copy

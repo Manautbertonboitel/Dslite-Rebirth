@@ -10,6 +10,8 @@ var character_name: String
 
 var faction: Faction.Type
 
+var formation_position: int = -1  # Formation.Position enum value
+
 # Controller (PlayerController or AIController)
 var controller = null
 
@@ -76,6 +78,7 @@ func setup_from_data(data: FighterData) -> void:
 
 
 func _ready():
+	#JE SAIS PLUS POURQUOI J'AI FAIT ÇA
 	if hp <= 0:
 		hp = max_hp
 

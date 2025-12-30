@@ -64,7 +64,7 @@ func setup_animations():
 	fade_anim.track_insert_key(track_alpha, transition_duration, 1.0)
 	fade_anim.track_set_interpolation_type(track_alpha, Animation.INTERPOLATION_CUBIC)
 	
-	animation_player.add_animation_library("fade_out", fade_anim)
+	#TODO ça trigger une error jsp ce que c'est animation_player.add_animation_library("fade_out", fade_anim)
 
 func transition_to_combat():
 	"""

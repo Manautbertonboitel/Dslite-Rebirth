@@ -17,6 +17,7 @@ var combat_atb_advantage: bool = false  # True if player attacked first
 var return_scene_path: String = ""
 var return_position: Vector3 = Vector3.ZERO
 var return_rotation: Vector3 = Vector3.ZERO
+const RETURN_TO_WORLD_ANIMATION_TIME = 0.5
 
 # === LOOT TABLES ===
 var loot_tables: Dictionary = {}  # Key: table_name, Value: LootTable resource
@@ -137,7 +138,7 @@ func end_combat(victory: bool, defeated_enemies: Array):
 		# Handle defeat (respawn, game over, etc.)
 	
 	# Return to world after a delay (or button press)
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(RETURN_TO_WORLD_ANIMATION_TIME).timeout
 	return_to_world()
 
 func calculate_xp(defeated_enemies: Array) -> int:

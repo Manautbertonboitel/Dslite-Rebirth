@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="FighterData" load_steps=7 format=3 uid="uid://cu8ibno8qactw"]
+[gd_resource type="Resource" script_class="FighterData" load_steps=8 format=3 uid="uid://cu8ibno8qactw"]
 
 [ext_resource type="Script" uid="uid://bs0mfywd5eycu" path="res://data/systems/angelic_combat_system/actions/action.gd" id="1_v2dql"]
 [ext_resource type="Resource" uid="uid://dsbiqs3aki1vq" path="res://data/systems/angelic_combat_system/actions/assembly_dissolution.tres" id="2_3yhg4"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://ccnhhcn7t7mrx" path="res://data/systems/angelic_combat_system/actions/drug_resell.tres" id="4_60puy"]
 [ext_resource type="PackedScene" uid="uid://djstn15csah1r" path="res://data/characters/lapine/art/Lapine_fighter_scene.tscn" id="5_3yhg4"]
 [ext_resource type="Script" uid="uid://cvpf5ti0muw4u" path="res://data/systems/angelic_combat_system/fighter_data.gd" id="5_60puy"]
+[ext_resource type="Resource" uid="uid://c1f5bhyhitk7h" path="res://data/systems/angelic_combat_system/actions/roll.tres" id="5_v6xox"]
 
 [resource]
 script = ExtResource("5_60puy")
@@ -13,5 +14,5 @@ character_name = "Lapine"
 faction = 0
 fighter_scene = ExtResource("5_3yhg4")
 base_atb_speed = 15.0
-actions = Array[ExtResource("1_v2dql")]([ExtResource("2_3yhg4"), ExtResource("3_v6xox"), ExtResource("4_60puy")])
+actions = Array[ExtResource("1_v2dql")]([ExtResource("2_3yhg4"), ExtResource("3_v6xox"), ExtResource("4_60puy"), ExtResource("5_v6xox")])
 metadata/_custom_type_script = "uid://cvpf5ti0muw4u"
