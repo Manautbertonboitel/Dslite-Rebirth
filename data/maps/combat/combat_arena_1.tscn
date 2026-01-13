@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ce6xqcfyhxyut"]
+[gd_scene load_steps=9 format=3 uid="uid://ce6xqcfyhxyut"]
 
 [ext_resource type="Script" uid="uid://cnkp5d0n06omu" path="res://data/systems/angelic_combat_system/combat_manager.gd" id="1_pbkuh"]
 [ext_resource type="PackedScene" uid="uid://ch2xa71k3v65b" path="res://data/systems/angelic_combat_system/UI/character_ui.tscn" id="4_ptoiq"]
@@ -9,9 +9,11 @@
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_dj5a4"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_dj5a4"]
+
 [node name="CombatScene" type="Node3D"]
 
-[node name="CombatManager" type="Node" parent="." node_paths=PackedStringArray("action_panel", "target_panel", "defeat_panel", "victory_panel", "heroes_ui_container", "enemies_ui_container")]
+[node name="CombatManager" type="Node" parent="." node_paths=PackedStringArray("action_panel", "target_panel", "defeat_panel", "victory_panel", "heroes_ui_container", "enemies_ui_container", "models_container", "hero_pos_up", "hero_pos_right", "hero_pos_down", "hero_pos_left", "enemy_pos_up", "enemy_pos_right", "enemy_pos_down", "enemy_pos_left")]
 script = ExtResource("1_pbkuh")
 action_panel = NodePath("../ActionPanel")
 target_panel = NodePath("../TargetPanel")
@@ -20,6 +22,15 @@ victory_panel = NodePath("../VictoryPanel")
 heroes_ui_container = NodePath("../HeroesUI/VBoxContainer")
 enemies_ui_container = NodePath("../EnemiesUI/VBoxContainer")
 character_ui_prefab = ExtResource("4_ptoiq")
+models_container = NodePath("../level/ModelsContainer")
+hero_pos_up = NodePath("../level/ModelsContainer/HeroePosUp")
+hero_pos_right = NodePath("../level/ModelsContainer/HeroePosRight")
+hero_pos_down = NodePath("../level/ModelsContainer/HeroePosDown")
+hero_pos_left = NodePath("../level/ModelsContainer/HeroePosLeft")
+enemy_pos_up = NodePath("../level/ModelsContainer/EnemyPosUp")
+enemy_pos_right = NodePath("../level/ModelsContainer/EnemyPosRight")
+enemy_pos_down = NodePath("../level/ModelsContainer/EnemyPosDown")
+enemy_pos_left = NodePath("../level/ModelsContainer/EnemyPosLeft")
 
 [node name="ActionPanel" type="Control" parent="."]
 visible = false
@@ -118,9 +129,81 @@ offset_bottom = 40.0
 
 [node name="level" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.32774496, 0)
+[node name="Ground" type="MeshInstance3D" parent="level"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
 mesh = SubResource("PlaneMesh_dj5a4")
 
+[node name="ModelsContainer" type="Node3D" parent="level"]
+
+[node name="HeroePosUp" type="Node3D" parent="level/ModelsContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="level/ModelsContainer/HeroePosUp"]
+visible = false
+mesh = SubResource("BoxMesh_dj5a4")
+
+[node name="HeroePosRight" type="Node3D" parent="level/ModelsContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="level/ModelsContainer/HeroePosRight"]
+visible = false
+mesh = SubResource("BoxMesh_dj5a4")
+
+[node name="HeroePosDown" type="Node3D" parent="level/ModelsContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="level/ModelsContainer/HeroePosDown"]
+visible = false
+mesh = SubResource("BoxMesh_dj5a4")
+
+[node name="HeroePosLeft" type="Node3D" parent="level/ModelsContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="level/ModelsContainer/HeroePosLeft"]
+visible = false
+mesh = SubResource("BoxMesh_dj5a4")
+
+[node name="EnemyPosUp" type="Node3D" parent="level/ModelsContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="level/ModelsContainer/EnemyPosUp"]
+visible = false
+mesh = SubResource("BoxMesh_dj5a4")
+
+[node name="EnemyPosRight" type="Node3D" parent="level/ModelsContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="level/ModelsContainer/EnemyPosRight"]
+visible = false
+mesh = SubResource("BoxMesh_dj5a4")
+
+[node name="EnemyPosDown" type="Node3D" parent="level/ModelsContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="level/ModelsContainer/EnemyPosDown"]
+visible = false
+mesh = SubResource("BoxMesh_dj5a4")
+
+[node name="EnemyPosLeft" type="Node3D" parent="level/ModelsContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="level/ModelsContainer/EnemyPosLeft"]
+visible = false
+mesh = SubResource("BoxMesh_dj5a4")
+
+[node name="Enemy Team positions" type="Node3D" parent="level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.7978857, -0.04870585, 0.600838, -0.002460366, 0.99645907, 0.08404343, -0.602804, -0.068535306, 0.7949406, 0.7423706, 0.34279668, 1.2975461)
+transform = Transform3D(0.8376886, 0.24330081, -0.48896065, 0, 0.8952894, 0.44548503, 0.5461481, -0.37317774, 0.7499738, -6.549292, 3.3323224, 8.154913)
+fov = 47.5
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.98714745, 0, -0.15981227, 0.055857696, 0.93692863, 0.34502843, 0.14973271, -0.34952065, 0.9248867, 0, 0, 0)
+light_color = Color(0.5708413, 0.40628642, 6.738305e-07, 1)
+light_energy = 4.261
+light_indirect_energy = 2.019
+light_volumetric_fog_energy = 1.51
+light_angular_distance = 2.86
+light_specular = 2.834
+shadow_enabled = true

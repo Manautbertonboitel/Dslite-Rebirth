@@ -11,6 +11,8 @@ class_name FighterData
 
 @export var fighter_scene: PackedScene
 
+@export var fighter_3d_scene: PackedScene  # NEW: 3D visual representation
+
 
 # --------------------------------------------------------------------
 # COMBAT STATS (BASE TEMPLATE)

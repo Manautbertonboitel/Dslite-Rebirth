@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="FighterData" load_steps=5 format=3 uid="uid://rwlloviuqfec"]
+[gd_resource type="Resource" script_class="FighterData" load_steps=6 format=3 uid="uid://rwlloviuqfec"]
 
 [ext_resource type="Script" uid="uid://bs0mfywd5eycu" path="res://data/systems/angelic_combat_system/actions/action.gd" id="1_h14aj"]
 [ext_resource type="Resource" uid="uid://43mcg5ogpsrx" path="res://data/systems/angelic_combat_system/actions/slash.tres" id="2_h14aj"]
 [ext_resource type="PackedScene" uid="uid://djstn15csah1r" path="res://data/characters/lapine/art/Lapine_fighter_scene.tscn" id="3_4ftke"]
+[ext_resource type="PackedScene" uid="uid://dq1e0jveol8k1" path="res://data/characters/dark_lapine (enemy)/art/lapine.tscn" id="3_yk2tt"]
 [ext_resource type="Script" uid="uid://cvpf5ti0muw4u" path="res://data/systems/angelic_combat_system/fighter_data.gd" id="4_6v2sh"]
 
 [resource]
 script = ExtResource("4_6v2sh")
 character_name = "Dark Lapine"
 fighter_scene = ExtResource("3_4ftke")
+fighter_3d_scene = ExtResource("3_yk2tt")
 max_hp = 10
 base_atb_speed = 50.0
 actions = Array[ExtResource("1_h14aj")]([ExtResource("2_h14aj")])

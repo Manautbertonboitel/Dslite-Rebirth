@@ -10,10 +10,13 @@ var character_name: String
 
 var faction: Faction.Type
 
-var formation_position: int = -1  # Formation.Position enum value
+var formation_position: Formation.Position = Formation.Position.UP  # Changed from int to enum
 
 # Controller (PlayerController or AIController)
 var controller = null
+
+# Visual representation (NEW)
+var visuals: FighterVisuals = null
 
 
 # --------------------------------------------------------------------
@@ -56,7 +59,8 @@ func setup_from_data(data: FighterData) -> void:
 
 	character_name = data.character_name
 	
-	#factions are always setup outside this code (Faction is a runtime combat property, not a data-template property.), here is only a fallback
+	# Factions are always setup outside this code (Faction is a runtime combat property)
+	# Here is only a fallback
 	if faction == null:
 		faction = data.faction
 
@@ -78,7 +82,6 @@ func setup_from_data(data: FighterData) -> void:
 
 
 func _ready():
-	#JE SAIS PLUS POURQUOI J'AI FAIT ÇA
 	if hp <= 0:
 		hp = max_hp
 
@@ -124,8 +127,31 @@ func take_damage(amount: int) -> void:
 
 func _die() -> void:
 	print("%s died" % character_name)
+	
+	# Play death animation if visuals exist
+	if visuals:
+		visuals.play_death_animation()
+	
 	emit_signal("died", self)
 
 
 func is_alive() -> bool:
 	return hp > 0
+
+
+# --------------------------------------------------------------------
+# VISUAL MANAGEMENT (NEW)
+# --------------------------------------------------------------------
+
+func set_visuals(visual_node: FighterVisuals) -> void:
+	"""Assign the visual representation to this fighter"""
+	visuals = visual_node
+	if visuals:
+		visuals.fighter = self
+
+
+func cleanup_visuals() -> void:
+	"""Clean up visual representation"""
+	if visuals and is_instance_valid(visuals):
+		visuals.cleanup()
+		visuals = null

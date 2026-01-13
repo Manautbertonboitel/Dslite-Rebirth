@@ -12,7 +12,7 @@ enum TransitionType {
 	ZOOM_IN,      # Zoom to black
 }
 
-@export var transition_type: TransitionType = TransitionType.ZOOM_IN
+@export var transition_type: TransitionType = TransitionType.SWIRL
 @export var transition_duration: float = 1.5
 
 var animation_player: AnimationPlayer
