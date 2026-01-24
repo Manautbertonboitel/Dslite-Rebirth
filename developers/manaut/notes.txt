@@ -1,0 +1,52 @@
+TODO :
+
+Lire les todo (debug + ERROR SA MERE)
+
+
+
+
+
+
+
+
+
+
+
+
+ATB Combat system :
+
+Je veux :
+
+- Chaque fighter à une jauge d'ATB
+- La jauge se remplit avec le temps qui passe
+- Quand la jauge est a 100% le fighter est placé dans une liste de fighters "actifs"
+
+Si la liste des fighters actifs n'est pas vide :
+    - Le premier fighter de cette liste peut :
+        - Request une action
+        - Si la liste de résolution d'action est vide OU qu'une dodge window est ouverte :
+            - Effectuer instantanément une action "Roll"
+    - Si il request une action :
+        - L'action est placée dans une liste de résolution d'actions
+    - Si il effectue une action "Roll"
+        - Effectuer instantanément une action "Roll"
+        - Signaler quand l'action est terminée
+        
+Si la liste de résolution d'action n'est pas vide :
+    - On exécute la première action de la liste :
+        - Reset l'ATB du caster
+        - Exécution de l'action
+            - si l'action est une attaque :
+                - Ouverture de la dodge window
+                - Si la cible utilise "Roll" pendant la dodge window :
+                    - Fermeture de la dodge window
+                    - Exécution instantanée de l'action "Roll"
+                    - Signaler quand l'action est terminée
+                - Sinon :
+                    - Exécution de l'attaque
+                    - Signaler quand l'action est terminée
+    - Action terminée ?
+        - On check les conditions de victoire
+        - On retire l'action de la liste de résolution des actions
+        - On retire le caster de la liste de fighters "actifs"
+      

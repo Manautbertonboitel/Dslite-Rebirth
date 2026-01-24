@@ -1,4 +1,5 @@
 extends Node
+class_name CombatManager
 
 enum BattleState {
 	START,
@@ -11,7 +12,6 @@ enum BattleState {
 
 const ACTION_ANIMATION_TIME = 0.5
 const DAMAGE_DELAY_TIME = 0.2
-const DODGE_WINDOW_DURATION = 5.0
 
 # --------------------------------------------------------------------
 # POSITION MAPPING (NEW)
@@ -34,12 +34,33 @@ class PositionMapping:
 	func is_valid() -> bool:
 		return up != null and right != null and down != null and left != null
 
+
+# --------------------------------------------------------------------
+# ActionRequest
+# --------------------------------------------------------------------
+
+class ActionRequest:
+	var caster: Fighter
+	var target: Fighter
+	var action: Action
+
+	func _init(c, t, a):
+		caster = c
+		target = t
+		action = a
+
 # --------------------------------------------------------------------
 # CORE STATE
 # --------------------------------------------------------------------
 
 var fighters: Array[Fighter] = []
 var ready_queue: Array[Fighter] = []
+#var ai_ready_queue: Array[Fighter] = []
+
+# ACTION RESOLUTION QUEUE (NEW)
+var action_queue: Array[ActionRequest] = []
+
+signal dodge_resolved(result: float)
 
 var state: BattleState = BattleState.START
 var current_character: Fighter = null
@@ -305,10 +326,14 @@ func _process(delta):
 				print("⏰ Dodge window: %.1fs remaining" % dodge_window_timer)
 
 		if dodge_window_timer <= 0.0:
-			_execute_pending_attack()
-
-	if state == BattleState.WAITING and not ready_queue.is_empty():
-		process_next_ready_fighter()
+			dodge_resolved.emit(false)
+#			_execute_pending_attack()
+		
+	if state == BattleState.WAITING:
+		if not action_queue.is_empty():
+			_resolve_next_action()
+		elif not ready_queue.is_empty():
+			process_next_ready_fighter()
 
 
 func set_time_paused(value: bool):
@@ -338,17 +363,19 @@ func _on_fighter_ready(fighter: Fighter):
 	if not fighter.is_alive():
 		return
 
-	# AI fighters can interrupt
+	# AI fighters goes first in the queue
 	if fighter.controller is AIController:
-		if not ready_queue.has(fighter):
-			ready_queue.append(fighter)
-			print("➕ [QUEUE] AI added: %s" % fighter.character_name)
-			_print_queue_snapshot()
+#		if not ready_queue.has(fighter):
+#			ready_queue.append(fighter)
+#			print("➕ [QUEUE] AI added: %s" % fighter.character_name)
+##			_print_queue_snapshot()
+		begin_turn(fighter)
+#		process_ai_turn_immediate(fighter)
 		
 		if state == BattleState.WAITING:
 			return
 		
-		_process_ai_turn_immediate(fighter)
+
 	else:
 		# Player fighters go into queue normally
 		if not ready_queue.has(fighter):
@@ -370,20 +397,31 @@ func process_next_ready_fighter():
 		return
 
 	current_character = ready_queue.pop_front()
-	print("⚡ [QUEUE] Processing: %s" % current_character.character_name)
+#	print("⚡ [QUEUE] Processing: %s" % current_character.character_name)
 	_print_queue_snapshot()
 
 	begin_turn(current_character)
 
+func begin_turn(fighter: Fighter):
+	if not _validate_state(BattleState.WAITING, "begin_turn"):
+		print("ERROR SA MERE")
+#		TODO ERROR SA MERE EST TRIGGER QUAND OIN FAIT RIEN DANS LE COMBAT
+		return
 
-func _process_ai_turn_immediate(fighter: Fighter):
-	print("⚠️ [QUEUE] AI INTERRUPT: %s" % fighter.character_name)
-	_print_queue_snapshot()
+	state = BattleState.ACTION_SELECT
+	print("🎮 [TURN START] %s begins turn" % fighter.character_name)
+#	_print_queue_snapshot()
+
+	fighter.controller.take_turn(fighter, self)
+
+func process_ai_turn_immediate(fighter: Fighter):
+	print("⚠️ [QUEUE] AI added to queue and processing action: %s" % fighter.character_name)
+#	_print_queue_snapshot()
 
 	if current_character and current_character.controller is PlayerController and state == BattleState.ACTION_SELECT:
 		interrupted_player = current_character
 		player_was_selecting = true
-		print("💾 [INTERRUPT] Saving player context: %s" % interrupted_player.character_name)
+#		print("💾 [INTERRUPT] Saving player context: %s" % interrupted_player.character_name)
 
 	var previous_character = current_character
 	current_character = fighter
@@ -401,19 +439,8 @@ func _process_ai_turn_immediate(fighter: Fighter):
 	submit_action(fighter, target, action)
 
 
-func begin_turn(fighter: Fighter):
-	if not _validate_state(BattleState.WAITING, "begin_turn"):
-		return
-
-	state = BattleState.ACTION_SELECT
-	print("🎮 [TURN START] %s begins turn" % fighter.character_name)
-	_print_queue_snapshot()
-
-	fighter.controller.take_turn(fighter, self)
-
-
 # --------------------------------------------------------------------
-# PLAYER FLOW
+# PLAYER ACTION CHOSE AND REQUEST FLOW
 # --------------------------------------------------------------------
 
 func show_action_menu(fighter: Fighter):
@@ -435,8 +462,12 @@ func _on_action_chosen(action):
 
 	action_panel.visible = false
 
-	if action is RollAction:
-		execute_roll_action(current_character)
+	if action is RollAction and dodge_window_active:
+		current_character.selected_action = action
+		submit_action(current_character, null, current_character.selected_action)
+	elif action is RollAction and not dodge_window_active:
+		print("cannot dodge while enemy is attacking and dodge window missed")
+		action_panel.visible = true
 	else:
 		current_character.selected_action = action
 		var targets = get_hostile_targets(current_character)
@@ -453,70 +484,43 @@ func _on_target_chosen(target: Fighter):
 
 
 # --------------------------------------------------------------------
-# ACTION EXECUTION (ASYNC)
+# ACTION EXECUTION
 # --------------------------------------------------------------------
 
 func submit_action(caster: Fighter, target: Fighter, action: Action):
-	execute_action_async(caster, target, action)
+	if action is RollAction:
+		_execute_dodge_action(caster)
+	else:
+		var request = ActionRequest.new(caster, target, action)
+		action_queue.append(request)
+	
+	state = BattleState.WAITING
 
+func _resolve_next_action():
+	if not _validate_state(BattleState.WAITING, "resolve_next_action"):
+		return
+		
+	var request = action_queue.pop_front()
 
-func execute_action_async(caster: Fighter, target: Fighter, action) -> void:
-	if not _validate_state(BattleState.ACTION_SELECT, "execute_action_async"):
+	# Ignore if caster is dead
+	if not request.caster.is_alive():
+		action_queue.pop_front()
 		return
 
 	state = BattleState.ACTION_EXECUTE
 
 	# Check if this is an enemy attacking a player - trigger dodge window
-	if caster.faction == Faction.Type.ENEMY and target.faction == Faction.Type.PLAYER:
-		_start_dodge_window(caster, target, action)
-		return
+#	if request.caster.faction == Faction.Type.ENEMY and request.target.faction == Faction.Type.PLAYER:
+##		_start_dodge_window(request.caster, request.target, request.action)
+#		await request.action.execute(request.caster, request.target, true)
+#		return
+#	else:
 
-	await action.execute(caster, target)
-
-	caster.reset_atb()
-	state = BattleState.CHECK
-	evaluate_battle_state()
-
-	if state != BattleState.END:
-		state = BattleState.WAITING
+	request.action.request_dodge_window.connect(_start_dodge_window)
+	await request.action.execute(request.caster, request.target, self)
 
 
-func execute_roll_action(fighter: Fighter):
-	if not _validate_state(BattleState.ACTION_SELECT, "execute_roll_action"):
-		return
-
-	var formation = hero_formation if fighter.faction == Faction.Type.PLAYER else enemy_formation
-	var position_mapping = hero_position_mapping if fighter.faction == Faction.Type.PLAYER else enemy_position_mapping
-
-	if not formation.can_roll():
-		print("Cannot roll with only 1 alive fighter")
-		state = BattleState.WAITING
-		return
-
-	state = BattleState.ACTION_EXECUTE
-	
-	var is_dodging = false
-	if dodge_window_active and fighter.faction == Faction.Type.PLAYER:
-		is_dodging = true
-
-	# Perform the roll
-	formation.roll_clockwise()
-	
-	# Update 3D visual positions
-	formation.update_visual_positions(position_mapping)
-	
-	if debug_formation_enabled and OS.is_debug_build():
-		print("Formation rolled! Revolt count: %d" % formation.revolt_count)
-		formation.print_formation_state()
-
-	if is_dodging:
-		fighter.reset_atb()
-		_cancel_pending_attack_with_dodge()
-		return
-
-	await get_tree().create_timer(ACTION_ANIMATION_TIME).timeout
-
-	fighter.reset_atb()
+	request.caster.reset_atb()
 	state = BattleState.CHECK
 	evaluate_battle_state()
 
@@ -528,87 +532,63 @@ func execute_roll_action(fighter: Fighter):
 # DODGE MANAGEMENT
 # --------------------------------------------------------------------
 
-func _start_dodge_window(caster: Fighter, target: Fighter, action: Action):
+func _start_dodge_window(caster: Fighter, target: Fighter, duration: float):
 	print("=== DODGE WINDOW OPENED ===")
 	print("%s is attacking %s - ROLL to dodge!" % [caster.character_name, target.character_name])
 
 	dodge_window_active = true
-	dodge_window_timer = DODGE_WINDOW_DURATION
-	pending_attack_caster = caster
-	pending_attack_target = target
-	pending_attack_action = action
+	dodge_window_timer = duration
 
 	# Show visual indicators
 	if target.visuals:
 		target.visuals.show_dodge_indicator()
-	if caster.visuals:
-		caster.visuals.show_attack_windup(target.visuals)
+#	if caster.visuals:
+#		caster.visuals.show_attack_windup(target.visuals)
+	pending_attack_target = target
+	pending_attack_caster = caster
 
 	set_time_paused(false)
 	state = BattleState.WAITING
 
-	# Restore interrupted player
-	if player_was_selecting and interrupted_player and interrupted_player.is_alive():
-		print("🔄 [RESTORE] Returning to player: %s" % interrupted_player.character_name)
-		current_character = interrupted_player
-		state = BattleState.ACTION_SELECT
-		player_was_selecting = false
-		interrupted_player = null
 
+func _execute_dodge_action(fighter: Fighter):
+	if not _validate_state(BattleState.ACTION_SELECT, "execute_dodge_action"):
+		return
 
-func _execute_pending_attack():
-	print("=== Dodge window expired - attack hits! ===")
+	var formation = hero_formation if fighter.faction == Faction.Type.PLAYER else enemy_formation
+	var position_mapping = hero_position_mapping if fighter.faction == Faction.Type.PLAYER else enemy_position_mapping
 
-	dodge_window_active = false
-	
-	# Clear visual indicators
-	if pending_attack_target and pending_attack_target.visuals:
-		pending_attack_target.visuals.hide_dodge_indicator()
-	if pending_attack_caster and pending_attack_caster.visuals:
-		pending_attack_caster.visuals.clear_attack_indicator()
+	if not formation.can_dodge():
+		print("Cannot dodge with only 1 alive fighter")
+		state = BattleState.WAITING
+		return
 
 	state = BattleState.ACTION_EXECUTE
-	await pending_attack_action.execute(pending_attack_caster, pending_attack_target)
 
-	pending_attack_caster.reset_atb()
-	_clear_pending_attack()
-
-	state = BattleState.CHECK
-	evaluate_battle_state()
-
-	if state != BattleState.END:
-		state = BattleState.WAITING
-
-
-func _cancel_pending_attack_with_dodge():
-	print("=== DODGED! Attack missed! ===")
-
-	dodge_window_active = false
+	# Perform the dodge
+	formation.dodge_clockwise()
+	
+	# Update 3D visual positions
+	formation.update_visual_positions(position_mapping, ACTION_ANIMATION_TIME)
+	
+	
+	dodge_resolved.emit(true)
 	
 	# Clear visual indicators
 	if pending_attack_target and pending_attack_target.visuals:
 		pending_attack_target.visuals.hide_dodge_indicator()
 	if pending_attack_caster and pending_attack_caster.visuals:
 		pending_attack_caster.visuals.clear_attack_indicator()
-
-	print("%s's attack was dodged!" % pending_attack_caster.character_name)
-
-	pending_attack_caster.reset_atb()
-	_clear_pending_attack()
-
+		
+	pending_attack_target = null
+	pending_attack_caster = null
+	
+	fighter.reset_atb()
 	state = BattleState.CHECK
 	evaluate_battle_state()
 
 	if state != BattleState.END:
 		state = BattleState.WAITING
-
-
-func _clear_pending_attack():
-	"""Helper to clear pending attack data"""
-	pending_attack_caster = null
-	pending_attack_target = null
-	pending_attack_action = null
-
 
 # --------------------------------------------------------------------
 # RELATIONSHIPS & TARGETING
@@ -695,28 +675,23 @@ func _on_defeat_retry():
 func _print_queue_snapshot():
 	if not debug_queue_enabled or not OS.is_debug_build():
 		return
-
-	print("\n╔════════════════════════════════════════")
-	print("║          READY QUEUE STATUS            ")
-	print("╠════════════════════════════════════════")
-	print("║ Current State: %-23s" % BattleState.keys()[state])
-	print("║ Active Fighter: %-22s" % (current_character.character_name if current_character else "None"))
-	print("║ Queue Size: %-27d" % ready_queue.size())
-	print("╠════════════════════════════════════════")
+#	print("║ Current State: %-23s" % BattleState.keys()[state])
+#	print("║ Active Fighter: %-22s" % (current_character.character_name if current_character else "None"))
 
 	if ready_queue.size() == 0:
-		print("║ Queue is EMPTY                         ")
+		print("║ Queue is EMPTY")
 	else:
 		for i in range(ready_queue.size()):
 			var f = ready_queue[i]
-			var type_str = "PLAYER" if f.controller is PlayerController else "AI    "
+			var type_str = "PLAYER" if f.controller is PlayerController else "AI"
 			var alive_str = "✓" if f.is_alive() else "✗"
-			print("║ Pos %d: %-15s [%s] %s ATB:%-3d" % [
-				i + 1,
-				f.character_name,
-				type_str,
-				alive_str,
-				int(f.atb)
-			])
-
-	print("╚════════════════════════════════════════\n")
+#			print("║ Pos %d: %-15s [%s] %s ATB:%-3d" % [
+#				i + 1,
+#				f.character_name,
+#				type_str,
+##				alive_str,
+##				int(f.atb)
+#			])
+			print("Queue: %s" % f.character_name)
+#			TODO CORRIGER LE DEBUG (afficher la queue dans le bon ordre etc)
+#			print("🗑️ [QUEUE] Removed dead fighter from queue: %s" % fighter.character_name)

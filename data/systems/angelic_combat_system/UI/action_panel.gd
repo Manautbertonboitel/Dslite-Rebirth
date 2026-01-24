@@ -17,3 +17,9 @@ func show_actions(hero: Fighter):
 			$VBoxContainer.add_child(btn)
 
 		visible = true
+
+#TODO Afficher / griser le bouton ROLL selon si on est en dodge window ou non 
+#func _process(delta):
+#	if $"../CombatManager".dodge_window_active:
+#		for action in hero.actions:
+			

@@ -44,7 +44,7 @@ func set_initial_position(target_transform: Transform3D) -> void:
 	global_transform = target_transform
 
 
-func move_to(target_transform: Transform3D, duration: float = 0.3) -> void:
+func move_to(target_transform: Transform3D, duration: float) -> void:
 	"""Smoothly move to target position"""
 	if not is_instance_valid(self):
 		return

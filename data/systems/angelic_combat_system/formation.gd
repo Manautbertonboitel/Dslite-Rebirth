@@ -73,8 +73,8 @@ func get_alive_fighters() -> Array[Fighter]:
 	return result
 
 
-func can_roll() -> bool:
-	"""Check if formation can roll (needs 2+ alive fighters)"""
+func can_dodge() -> bool:
+	"""Check if formation can dodge (needs 2+ alive fighters)"""
 	return get_alive_fighters().size() > 1
 
 
@@ -96,7 +96,7 @@ func get_occupied_positions() -> Array:
 # FORMATION MANIPULATION
 # --------------------------------------------------------------------
 
-func roll_clockwise():
+func dodge_clockwise():
 	"""Rotate all fighters clockwise around formation"""
 	var temp = slots[Position.UP]
 	slots[Position.UP] = slots[Position.LEFT]
@@ -117,14 +117,14 @@ func roll_clockwise():
 # VISUAL UPDATES
 # --------------------------------------------------------------------
 
-func update_visual_positions(position_mapping) -> void:
+func update_visual_positions(position_mapping, duration: float) -> void:
 	"""Update 3D visuals for all fighters based on current formation"""
 	for pos in slots:
 		var fighter = slots[pos]
 		if fighter and fighter.visuals and is_instance_valid(fighter.visuals):
 			var target_node = position_mapping.get_node(pos)
 			if target_node:
-				fighter.visuals.move_to(target_node.global_transform, 0.3)
+				fighter.visuals.move_to(target_node.global_transform, duration)
 
 
 # --------------------------------------------------------------------

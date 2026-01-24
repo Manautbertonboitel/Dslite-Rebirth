@@ -1,7 +1,7 @@
 extends Node
 class_name AIController
 
-func take_turn(fighter: Fighter, combat_manager: Node) -> void:
+func take_turn(fighter: Fighter, combat_manager: CombatManager) -> void:
 	var action: Action = choose_action(fighter)
 	var target: Fighter = choose_target(fighter, combat_manager)
 
