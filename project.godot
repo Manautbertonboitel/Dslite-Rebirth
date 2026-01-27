@@ -76,6 +76,10 @@ attack={
 3d_physics/layer_2="Enemies"
 3d_physics/layer_3="Environment"
 
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
 [rendering]
 
 environment/layer_3=""

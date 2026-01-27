@@ -1,12 +1,45 @@
-TODO :
+STATES
 
-Lire les todo (debug + ERROR SA MERE)
+WAITING
+    # état de base lorsqu'il ne se passe rien
+    
+    Charge ATB
+    Time ON
+    Trigger de la ACTION EXECUTE state
 
 
+ACTION SELECT
+    TODO à découpler de la state machine
+    
+    Si la queue Fighter Ready n'est pas vide,
+        tant que le premier fighter de la qeue Fighter Ready est en vie 
+            le UI est disponible, peut sélectionner une attaque, une target, et submit une requête d'attaque à la Action Queue
+    
+    Side issues : 
+        - OUI one peut select si on est en train de se faire attaquer, tant que notre perso est en vie. si le perso meurt toutes ses attaques queued doivent être supprimées
 
+ACTION EXECUTE
+    # Important pour n'avoir qu'une action qui s'exécute à la fois (ATTAQUE, OBJECT, HEAL, FUIR, etc.)
+    
+    DODGE WINDOW 
+        Si une IA attaque un Joueur
+            Si l'attaque possède une dodge window
+                Une dodge window s'ouvre
+                    Si le joueur à un fighter READY, il peut exécuter l'action ROLL pour dodge
+                    Back to Action Execute
+                    
+    Side issues :
+        - Si l'attaquant est mort il faut supprimer l'action de la queue, Si il est ressuscité il repasse par une state de charge d'ATB etc
+        - Si la cible est morte il faut choisir une autre cible TODO en parler à Anthony
+        
+CHECK STATE
+    TODO à découpler de la state machine
 
+    Vérification des conditions de victoire / défaite
+    Si fin du combat => ENDSTATE(Victory ou pas)
 
-
+END STATE
+    # Fin du combat, si victoire affichage des stats et back to le monde réel / si défaite game over load de la dernière sauvegarde  
 
 
 
