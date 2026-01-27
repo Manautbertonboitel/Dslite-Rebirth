@@ -1,0 +1,157 @@
+extends Node
+class_name Fighter
+
+# --------------------------------------------------------------------
+# DATA & IDENTITY
+# --------------------------------------------------------------------
+
+var original_data: FighterData = null
+var character_name: String
+
+var faction: Faction.Type
+
+var formation_position: Formation.Position = Formation.Position.UP  # Changed from int to enum
+
+# Controller (PlayerController or AIController)
+var controller = null
+
+# Visual representation (NEW)
+var visuals: FighterVisuals = null
+
+
+# --------------------------------------------------------------------
+# COMBAT STATS
+# --------------------------------------------------------------------
+
+var hp: int
+var max_hp: int
+var attack: int
+var defense: int
+
+var atb: float
+var atb_speed: float
+var atb_ready: bool = false
+var atb_paused: bool = false
+
+
+# --------------------------------------------------------------------
+# ACTIONS
+# --------------------------------------------------------------------
+
+var actions: Array[Action] = []
+var selected_action: Action = null
+
+
+# --------------------------------------------------------------------
+# SIGNALS
+# --------------------------------------------------------------------
+
+signal ready_to_act(fighter)
+signal died(fighter)
+
+
+# --------------------------------------------------------------------
+# INITIALIZATION
+# --------------------------------------------------------------------
+
+func setup_from_data(data: FighterData) -> void:
+	original_data = data
+
+	character_name = data.character_name
+	
+	# Factions are always setup outside this code (Faction is a runtime combat property)
+	# Here is only a fallback
+	if faction == null:
+		faction = data.faction
+
+	hp = data.base_hp
+	max_hp = data.max_hp
+	hp = min(hp, max_hp)
+
+	attack = data.base_attack
+	defense = data.base_defense
+
+	atb = data.base_atb
+	atb_speed = data.base_atb_speed
+	atb_ready = false
+
+	actions.clear()
+	for a in data.actions:
+		if a != null:
+			actions.append(a.duplicate(true))
+
+
+func _ready():
+	if hp <= 0:
+		hp = max_hp
+
+
+# --------------------------------------------------------------------
+# ATB LOGIC
+# --------------------------------------------------------------------
+
+func _process(delta: float) -> void:
+	if atb_paused or atb_ready:
+		return
+
+	atb += atb_speed * delta
+	if atb >= 100.0:
+		atb = 100.0
+		atb_ready = true
+		emit_signal("ready_to_act", self)
+
+
+func pause_atb(paused: bool) -> void:
+	atb_paused = paused
+
+
+func reset_atb() -> void:
+	atb = 0.0
+	atb_ready = false
+
+
+# --------------------------------------------------------------------
+# DAMAGE & DEATH
+# --------------------------------------------------------------------
+
+func take_damage(amount: int) -> void:
+	if not is_alive():
+		return
+
+	hp = max(0, hp - amount)
+	print("%s takes %d damage (HP: %d)" % [character_name, amount, hp])
+
+	if hp == 0:
+		_die()
+
+
+func _die() -> void:
+	print("%s died" % character_name)
+	
+	# Play death animation if visuals exist
+	if visuals:
+		visuals.play_death_animation()
+	
+	emit_signal("died", self)
+
+
+func is_alive() -> bool:
+	return hp > 0
+
+
+# --------------------------------------------------------------------
+# VISUAL MANAGEMENT (NEW)
+# --------------------------------------------------------------------
+
+func set_visuals(visual_node: FighterVisuals) -> void:
+	"""Assign the visual representation to this fighter"""
+	visuals = visual_node
+	if visuals:
+		visuals.fighter = self
+
+
+func cleanup_visuals() -> void:
+	"""Clean up visual representation"""
+	if visuals and is_instance_valid(visuals):
+		visuals.cleanup()
+		visuals = null
