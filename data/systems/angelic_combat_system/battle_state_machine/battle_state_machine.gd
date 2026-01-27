@@ -5,9 +5,7 @@ var combat_manager: CombatManager
 var current_state: BattleState
 
 var waiting_state: BattleState
-var action_select_state: BattleState
 var action_execute_state: BattleState
-var check_state: BattleState
 var end_state: BattleState
 
 var states: Dictionary[String, BattleState] = {}
@@ -16,9 +14,7 @@ func _init(mgr: CombatManager):
 	combat_manager = mgr
 	
 	waiting_state = WaitingState.new()
-	action_select_state = ActionSelectState.new()
 	action_execute_state = ActionExecuteState.new()
-	check_state = CheckState.new()
 	end_state = EndState.new()
 
 func update(delta: float) -> void:

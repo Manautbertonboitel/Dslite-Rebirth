@@ -451,7 +451,6 @@ func _resolve_next_action():
 	await request.action.execute(request.caster, request.target, self)
 
 	request.caster.reset_atb()
-#	state_machine.change_state(state_machine.check_state)
 	evaluate_battle_state()
 
 
@@ -502,7 +501,6 @@ func _execute_dodge_action(fighter: Fighter):
 	pending_attack_caster = null
 	
 	fighter.reset_atb()
-	state_machine.change_state(state_machine.check_state)
 	evaluate_battle_state()
 
 

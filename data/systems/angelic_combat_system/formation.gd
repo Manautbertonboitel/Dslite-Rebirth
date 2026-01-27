@@ -110,7 +110,7 @@ func dodge_clockwise():
 			slots[pos].formation_position = pos
 	
 	revolt_count += 1
-	print("🔄 [FORMATION] Rolled clockwise (count: %d)" % revolt_count)
+	print("[FORMATION] Rolled clockwise (count: %d)" % revolt_count)
 
 
 # --------------------------------------------------------------------
