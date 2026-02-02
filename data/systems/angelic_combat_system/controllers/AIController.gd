@@ -1,4 +1,4 @@
-extends Node
+extends FighterController
 class_name AIController
 
 func take_turn(fighter: Fighter, combat_manager: CombatManager) -> void:

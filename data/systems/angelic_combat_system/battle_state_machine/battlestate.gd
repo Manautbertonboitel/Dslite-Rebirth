@@ -1,10 +1,8 @@
 extends Node
 class_name BattleState
 
-var state_name: String
-
 func _init() -> void:
-	state_name = name
+	pass
 
 func enter(manager: CombatManager) -> void:
 	pass

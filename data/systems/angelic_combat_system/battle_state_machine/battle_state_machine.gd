@@ -4,11 +4,10 @@ class_name BattleStateMachine
 var combat_manager: CombatManager
 var current_state: BattleState
 
-var waiting_state: BattleState
-var action_execute_state: BattleState
-var end_state: BattleState
-
-var states: Dictionary[String, BattleState] = {}
+var waiting_state
+var action_execute_state
+var dodge_window_state
+var end_state
 
 func _init(mgr: CombatManager):
 	combat_manager = mgr
@@ -16,6 +15,7 @@ func _init(mgr: CombatManager):
 	waiting_state = WaitingState.new()
 	action_execute_state = ActionExecuteState.new()
 	end_state = EndState.new()
+	dodge_window_state = DodgeWindowState.new()
 
 func update(delta: float) -> void:
 	if current_state:
@@ -24,8 +24,8 @@ func update(delta: float) -> void:
 func change_state(new_state: BattleState) -> void:
 
 	if current_state:
-		print("Transitioning from %s state to %s state" % [current_state.state_name, new_state.state_name])
 		current_state.exit(combat_manager)
 
 	current_state = new_state
+	combat_manager.state_name = current_state.state_name
 	current_state.enter(combat_manager)

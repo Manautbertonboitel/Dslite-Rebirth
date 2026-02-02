@@ -13,7 +13,7 @@ var faction: Faction.Type
 var formation_position: Formation.Position = Formation.Position.UP  # Changed from int to enum
 
 # Controller (PlayerController or AIController)
-var controller = null
+var controller: FighterController = null
 
 # Visual representation (NEW)
 var visuals: FighterVisuals = null
@@ -48,6 +48,12 @@ var selected_action: Action = null
 
 signal ready_to_act(fighter)
 signal died(fighter)
+
+# --------------------------------------------------------------------
+# ACTIONS
+# --------------------------------------------------------------------
+
+var is_chosing: bool = false
 
 
 # --------------------------------------------------------------------

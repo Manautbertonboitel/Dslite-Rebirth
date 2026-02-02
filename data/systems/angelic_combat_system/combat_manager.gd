@@ -35,8 +35,8 @@ class ActionRequest:
 # --------------------------------------------------------------------
 
 # CONSTANTS TODO replace them by real animations
-const ACTION_ANIMATION_TIME = 0.5
-const DAMAGE_DELAY_TIME = 0.2
+const ACTION_ANIMATION_TIME: float = 0.5
+const DAMAGE_DELAY_TIME: float = 0.2
 
 # STATE MACHINE
 var state_machine: BattleStateMachine
@@ -89,7 +89,8 @@ var enemy_position_mapping: PositionMapping
 @export var enemy_pos_left: Node3D
 
 # UI
-@export var action_panel: Control
+@export_subgroup("UI")
+@export var action_panel: UIManager
 @export var target_panel: Control
 @export var defeat_panel: Control
 @export var victory_panel: Control
@@ -98,16 +99,20 @@ var enemy_position_mapping: PositionMapping
 @export var character_ui_prefab: PackedScene
 
 # DEBUG
-var debug_queue_enabled: bool = true
+@export_subgroup("DEBUG")
+@export var fighter_ui_queue: VBoxContainer
+@export var action_ui_queue: VBoxContainer
+var debug_queue_enabled: bool = false
 var debug_dodge_window_timer_enabled: bool = false
 var debug_formation_enabled: bool = false
-
+@export var state_debug: Label
+var state_name: String
 
 # --------------------------------------------------------------------
 # INITIALIZATION & VALIDATION
 # --------------------------------------------------------------------
 
-func _ready():
+func _ready() -> void:
 	if not _validate_setup():
 		push_error("[SETUP] Combat Manager setup failed! Check inspector assignments.")
 		return
@@ -257,14 +262,14 @@ func _spawn_fighter(data: FighterData, faction: Faction.Type, ui_container: VBox
 
 	# Spawn 3D visual representation
 	if data.fighter_3d_scene and models_container:
-		var visuals = FighterVisuals.new()
+		var visuals: FighterVisuals = FighterVisuals.new()
 		models_container.add_child(visuals)
 		
 		if visuals.setup(data, fighter):
 			fighter.set_visuals(visuals)
 			
 			# Position the visual at the formation position
-			var target_node = position_mapping.get_node(assigned_position)
+			var target_node: Node3D = position_mapping.get_node(assigned_position)
 			if target_node:
 				visuals.set_initial_position(target_node.global_transform)
 			else:
@@ -282,7 +287,7 @@ func _spawn_fighter(data: FighterData, faction: Faction.Type, ui_container: VBox
 
 	# Create UI display
 	if character_ui_prefab:
-		var ui = character_ui_prefab.instantiate()
+		var ui: Node = character_ui_prefab.instantiate()
 		ui_container.add_child(ui)
 		ui.fighter = fighter
 
@@ -311,17 +316,23 @@ func _process(delta):
 			dodge_resolved.emit(false)
 #			_execute_pending_attack()
 
-	if not ready_queue.is_empty():
+	if not ready_queue.is_empty() and not ready_queue[0].is_chosing:
 		process_next_ready_fighter()
 
 	state_machine.update(delta)
 
+	#debug
+#	update_ready_queue()
+#	update_action_queue()
+	update_state_debug()
+	
 
+	
 # --------------------------------------------------------------------
 # TIME MANAGEMENT
 # --------------------------------------------------------------------
 
-func set_time_paused(value: bool):
+func set_time_paused(value: bool) -> void:
 	if time_paused == value:
 		return
 	time_paused = value
@@ -333,44 +344,50 @@ func set_time_paused(value: bool):
 # TURN FLOW
 # --------------------------------------------------------------------
 
-func _on_fighter_ready(fighter: Fighter):
+func _on_fighter_ready(fighter: Fighter) -> void:
 	if not fighter.is_alive():
 		return
 
-	# AI fighters goes first in the queue
+	# AI fighters bypass the ready_queue and submits action directly
 	if fighter.controller is AIController:
-		print("[FIGHTER QUEUE] AI turn, skipped the queue: %s" % fighter.character_name)
-		begin_turn(fighter)
+		print("[READY QUEUE] AI fighter (%s) ready to act, submits action immediatelly" % fighter.character_name)
+		fighter.controller.take_turn(fighter, self)
 		
 
 	else:
-		# Player fighters go into queue normally
+		# Player fighters go into ready_queue
 		if not ready_queue.has(fighter):
 			ready_queue.append(fighter)
-			print("[FIGHTER QUEUE] PLAYER added: %s" % fighter.character_name)
+			update_ready_queue()
+			print("[READY QUEUE] PLAYER figher (%s) ready to act, added to ready_queue" % fighter.character_name)
 
 
-func process_next_ready_fighter():
+func process_next_ready_fighter() -> void:
 
 	# Clean up dead fighters from queue
 	while not ready_queue.is_empty() and not ready_queue[0].is_alive():
 		var dead_fighter = ready_queue.pop_front()
-		ready_queue.erase(ready_queue[0])
+		#ready_queue.erase(ready_queue[0])
 		print("[FIGHTER QUEUE] Skipped and Removed dead fighter from queue: %s" % dead_fighter.character_name)
+		update_ready_queue()
 	
 	if ready_queue.is_empty():
 		return
 
-	current_character = ready_queue.pop_front()
+	current_character = ready_queue[0]
+	#update_ready_queue()
 
-	begin_turn(current_character)
+#	begin_turn(current_character)
+	current_character.controller.take_turn(current_character, self)
 
 
-func begin_turn(fighter: Fighter):
-
-	print("[TURN START] %s begins turn" % fighter.character_name)
-
-	fighter.controller.take_turn(fighter, self)
+#func begin_turn(fighter: Fighter):
+#	# process_next_ready_fighter() est dans son propre bloc plutôt que dans _process() pour gagner de la place / lisibilité
+#	# begin_turn() est découplé de process_next_ready_fighter pour qu'on puisse appeler begin_turn() par le check d'IA (un fighter IA ne passe pas dans la queue, il take_turn() immédiatement dès qu'il est ready, TODO devrait ptetre passer dans la queue si on fait un autobatler par exemple)
+#
+#	print("[TURN START] %s begins turn" % fighter.character_name)
+#
+#	fighter.controller.take_turn(fighter, self)
 
 
 # --------------------------------------------------------------------
@@ -379,11 +396,11 @@ func begin_turn(fighter: Fighter):
 
 func show_action_menu(fighter: Fighter):
 
-	action_panel.show_actions(fighter)
+	action_panel.show_actions(current_character)
 	action_panel.action_chosen.connect(_on_action_chosen, CONNECT_ONE_SHOT)
 
 
-func _on_action_chosen(action):
+func _on_action_chosen(action) -> void:
 
 	if action == null:
 		push_error("Null action chosen")
@@ -393,14 +410,15 @@ func _on_action_chosen(action):
 	action_panel.visible = false
 
 	if action is RollAction and dodge_window_active:
-		current_character.selected_action = action
-		submit_action(current_character, null, current_character.selected_action)
+		submit_action(current_character, null, action)
+		current_character.is_chosing = false #TODO RESOUDRE LE PROBLEME IL EST LA
+		ready_queue.pop_front()
 	elif action is RollAction and not dodge_window_active:
 		print("cannot dodge while enemy is attacking and dodge window missed")
 		action_panel.visible = true
 	else:
 		current_character.selected_action = action
-		var targets = get_hostile_targets(current_character)
+		var targets: Array[Fighter] = get_hostile_targets(current_character)
 		target_panel.show_targets(targets)
 		target_panel.target_chosen.connect(_on_target_chosen, CONNECT_ONE_SHOT)
 
@@ -409,14 +427,16 @@ func _on_target_chosen(target: Fighter):
 
 	target_panel.visible = false
 	submit_action(current_character, target, current_character.selected_action)
-
+	ready_queue.pop_front()
+	current_character.is_chosing = false
 
 func submit_action(caster: Fighter, target: Fighter, action: Action):
 	if action is RollAction:
 		_execute_dodge_action(caster)
 	else:
-		var request = ActionRequest.new(caster, target, action)
-		action_queue.append(request)
+		var action_request: ActionRequest = ActionRequest.new(caster, target, action)
+		action_queue.append(action_request)
+		update_action_queue()
 
 # --------------------------------------------------------------------
 # RELATIONSHIPS & TARGETING
@@ -438,19 +458,21 @@ func is_hostile(a: Fighter, b: Fighter) -> bool:
 # ACTION EXECUTION
 # --------------------------------------------------------------------
 
-func _resolve_next_action():
+func resolve_next_action() -> void:
 		
-	var request = action_queue.pop_front()
+	var request: ActionRequest = action_queue[0]
 
 	# Ignore if caster is dead
 	if not request.caster.is_alive():
 		action_queue.pop_front()
 		return
 
-	request.action.request_dodge_window.connect(_start_dodge_window)
+	request.action.request_dodge_window.connect(_start_dodge_window, CONNECT_ONE_SHOT)
 	await request.action.execute(request.caster, request.target, self)
 
+	action_queue.pop_front()
 	request.caster.reset_atb()
+	update_action_queue()
 	evaluate_battle_state()
 
 
@@ -474,10 +496,10 @@ func _start_dodge_window(caster: Fighter, target: Fighter, duration: float):
 	set_time_paused(false)
 
 
-func _execute_dodge_action(fighter: Fighter):
+func _execute_dodge_action(fighter: Fighter) -> void:
 
-	var formation = hero_formation if fighter.faction == Faction.Type.PLAYER else enemy_formation
-	var position_mapping = hero_position_mapping if fighter.faction == Faction.Type.PLAYER else enemy_position_mapping
+	var formation: Formation = hero_formation if fighter.faction == Faction.Type.PLAYER else enemy_formation
+	var position_mapping: PositionMapping = hero_position_mapping if fighter.faction == Faction.Type.PLAYER else enemy_position_mapping
 
 	if not formation.can_dodge():
 		print("Cannot dodge with only 1 alive fighter")
@@ -517,7 +539,7 @@ func _on_fighter_died(fighter: Fighter):
 			defeated_enemies_data.append(fighter.original_data)
 	
 	# Remove from formation
-	var formation = hero_formation if fighter.faction == Faction.Type.PLAYER else enemy_formation
+	var formation: Formation = hero_formation if fighter.faction == Faction.Type.PLAYER else enemy_formation
 	formation.remove_fighter(fighter)
 	
 	# Remove from ready queue if present
@@ -536,10 +558,11 @@ func _on_fighter_died(fighter: Fighter):
 
 func evaluate_battle_state():
 
-	var result = victory_condition.evaluate(fighters)
+	var result: VictoryCondition.Result = victory_condition.evaluate(fighters)
 
 	match result:
 		VictoryCondition.Result.ONGOING:
+			state_machine.change_state(state_machine.waiting_state)
 			pass
 		VictoryCondition.Result.VICTORY:
 			end_battle(true)
@@ -570,6 +593,28 @@ func _on_defeat_retry():
 # --------------------------------------------------------------------
 # DEBUG
 # --------------------------------------------------------------------
+
+func update_state_debug() -> void:
+	state_debug.text = state_name
+
+func update_ready_queue() -> void:	
+	for child in fighter_ui_queue.get_children():
+		child.queue_free()
+		
+	for fighter: Fighter in ready_queue:
+		var lbl: Label = Label.new()
+		lbl.text = fighter.character_name
+		fighter_ui_queue.add_child(lbl)
+			
+
+func update_action_queue() -> void:
+	for child in action_ui_queue.get_children():
+		child.queue_free()
+		
+	for action_request: ActionRequest in action_queue:
+		var lbl: Label = Label.new()
+		lbl.text = action_request.action.action_name
+		action_ui_queue.add_child(lbl)
 
 #func _print_queue_snapshot():
 #

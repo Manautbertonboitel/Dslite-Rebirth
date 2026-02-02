@@ -2,6 +2,8 @@
 extends BattleState
 class_name EndState
 
+var state_name: String = "End State"
+
 func enter(manager: CombatManager):
 	manager.set_time_paused(true)
 	

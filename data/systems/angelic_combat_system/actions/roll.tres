@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RollAction" load_steps=2 format=3 uid="uid://c1f5bhyhitk7h"]
+[gd_resource type="Resource" script_class="RollAction" format=3 uid="uid://c1f5bhyhitk7h"]
 
 [ext_resource type="Script" uid="uid://0xlpaned7ke0" path="res://data/systems/angelic_combat_system/actions/roll_action.gd" id="1_cey7u"]
 

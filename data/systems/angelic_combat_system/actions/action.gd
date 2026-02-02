@@ -34,6 +34,8 @@ func execute(caster: Fighter, target: Fighter, combat_manager: CombatManager) ->
 		var dodged = await _wait_for_dodge_result(combat_manager)
 		if not dodged:
 			print("=== Dodge window expired - attack hits! ===")
+			target.visuals.hide_dodge_indicator()
+			caster.visuals.clear_attack_indicator()
 			target.take_damage(power)
 	else:
 		target.take_damage(power)

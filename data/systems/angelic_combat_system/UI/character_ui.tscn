@@ -1,25 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://ch2xa71k3v65b"]
+[gd_scene format=3 uid="uid://ch2xa71k3v65b"]
 
 [ext_resource type="Script" uid="uid://ctwmo36jleysd" path="res://data/systems/angelic_combat_system/UI/character_ui_display.gd" id="1_uci57"]
 
-[node name="CharacterHBoxContainer" type="HBoxContainer"]
+[node name="CharacterHBoxContainer" type="HBoxContainer" unique_id=570797279]
 offset_right = 408.0
 offset_bottom = 126.0
 script = ExtResource("1_uci57")
 
-[node name="NameLabel" type="Label" parent="."]
+[node name="NameLabel" type="Label" parent="." unique_id=1921881726]
 layout_mode = 2
-text = "sdfsdfsdfsdfsdf"
 
-[node name="HPLabel" type="Label" parent="."]
+[node name="HPLabel" type="Label" parent="." unique_id=1989515074]
 layout_mode = 2
-text = "sdfsdfsdfsdfsdf"
 
-[node name="MPLabel" type="Label" parent="."]
+[node name="MPLabel" type="Label" parent="." unique_id=1584955438]
 layout_mode = 2
-text = "sdfsdfsdfsdfsdf"
+text = "MPLabel"
 
-[node name="ATBBar" type="ProgressBar" parent="."]
+[node name="ATBBar" type="ProgressBar" parent="." unique_id=168754345]
 layout_mode = 2
 size_flags_horizontal = 3
 step = 0.001
