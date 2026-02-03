@@ -467,8 +467,9 @@ func resolve_next_action() -> void:
 		action_queue.pop_front()
 		return
 
-	request.action.request_dodge_window.connect(_start_dodge_window, CONNECT_ONE_SHOT)
+	request.action.request_dodge_window.connect(_start_dodge_window)
 	await request.action.execute(request.caster, request.target, self)
+	request.action.request_dodge_window.disconnect(_start_dodge_window)
 
 	action_queue.pop_front()
 	request.caster.reset_atb()
