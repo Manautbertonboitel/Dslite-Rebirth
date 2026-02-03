@@ -1,14 +1,9 @@
+@abstract
 extends Node
 class_name BattleState
 
-func _init() -> void:
-	pass
+@abstract func enter(manager: CombatManager) -> void
 
-func enter(manager: CombatManager) -> void:
-	pass
+@abstract func update(manager: CombatManager, delta: float) -> void
 
-func update(manager: CombatManager, delta: float) -> void:
-	pass
-
-func exit(manager: CombatManager) -> void:
-	pass
+@abstract func exit(manager: CombatManager) -> void

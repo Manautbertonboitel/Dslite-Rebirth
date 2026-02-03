@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_q3v35")
 action_name = "Dissolution de l'assemblée"
-power = 10
+power = 60
 metadata/_custom_type_script = "uid://bs0mfywd5eycu"

@@ -411,7 +411,7 @@ func _on_action_chosen(action) -> void:
 
 	if action is RollAction and dodge_window_active:
 		submit_action(current_character, null, action)
-		current_character.is_chosing = false #TODO RESOUDRE LE PROBLEME IL EST LA
+		current_character.is_chosing = false
 		ready_queue.pop_front()
 	elif action is RollAction and not dodge_window_active:
 		print("cannot dodge while enemy is attacking and dodge window missed")
