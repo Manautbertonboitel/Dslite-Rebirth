@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends Control
 class_name CharacterATBDisplay
 
 # Référence vers le Fighter que ce display représente
@@ -7,7 +7,7 @@ var fighter: Fighter = null
 # Références vers les nodes enfants
 @onready var name_label = $NameLabel
 @onready var hp_label = $HPLabel
-@onready var mp_label = $MPLabel
+#@onready var mp_label = $MPLabel
 @onready var atb_bar = $ATBBar
 
 func setup(f: Fighter):

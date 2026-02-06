@@ -94,8 +94,8 @@ var enemy_position_mapping: PositionMapping
 @export var target_panel: Control
 @export var defeat_panel: Control
 @export var victory_panel: Control
-@export var heroes_ui_container: VBoxContainer
-@export var enemies_ui_container: VBoxContainer
+@export var heroes_ui_container: HBoxContainer
+@export var enemies_ui_container: HBoxContainer
 @export var character_ui_prefab: PackedScene
 
 # DEBUG
@@ -217,7 +217,7 @@ func start_battle(heroes_pool: FighterPool, enemies_pool: FighterPool, atb_advan
 	state_machine.change_state(state_machine.waiting_state)
 
 
-func _spawn_fighter(data: FighterData, faction: Faction.Type, ui_container: VBoxContainer, atb_advantage: bool) -> void:
+func _spawn_fighter(data: FighterData, faction: Faction.Type, ui_container: HBoxContainer, atb_advantage: bool) -> void:
 	"""Spawn a fighter with logic, UI, and 3D visuals"""
 	
 	# Create fighter logic node

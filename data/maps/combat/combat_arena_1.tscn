@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ce6xqcfyhxyut"]
 
 [ext_resource type="Script" uid="uid://cnkp5d0n06omu" path="res://data/systems/angelic_combat_system/combat_manager.gd" id="1_pbkuh"]
-[ext_resource type="PackedScene" uid="uid://ch2xa71k3v65b" path="res://data/systems/angelic_combat_system/UI/character_ui.tscn" id="4_ptoiq"]
+[ext_resource type="PackedScene" uid="uid://cn4c42b1k535h" path="res://data/systems/angelic_combat_system/UI/v_box_container.tscn" id="2_dj5a4"]
 [ext_resource type="Script" uid="uid://bnwj20lgxfhqw" path="res://data/systems/angelic_combat_system/UI/action_panel.gd" id="5_3c7v3"]
 [ext_resource type="Script" uid="uid://dac6xgeuf84cj" path="res://data/systems/angelic_combat_system/UI/victory_panel.gd" id="5_kltxb"]
 [ext_resource type="Script" uid="uid://dpmsmv0miv5nu" path="res://data/systems/angelic_combat_system/UI/target_panel.gd" id="6_etgvb"]
@@ -31,9 +31,9 @@ action_panel = NodePath("../ActionPanel")
 target_panel = NodePath("../TargetPanel")
 defeat_panel = NodePath("../DefeatPanel")
 victory_panel = NodePath("../VictoryPanel")
-heroes_ui_container = NodePath("../HeroesUI/VBoxContainer")
-enemies_ui_container = NodePath("../EnemiesUI/VBoxContainer")
-character_ui_prefab = ExtResource("4_ptoiq")
+heroes_ui_container = NodePath("../HeroesUI/HBoxContainer")
+enemies_ui_container = NodePath("../EnemiesUI/HBoxContainer")
+character_ui_prefab = ExtResource("2_dj5a4")
 fighter_ui_queue = NodePath("../Queue debug/FighterReadyQueue")
 action_ui_queue = NodePath("../Queue debug/ActionQueue")
 state_debug = NodePath("../State debug/Label")
@@ -62,22 +62,6 @@ offset_bottom = 52.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Queue debug/FighterReadyQueue" unique_id=1961826650]
-layout_mode = 2
-text = "Fighter 1"
-
-[node name="Label2" type="Label" parent="Queue debug/FighterReadyQueue" unique_id=920101162]
-layout_mode = 2
-text = "Fighter 2"
-
-[node name="Label3" type="Label" parent="Queue debug/FighterReadyQueue" unique_id=1811247209]
-layout_mode = 2
-text = "Fighter 3"
-
-[node name="Label4" type="Label" parent="Queue debug/FighterReadyQueue" unique_id=1075256070]
-layout_mode = 2
-text = "Fighter 4"
-
 [node name="ActionQueue" type="VBoxContainer" parent="Queue debug" unique_id=830166984]
 layout_mode = 1
 anchors_preset = 1
@@ -86,26 +70,6 @@ anchor_right = 1.0
 offset_left = -63.0
 offset_bottom = 131.0
 grow_horizontal = 0
-
-[node name="Label" type="Label" parent="Queue debug/ActionQueue" unique_id=1153961578]
-layout_mode = 2
-text = "Action 1"
-
-[node name="Label2" type="Label" parent="Queue debug/ActionQueue" unique_id=876358659]
-layout_mode = 2
-text = "Action 2"
-
-[node name="Label3" type="Label" parent="Queue debug/ActionQueue" unique_id=300379757]
-layout_mode = 2
-text = "Action 3"
-
-[node name="Label4" type="Label" parent="Queue debug/ActionQueue" unique_id=885130575]
-layout_mode = 2
-text = "Action 4"
-
-[node name="Label5" type="Label" parent="Queue debug/ActionQueue" unique_id=271384543]
-layout_mode = 2
-text = "Action 5"
 
 [node name="State debug" type="Control" parent="." unique_id=2071902209]
 layout_mode = 3
@@ -131,41 +95,44 @@ horizontal_alignment = 1
 
 [node name="HeroesUI" type="Control" parent="." unique_id=487963089]
 layout_mode = 3
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -20.0
-offset_right = 40.0
-offset_bottom = 20.0
-grow_vertical = 2
-script = ExtResource("5_3c7v3")
-metadata/_edit_use_anchors_ = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HeroesUI" unique_id=1757082506]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -20.0
-offset_right = 562.0
-offset_bottom = 65.0
-grow_vertical = 2
-
-[node name="EnemiesUI" type="Control" parent="." unique_id=1490052883]
-layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -40.0
+offset_top = -159.0
 offset_right = 40.0
+offset_bottom = -119.0
 grow_vertical = 0
 script = ExtResource("5_3c7v3")
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EnemiesUI" unique_id=2015527675]
+[node name="HBoxContainer" type="HBoxContainer" parent="HeroesUI" unique_id=1979882483]
 layout_mode = 0
-offset_right = 551.0
+offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="EnemiesUI" type="Control" parent="." unique_id=1490052883]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -159.0
+offset_bottom = -119.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("5_3c7v3")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EnemiesUI" unique_id=1117017450]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -11.6
+anchor_right = -11.6
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
 [node name="TargetPanel" type="Control" parent="." unique_id=1883963302]
 layout_mode = 3
@@ -177,18 +144,6 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 alignment = 1
-
-[node name="Label" type="Label" parent="TargetPanel/VBoxContainer" unique_id=402764208]
-layout_mode = 2
-text = "Target 1"
-
-[node name="Label2" type="Label" parent="TargetPanel/VBoxContainer" unique_id=453952563]
-layout_mode = 2
-text = "Target 2"
-
-[node name="Label3" type="Label" parent="TargetPanel/VBoxContainer" unique_id=1275916088]
-layout_mode = 2
-text = "Target 3"
 
 [node name="VictoryPanel" type="Control" parent="." unique_id=1806648360 node_paths=PackedStringArray("continue_button")]
 visible = false
@@ -259,18 +214,6 @@ layout_mode = 1
 offset_right = 63.0
 offset_bottom = 77.0
 alignment = 1
-
-[node name="Label" type="Label" parent="ActionPanel/VBoxContainer" unique_id=963688194]
-layout_mode = 2
-text = "Action 1"
-
-[node name="Label2" type="Label" parent="ActionPanel/VBoxContainer" unique_id=1888017542]
-layout_mode = 2
-text = "Action 2"
-
-[node name="Label3" type="Label" parent="ActionPanel/VBoxContainer" unique_id=277553645]
-layout_mode = 2
-text = "Action 3"
 
 [node name="level" type="Node3D" parent="." unique_id=1079232525]
 
