@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c0dsmo2w7aenb"]
+[gd_scene format=3 uid="uid://c0dsmo2w7aenb"]
 
 [ext_resource type="PackedScene" uid="uid://bannkjitj3xwk" path="res://data/environments/tower/Tower.glb" id="1_ay4al"]
 [ext_resource type="Texture2D" uid="uid://0d3i74lhkpdd" path="res://data/environments/tower/Tower_medieval_wall_02_diff_256.jpg" id="2_ktxwe"]
@@ -35,13 +35,13 @@ shader_parameter/resolution = Vector2i(320, 240)
 [sub_resource type="BoxShape3D" id="BoxShape3D_qrbg1"]
 size = Vector3(1.64502, 6.25482, 4.57672)
 
-[node name="Tower" instance=ExtResource("1_ay4al")]
+[node name="Tower" unique_id=947638702 instance=ExtResource("1_ay4al")]
 
 [node name="Cylinder" parent="." index="1"]
 layers = 7
 surface_material_override/0 = ExtResource("2_qrbg1")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cylinder" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cylinder" index="0" unique_id=533018340]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0940704, 4.04721, -3.45418)
 shape = SubResource("BoxShape3D_ay4al")
 
@@ -49,7 +49,7 @@ shape = SubResource("BoxShape3D_ay4al")
 layers = 7
 surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cylinder_012" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cylinder_012" index="0" unique_id=686074754]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00479126, 9.04141, 0.000183105)
 shape = SubResource("BoxShape3D_ktxwe")
 
@@ -63,6 +63,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_jfguu")
 layers = 7
 surface_material_override/0 = ExtResource("2_qrbg1")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_001" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_001" index="0" unique_id=1643745932]
 transform = Transform3D(0.996934, 0, 0, 0, 0.996934, 0, 0, 0, 0.996934, -0.141272, 3.25211, 3.29635)
 shape = SubResource("BoxShape3D_qrbg1")
