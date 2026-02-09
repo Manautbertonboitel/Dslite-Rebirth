@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://ce6xqcfyhxyut"]
 
-[ext_resource type="Script" uid="uid://cnkp5d0n06omu" path="res://data/systems/angelic_combat_system/combat_manager.gd" id="1_pbkuh"]
-[ext_resource type="PackedScene" uid="uid://cn4c42b1k535h" path="res://data/systems/angelic_combat_system/UI/v_box_container.tscn" id="2_dj5a4"]
-[ext_resource type="Script" uid="uid://bnwj20lgxfhqw" path="res://data/systems/angelic_combat_system/UI/action_panel.gd" id="5_3c7v3"]
-[ext_resource type="Script" uid="uid://dac6xgeuf84cj" path="res://data/systems/angelic_combat_system/UI/victory_panel.gd" id="5_kltxb"]
-[ext_resource type="Script" uid="uid://dpmsmv0miv5nu" path="res://data/systems/angelic_combat_system/UI/target_panel.gd" id="6_etgvb"]
-[ext_resource type="Script" uid="uid://dnudpbi6dhsfn" path="res://data/systems/angelic_combat_system/UI/defeat_panel.gd" id="6_pbkuh"]
+[ext_resource type="Script" uid="uid://cnkp5d0n06omu" path="res://data/systems/combat_system/combat_manager.gd" id="1_pbkuh"]
+[ext_resource type="PackedScene" uid="uid://cn4c42b1k535h" path="res://data/systems/combat_system/UI/v_box_container.tscn" id="2_dj5a4"]
+[ext_resource type="Script" uid="uid://bnwj20lgxfhqw" path="res://data/systems/combat_system/UI/action_panel.gd" id="5_3c7v3"]
+[ext_resource type="Script" uid="uid://dac6xgeuf84cj" path="res://data/systems/combat_system/UI/victory_panel.gd" id="5_kltxb"]
+[ext_resource type="Script" uid="uid://dpmsmv0miv5nu" path="res://data/systems/combat_system/UI/target_panel.gd" id="6_etgvb"]
+[ext_resource type="Script" uid="uid://dnudpbi6dhsfn" path="res://data/systems/combat_system/UI/defeat_panel.gd" id="6_pbkuh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dj5a4"]
 font_size = 44

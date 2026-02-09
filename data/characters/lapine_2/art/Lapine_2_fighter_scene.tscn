@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bic7x4wo8em6"]
+[gd_scene format=3 uid="uid://bic7x4wo8em6"]
 
-[ext_resource type="Script" uid="uid://dp1dqpdpk6vo6" path="res://data/systems/angelic_combat_system/fighter.gd" id="1_a0747"]
+[ext_resource type="Script" uid="uid://dp1dqpdpk6vo6" path="res://data/systems/combat_system/fighter.gd" id="1_a0747"]
 
 [node name="FighterScene" type="Node2D"]
 script = ExtResource("1_a0747")

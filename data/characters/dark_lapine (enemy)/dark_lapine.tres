@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="FighterData" format=3 uid="uid://rwlloviuqfec"]
 
-[ext_resource type="Script" uid="uid://bs0mfywd5eycu" path="res://data/systems/angelic_combat_system/actions/action.gd" id="1_h14aj"]
-[ext_resource type="Resource" uid="uid://43mcg5ogpsrx" path="res://data/systems/angelic_combat_system/actions/slash.tres" id="2_h14aj"]
+[ext_resource type="Script" uid="uid://bs0mfywd5eycu" path="res://data/systems/combat_system/actions/action.gd" id="1_h14aj"]
+[ext_resource type="Resource" uid="uid://43mcg5ogpsrx" path="res://data/systems/combat_system/actions/slash.tres" id="2_h14aj"]
 [ext_resource type="PackedScene" uid="uid://djstn15csah1r" path="res://data/characters/lapine/art/Lapine_fighter_scene.tscn" id="3_4ftke"]
 [ext_resource type="PackedScene" uid="uid://dq1e0jveol8k1" path="res://data/characters/dark_lapine (enemy)/art/lapine.tscn" id="3_yk2tt"]
-[ext_resource type="Script" uid="uid://cvpf5ti0muw4u" path="res://data/systems/angelic_combat_system/fighter_data.gd" id="4_6v2sh"]
+[ext_resource type="Script" uid="uid://cvpf5ti0muw4u" path="res://data/systems/combat_system/fighter_data.gd" id="4_6v2sh"]
 
 [resource]
 script = ExtResource("4_6v2sh")

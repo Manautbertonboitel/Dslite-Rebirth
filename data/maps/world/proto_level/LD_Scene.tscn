@@ -2,14 +2,15 @@
 
 [ext_resource type="Shader" uid="uid://d1q3ratm6ww8o" path="res://data/effects/postprocess/PS1Scene.gdshader" id="1_fwsrj"]
 [ext_resource type="PackedScene" uid="uid://l5boluq4n37e" path="res://data/characters/lapine/art/lapine.tscn" id="2_22l76"]
+[ext_resource type="PackedScene" uid="uid://cq0wq2tirpdqa" path="res://data/characters/player/art/player_3d_no_camera.tscn" id="2_f82lu"]
 [ext_resource type="PackedScene" uid="uid://c0dsmo2w7aenb" path="res://data/environments/tower/tower.tscn" id="3_hn5ql"]
-[ext_resource type="PackedScene" uid="uid://b2mt87uhqd08p" path="res://data/characters/player/art/player_3d.tscn" id="4_ho50q"]
 [ext_resource type="Texture2D" uid="uid://0d3i74lhkpdd" path="res://data/environments/tower/Tower_medieval_wall_02_diff_256.jpg" id="5_v4aji"]
 [ext_resource type="Texture2D" uid="uid://cjd5egmj8i8wy" path="res://data/environments/tower/Tower_medieval_wall_02_nor_gl_256.png" id="6_f82lu"]
 [ext_resource type="Material" uid="uid://cyqjfyxoc1jh8" path="res://data/environments/tower/Tower_PS1.tres" id="7_e186a"]
 [ext_resource type="Material" uid="uid://dgdkum2ye5ijs" path="res://data/material_library/prototype_box.tres" id="8_acdm5"]
 [ext_resource type="Shader" uid="uid://diwg8kbsjjmcw" path="res://data/effects/postprocess/PS1.gdshader" id="8_kub6w"]
 [ext_resource type="PackedScene" uid="uid://dtfhci3vvkfgr" path="res://data/characters/anno/art/anno.tscn" id="9_e8iew"]
+[ext_resource type="PackedScene" uid="uid://5rcs18gvb8lt" path="res://data/systems/camera/placeable_camera.tscn" id="12_kub6w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ab3st"]
 shader = ExtResource("1_fwsrj")
@@ -27,7 +28,7 @@ sky_material = SubResource("ProceduralSkyMaterial_v4aji")
 
 [sub_resource type="Environment" id="Environment_ab3st"]
 background_mode = 2
-background_color = Color(0.5931336, 0.59313357, 0.59313357, 1)
+background_color = Color(0.45506775, 0.5841923, 0.8767696, 1)
 sky = SubResource("Sky_3sm11")
 ambient_light_source = 2
 ambient_light_color = Color(0.543979, 0.680659, 0.89865, 1)
@@ -212,7 +213,7 @@ point_count = 3
 
 [sub_resource type="Curve3D" id="Curve3D_f82lu"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3.385, 3.79, 18.27, 0, 0, 0, 0, 0, 0, -3.05, 4.9, 31.155),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 4.633362, 5.231702, 21.032114, 0, 0, 0, 0, 0, 0, 5.168701, 21.097233, 78.863495, 0, 0, 0, 0, 0, 0, 6.590847, 16.682528, 119.109985),
 "tilts": PackedFloat32Array(0, 0, 0)
 }
 point_count = 3
@@ -220,6 +221,7 @@ point_count = 3
 [node name="Node3D" type="Node3D" unique_id=1121726285]
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1670392050]
+visible = false
 material = SubResource("ShaderMaterial_ab3st")
 anchors_preset = 15
 anchor_right = 1.0
@@ -231,18 +233,17 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1833311363]
 handle_input_locally = false
 size = Vector2i(1280, 720)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
-[node name="Player3D" parent="SubViewportContainer/SubViewport" unique_id=1719687365 instance=ExtResource("4_ho50q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.25579, 0.563078, 21.92662)
-metadata/_edit_lock_ = true
+[node name="Player3DNoCamera" parent="." unique_id=205379790 node_paths=PackedStringArray("_current_camera") instance=ExtResource("2_f82lu")]
+_current_camera = NodePath("../Path3D2/PathFollow3D/Camera3D")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=458493203]
 environment = SubResource("Environment_ab3st")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1176231910]
 transform = Transform3D(0.755879, -0.440902, 0.483996, -0.242683, 0.497906, 0.832583, -0.608072, -0.74679, 0.269357, 5.00624, 9.33842, -0.482016)
-light_color = Color(0.82221395, 0.8655416, 0.72278637, 1)
+light_color = Color(0.6661935, 0.76812303, 0.9709651, 1)
 light_energy = 2.538
 shadow_enabled = true
 metadata/_edit_lock_ = true
@@ -559,4 +560,11 @@ curve = SubResource("Curve3D_v4aji")
 curve = SubResource("Curve3D_f82lu")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D2" unique_id=655306643]
-transform = Transform3D(-0.9832656, -0.036409196, -0.17850061, -1.8626444e-09, 0.97982395, -0.19985734, 0.182176, -0.19651274, -0.9634283, 0, 0, 0)
+transform = Transform3D(-0.9999259, -0.0024488736, -0.008926772, 1.1641168e-10, 0.9643648, -0.26455417, 0.009256331, -0.26454246, -0.96432495, 4.633362, 5.231702, 21.032114)
+
+[node name="Camera3D" type="Camera3D" parent="Path3D2/PathFollow3D" unique_id=5274261]
+transform = Transform3D(-0.53537494, -0.21439612, 0.81697345, -0.22345252, 0.9687486, 0.10779421, -0.81453913, -0.124840334, -0.5665414, 1.1964097, 0.46857643, -1.4089432)
+fov = 65.0
+
+[node name="CameraSystem" parent="." unique_id=1388505660 instance=ExtResource("12_kub6w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 19)

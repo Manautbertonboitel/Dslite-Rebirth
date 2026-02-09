@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://b5gh2iwtsdaal"]
+
+[ext_resource type="Script" uid="uid://bs0mfywd5eycu" path="res://data/systems/combat_system/actions/action.gd" id="1_8x12e"]
+
+[resource]
+script = ExtResource("1_8x12e")
+action_name = "Coup d'épée puissant"
+power = 10
+metadata/_custom_type_script = "uid://bs0mfywd5eycu"
