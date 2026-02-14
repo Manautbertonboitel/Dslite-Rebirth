@@ -5,4 +5,7 @@
 [resource]
 script = ExtResource("1_cey7u")
 action_name = "Roll"
+can_bypass_action_queue = true
+targeting_type = 5
+requires_target_selection = false
 metadata/_custom_type_script = "uid://0xlpaned7ke0"

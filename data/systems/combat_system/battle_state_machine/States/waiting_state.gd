@@ -1,4 +1,4 @@
-extends BattleState
+extends CombatState
 class_name WaitingState
 
 var state_name: String = "Waiting State"

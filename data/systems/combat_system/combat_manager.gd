@@ -1,5 +1,5 @@
-extends Node
 class_name CombatManager
+extends Node
 
 class PositionMapping:
 	var up: Node3D
@@ -19,17 +19,6 @@ class PositionMapping:
 		return up != null and right != null and down != null and left != null
 
 
-class ActionRequest:
-	var caster: Fighter
-	var target: Fighter
-	var action: Action
-
-	func _init(c, t, a):
-		caster = c
-		target = t
-		action = a
-
-
 # --------------------------------------------------------------------
 # INITIALIZATION & VALIDATION
 # --------------------------------------------------------------------
@@ -39,7 +28,7 @@ const ACTION_ANIMATION_TIME: float = 0.5
 const DAMAGE_DELAY_TIME: float = 0.2
 
 # STATE MACHINE
-var state_machine: BattleStateMachine
+var state_machine: CombatStateMachine
 
 # STATE DATA (used by states) TODO transform in sub states or contexts
 var dodge_window_active: bool = false
@@ -48,7 +37,7 @@ signal dodge_resolved(result: float)
 
 var pending_attack_caster: Fighter = null
 var pending_attack_target: Fighter = null
-var pending_attack_action: Action = null
+var pending_attack_action: AttackAction = null
 
 # CORE COMBAT CONTEXT
 var fighters: Array[Fighter] = []
@@ -90,7 +79,7 @@ var enemy_position_mapping: PositionMapping
 
 # UI
 @export_subgroup("UI")
-@export var action_panel: UIManager
+@export var action_panel: Control
 @export var target_panel: Control
 @export var defeat_panel: Control
 @export var victory_panel: Control
@@ -119,7 +108,7 @@ func _ready() -> void:
 	
 	_initialize_position_mappings()
 
-	state_machine = BattleStateMachine.new(self)
+	state_machine = CombatStateMachine.new(self)
 	
 	start_battle(
 		GameManager.combat_heroes_pool,
@@ -350,16 +339,16 @@ func _on_fighter_ready(fighter: Fighter) -> void:
 
 	# AI fighters bypass the ready_queue and submits action directly
 	if fighter.controller is AIController:
-		print("[READY QUEUE] AI fighter (%s) ready to act, submits action immediatelly" % fighter.character_name)
 		fighter.controller.take_turn(fighter, self)
 		
-
-	else:
+	elif fighter.controller is PlayerController:
 		# Player fighters go into ready_queue
 		if not ready_queue.has(fighter):
 			ready_queue.append(fighter)
-			update_ready_queue()
-			print("[READY QUEUE] PLAYER figher (%s) ready to act, added to ready_queue" % fighter.character_name)
+			update_ready_queue_debug()
+	
+	else:
+		print("WTF c'est ni un PlayerController ni un AIController qui est ready à faire une action ya un gros pb la team")
 
 
 func process_next_ready_fighter() -> void:
@@ -369,7 +358,7 @@ func process_next_ready_fighter() -> void:
 		var dead_fighter = ready_queue.pop_front()
 		#ready_queue.erase(ready_queue[0])
 		print("[FIGHTER QUEUE] Skipped and Removed dead fighter from queue: %s" % dead_fighter.character_name)
-		update_ready_queue()
+		update_ready_queue_debug()
 	
 	if ready_queue.is_empty():
 		return
@@ -400,41 +389,53 @@ func show_action_menu(fighter: Fighter):
 	action_panel.action_chosen.connect(_on_action_chosen, CONNECT_ONE_SHOT)
 
 
-func _on_action_chosen(action) -> void:
-
+func _on_action_chosen(action: Action) -> void:
 	if action == null:
-		push_error("Null action chosen")
-		#state = BattleState.WAITING
 		return
-
+	
 	action_panel.visible = false
-
-	if action is RollAction and dodge_window_active:
-		submit_action(current_character, null, action)
-		current_character.is_chosing = false
+	current_character.selected_action = action
+	
+	# CAS SPÉCIAL: RollAction pendant dodge window
+	if action.can_bypass_action_queue:
+		if dodge_window_active:
+			submit_action(current_character, action, null)
+			ready_queue.pop_front()
+			current_character.is_chosing = false
+		else:
+			print("Cannot dodge now")
+			action_panel.visible = true
+		return
+	
+	if not action.requires_target_selection:
+		# Actions auto-ciblées (AOE, Flee, Self)
+		submit_action(current_character, action, null)
 		ready_queue.pop_front()
-	elif action is RollAction and not dodge_window_active:
-		print("cannot dodge while enemy is attacking and dodge window missed")
-		action_panel.visible = true
+		current_character.is_chosing = false
 	else:
-		current_character.selected_action = action
-		var targets: Array[Fighter] = get_hostile_targets(current_character)
-		target_panel.show_targets(targets)
+		# Actions nécessitant une sélection de cible
+		var valid_targets: Array[Fighter] = action.get_valid_targets(current_character, self)
+		
+		if valid_targets.is_empty():
+			print("No valid targets for this action")
+			action_panel.visible = true
+			return
+		
+		target_panel.show_targets(valid_targets)
 		target_panel.target_chosen.connect(_on_target_chosen, CONNECT_ONE_SHOT)
 
 
 func _on_target_chosen(target: Fighter):
-
 	target_panel.visible = false
-	submit_action(current_character, target, current_character.selected_action)
+	submit_action(current_character, current_character.selected_action, target)
 	ready_queue.pop_front()
 	current_character.is_chosing = false
 
-func submit_action(caster: Fighter, target: Fighter, action: Action):
+func submit_action(caster: Fighter, action: Action, target: Fighter):
 	if action is RollAction:
 		_execute_dodge_action(caster)
 	else:
-		var action_request: ActionRequest = ActionRequest.new(caster, target, action)
+		var action_request: ActionRequest = ActionRequest.new(caster, action, target)
 		action_queue.append(action_request)
 		update_action_queue()
 
@@ -448,35 +449,17 @@ func get_hostile_targets(source: Fighter) -> Array[Fighter]:
 		if f.is_alive() and is_hostile(source, f):
 			result.append(f)
 	return result
-
+	
+func get_allied_targets(source: Fighter) -> Array[Fighter]:
+	var result: Array[Fighter] = []
+	for f in fighters:
+		if f.is_alive() and not is_hostile(source, f):
+			result.append(f)
+	return result
 
 func is_hostile(a: Fighter, b: Fighter) -> bool:
 	return a.faction != b.faction
 	
-
-# --------------------------------------------------------------------
-# ACTION EXECUTION
-# --------------------------------------------------------------------
-
-func resolve_next_action() -> void:
-		
-	var request: ActionRequest = action_queue[0]
-
-	# Ignore if caster is dead
-	if not request.caster.is_alive():
-		action_queue.pop_front()
-		return
-
-	request.action.request_dodge_window.connect(_start_dodge_window)
-	await request.action.execute(request.caster, request.target, self)
-	request.action.request_dodge_window.disconnect(_start_dodge_window)
-
-	action_queue.pop_front()
-	request.caster.reset_atb()
-	update_action_queue()
-	evaluate_battle_state()
-
-
 # --------------------------------------------------------------------
 # DODGE MANAGEMENT
 # --------------------------------------------------------------------
@@ -598,7 +581,7 @@ func _on_defeat_retry():
 func update_state_debug() -> void:
 	state_debug.text = state_name
 
-func update_ready_queue() -> void:	
+func update_ready_queue_debug() -> void:	
 	for child in fighter_ui_queue.get_children():
 		child.queue_free()
 		

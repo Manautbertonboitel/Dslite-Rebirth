@@ -1,6 +1,6 @@
 @abstract
 extends Node
-class_name BattleState
+class_name CombatState
 
 @abstract func enter(manager: CombatManager) -> void
 

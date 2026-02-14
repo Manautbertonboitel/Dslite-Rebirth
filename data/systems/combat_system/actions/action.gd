@@ -1,55 +1,45 @@
-extends Resource
 class_name Action
+extends Resource
 
 signal completed
-signal request_dodge_window(
-	caster: Fighter,
-	target: Fighter,
-	duration: float
-)
-
-const ACTION_ANIMATION_TIME = 0.5
-const DAMAGE_DELAY_TIME = 0.2
-const DODGE_WINDOW_DURATION = 5.0
 
 @export var action_name: String
-@export var power: int
-@export var cost: int = 0
+@export var can_bypass_action_queue: bool = false
 
-func execute(caster: Fighter, target: Fighter, combat_manager: CombatManager) -> void:
-#	print("%s uses %s on %s" % [caster.character_name, action_name, target.character_name])
+# Types de ciblage
+enum TargetingType {
+	SINGLE_HOSTILE,      # 1 ennemi
+	SINGLE_ALLY,         # 1 allié TODO peut-être rajouter pour 2 alliés / ennemies si jamais, ou custom, etc.
+	ALL_HOSTILES,        # Tous les ennemis (AOE)
+	ALL_ALLIES,          # Tous les alliés (AOE)
+	SELF,                # Soi-même
+	NONE                 # Pas de cible (fuite)
+}
 
-	# Example: simulate animation time
-#	await caster.get_tree().create_timer(ACTION_ANIMATION_TIME).timeout
-#
-#	await caster.get_tree().create_timer(DAMAGE_DELAY_TIME).timeout
-	
+@export var targeting_type: TargetingType = TargetingType.SINGLE_HOSTILE
+@export var requires_target_selection: bool = true  # false pour AOE/Flee/Self
 
-	# windup
-	await _play_windup(caster)
+# Méthodes que chaque action doit implémenter
+func can_execute(caster: Fighter, combat_manager: CombatManager) -> bool:
+	return true
 
-	# hit 1
-	if caster.faction == Faction.Type.ENEMY and target.faction == Faction.Type.PLAYER:
-		request_dodge_window.emit(caster, target, DODGE_WINDOW_DURATION)
-		var dodged = await _wait_for_dodge_result(combat_manager)
-		if not dodged:
-			print("=== Dodge window expired - attack hits! ===")
-			target.visuals.hide_dodge_indicator()
-			caster.visuals.clear_attack_indicator()
-			target.take_damage(power)
-	else:
-		target.take_damage(power)
-		
-	# hit 2
-#	emit_signal("request_dodge_window", caster, target, 0.2)
-#	dodged = await _wait_for_dodge_result()
-#	if not dodged:
-#		target.take_damage(power)
-		
-	emit_signal("completed") 
-	
-func _play_windup(caster: Fighter):
-	await caster.get_tree().create_timer(ACTION_ANIMATION_TIME).timeout
-	
-func _wait_for_dodge_result(combat_manager) -> bool:
-	return await combat_manager.dodge_resolved
+func get_valid_targets(caster: Fighter, combat_manager: CombatManager) -> Array[Fighter]:
+	"""Retourne les cibles valides selon le type de ciblage"""
+	match targeting_type:
+		TargetingType.SINGLE_HOSTILE:
+			return combat_manager.get_hostile_targets(caster)
+		TargetingType.SINGLE_ALLY:
+			return combat_manager.get_allied_targets(caster)
+		TargetingType.ALL_HOSTILES:
+			return combat_manager.get_hostile_targets(caster)
+		TargetingType.ALL_ALLIES:
+			return combat_manager.get_allied_targets(caster)
+		TargetingType.SELF:
+			return [caster]
+		TargetingType.NONE:
+			return []
+	return []
+
+func execute(caster: Fighter, combat_manager: CombatManager, target: Fighter) -> void:
+	"""Execute l'action - selected_target est null pour AOE/Flee/Self"""
+	push_error("Must implement execute() in derived class")

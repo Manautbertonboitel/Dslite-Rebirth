@@ -11,6 +11,9 @@
 [ext_resource type="Shader" uid="uid://diwg8kbsjjmcw" path="res://data/effects/postprocess/PS1.gdshader" id="8_kub6w"]
 [ext_resource type="PackedScene" uid="uid://dtfhci3vvkfgr" path="res://data/characters/anno/art/anno.tscn" id="9_e8iew"]
 [ext_resource type="PackedScene" uid="uid://5rcs18gvb8lt" path="res://data/systems/camera/placeable_camera.tscn" id="12_kub6w"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="12_w6f4t"]
+[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="13_8xxot"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_pkgp8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ab3st"]
 shader = ExtResource("1_fwsrj")
@@ -218,6 +221,9 @@ _data = {
 }
 point_count = 3
 
+[sub_resource type="Resource" id="Resource_ilvjf"]
+script = ExtResource("14_pkgp8")
+
 [node name="Node3D" type="Node3D" unique_id=1121726285]
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1670392050]
@@ -236,7 +242,8 @@ size = Vector2i(1280, 720)
 render_target_update_mode = 0
 
 [node name="Player3DNoCamera" parent="." unique_id=205379790 node_paths=PackedStringArray("_current_camera") instance=ExtResource("2_f82lu")]
-_current_camera = NodePath("../Path3D2/PathFollow3D/Camera3D")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+_current_camera = NodePath("../Camera3D")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=458493203]
 environment = SubResource("Environment_ab3st")
@@ -560,11 +567,23 @@ curve = SubResource("Curve3D_v4aji")
 curve = SubResource("Curve3D_f82lu")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D2" unique_id=655306643]
-transform = Transform3D(-0.9999259, -0.0024488736, -0.008926772, 1.1641168e-10, 0.9643648, -0.26455417, 0.009256331, -0.26454246, -0.96432495, 4.633362, 5.231702, 21.032114)
-
-[node name="Camera3D" type="Camera3D" parent="Path3D2/PathFollow3D" unique_id=5274261]
-transform = Transform3D(-0.53537494, -0.21439612, 0.81697345, -0.22345252, 0.9687486, 0.10779421, -0.81453913, -0.124840334, -0.5665414, 1.1964097, 0.46857643, -1.4089432)
-fov = 65.0
+transform = Transform3D(-0.9999256, -0.0024488736, -0.008926772, 1.16411644e-10, 0.9643648, -0.26455417, 0.009256328, -0.26454246, -0.96432495, 4.633362, 5.231702, 21.032114)
 
 [node name="CameraSystem" parent="." unique_id=1388505660 instance=ExtResource("12_kub6w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 19)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=5274261]
+top_level = true
+fov = 65.0
+
+[node name="PhantomCameraHost" type="Node" parent="Camera3D" unique_id=522715566]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("12_w6f4t")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[node name="PhantomCamera3D" type="Node3D" parent="." unique_id=278076257]
+script = ExtResource("13_8xxot")
+look_at_mode = 1
+tween_resource = SubResource("Resource_ilvjf")
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"

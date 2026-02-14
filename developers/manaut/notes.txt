@@ -77,3 +77,56 @@ Si la liste de résolution d'action n'est pas vide :
         - On retire l'action de la liste de résolution des actions
         - On retire le caster de la liste de fighters "actifs"
       
+      
+      
+TODO Tenter de tout Diviser Combat Manager en 2 : Temps réel combat manager -> turn combat manager -> State Machine
+
+TODO Observer pattern pour la UI
+
+
+# --------------------------------------------------------------------
+# ACTION COMMAND PATTERN
+# --------------------------------------------------------------------
+
+- Mes actions sont actuellement des ressources, ce qui permet d'avoir plein de ressources et de modifier les caractéristiques (pour faire des attaques différentes par exemple) :
+
+une attack action :
+- caster
+- target
+- power
+- cost
+
+une attaque AOE :
+- caster
+- array de targets ? team ?
+- power
+- cost
+
+une action de fuite :
+- caster
+Mais c'est toute l'équipe qui tente de fuir, pas de target ni de cost
+
+heal_action :
+- caster
+- target
+- power
+- cost
+
+(target.hp += target.hp + power * caster.power)
+
+heal_action_aoe :
+
+- caster
+- array de targets ? team ?
+- power
+- cost
+
+item_action :
+- item qui heal
+- item qui boost des stats
+- item qui lance un sort d'attaque particulier (caster + target)
+- etc etc etc
+
+
+
+

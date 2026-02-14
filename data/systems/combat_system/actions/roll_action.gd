@@ -1,7 +1,7 @@
 extends Action
 class_name RollAction
 
-func execute(caster: Fighter, _target: Fighter, _combat_manager: CombatManager) -> void:
+func execute(caster: Fighter, combat_manager: CombatManager, target: Fighter, ) -> void:
 	# Roll doesn't need a target, but we keep signature compatible
 	print("%s initiates ROLL" % caster.character_name)
 	

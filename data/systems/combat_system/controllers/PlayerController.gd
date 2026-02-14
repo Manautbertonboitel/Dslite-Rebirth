@@ -1,5 +1,5 @@
-extends FighterController
 class_name PlayerController
+extends FighterController
 
 func take_turn(fighter: Fighter, combat_manager: CombatManager) -> void:
 	# Player input → delegate to UI

@@ -1,8 +1,8 @@
 extends Node
-class_name BattleStateMachine
+class_name CombatStateMachine
 
 var combat_manager: CombatManager
-var current_state: BattleState
+var current_state: CombatState
 
 var waiting_state
 var action_execute_state
@@ -21,7 +21,7 @@ func update(delta: float) -> void:
 	if current_state:
 		current_state.update(combat_manager, delta)
 
-func change_state(new_state: BattleState) -> void:
+func change_state(new_state: CombatState) -> void:
 
 	if current_state:
 		current_state.exit(combat_manager)

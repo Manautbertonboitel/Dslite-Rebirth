@@ -1,5 +1,5 @@
 # EndState.gd
-extends BattleState
+extends CombatState
 class_name EndState
 
 var state_name: String = "End State"

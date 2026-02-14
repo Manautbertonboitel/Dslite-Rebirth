@@ -1,7 +1,6 @@
 extends Control
-class_name UIManager
 
-signal action_chosen(action: Action)
+signal action_chosen(action: AttackAction)
 
 func show_actions(fighter: Fighter):
 	# Vider l’UI
@@ -20,7 +19,3 @@ func show_actions(fighter: Fighter):
 		visible = true
 
 #TODO Afficher / griser le bouton ROLL selon si on est en dodge window ou non 
-#func _process(delta):
-#	if $"../CombatManager".dodge_window_active:
-#		for action in hero.actions:
-			
