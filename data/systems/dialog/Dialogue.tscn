@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://bd6yt8cqsj3qs"]
+
+[ext_resource type="Texture2D" uid="uid://28sh0avifcp" path="res://data/systems/dialog/dialogue_backgroung.png" id="1"]
+[ext_resource type="Theme" uid="uid://du7pjewgb4h87" path="res://data/systems/dialog/MainTheme.tres" id="2"]
+[ext_resource type="Script" uid="uid://c4lirjmu5ogaw" path="res://data/systems/dialog/dialogue.gd" id="3"]
+[ext_resource type="PackedScene" path="res://data/systems/dialog/DialogueVoicePlayer.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://data/systems/dialog/PauseCalculator.tscn" id="5"]
+
+[node name="DialogueBox" type="Control" unique_id=1399469030]
+layout_mode = 3
+anchor_right = 0.779
+anchor_bottom = 0.248
+offset_right = 0.303955
+offset_bottom = 0.199997
+theme = ExtResource("2")
+script = ExtResource("3")
+
+[node name="Background" type="NinePatchRect" parent="." unique_id=719820384]
+layout_mode = 0
+offset_right = 798.0
+offset_bottom = 149.0
+texture = ExtResource("1")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="Content" type="RichTextLabel" parent="." unique_id=320491146]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 785.0
+offset_bottom = 138.0
+theme_override_colors/default_color = Color(0.4, 0.223529, 0.192157, 1)
+bbcode_enabled = true
+scroll_active = false
+
+[node name="TypeTyper" type="Timer" parent="." unique_id=397201292]
+wait_time = 0.04
+
+[node name="DialogueVoicePlayer" parent="." unique_id=785568961 instance=ExtResource("4")]
+
+[node name="PauseCalculator" parent="." unique_id=1347454183 instance=ExtResource("5")]
+
+[node name="PauseTimer" type="Timer" parent="." unique_id=1256402404]
+one_shot = true
+
+[connection signal="timeout" from="TypeTyper" to="." method="_on_TypeTyper_timeout"]
+[connection signal="finished" from="DialogueVoicePlayer" to="." method="_on_DialogueVoicePlayer_finished"]
+[connection signal="pause_requested" from="PauseCalculator" to="." method="_on_PauseCalculator_pause_requested"]
+[connection signal="timeout" from="PauseTimer" to="." method="_on_PauseTimer_timeout"]

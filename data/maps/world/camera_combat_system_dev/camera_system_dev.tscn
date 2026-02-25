@@ -3,7 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://cnedxfn2pxh2t" path="res://addons/gdquest/level/level.tscn" id="1_6k5lt"]
 [ext_resource type="PackedScene" uid="uid://5rcs18gvb8lt" path="res://data/systems/camera/placeable_camera.tscn" id="2_mkw1v"]
 [ext_resource type="PackedScene" uid="uid://cq0wq2tirpdqa" path="res://data/characters/player/art/player_3d_no_camera.tscn" id="3_12kxl"]
-[ext_resource type="PackedScene" uid="uid://mbkif2wgqod3" path="res://data/systems/combat_system/triggers/enemy_trigger.tscn" id="3_mkw1v"]
+[ext_resource type="PackedScene" uid="uid://mbkif2wgqod3" path="res://data/systems/combat/triggers/enemy_trigger.tscn" id="3_mkw1v"]
+[ext_resource type="Script" uid="uid://dxbrooln481kq" path="res://data/systems/dialog/dialogue_trigger.gd" id="4_nf6am"]
+[ext_resource type="Script" uid="uid://dgvtsq2i4seff" path="res://data/systems/dialog/dialogueManager.gd" id="5_uurd1"]
+[ext_resource type="Theme" uid="uid://du7pjewgb4h87" path="res://data/systems/dialog/MainTheme.tres" id="7_hn0g3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2x0pp"]
 size = Vector3(5.408539, 8.366211, 6.901062)
@@ -41,12 +44,40 @@ shape = SubResource("BoxShape3D_ia08l")
 [node name="EnemyTrigger" parent="Level" unique_id=426652158 instance=ExtResource("3_mkw1v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8765373, 0.58077097, -40.427856)
 
+[node name="DialogTrigger" parent="Level" unique_id=1555188131 node_paths=PackedStringArray("dialogue_manager") instance=ExtResource("3_mkw1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6339463, 0.580771, -40.427856)
+script = ExtResource("4_nf6am")
+dialogue_manager = NodePath("../../DialogueManager")
+message_list = ["Bonjour,{p=0.5} est-ce que je t'ai déjà parlé de MaoDSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS SSSSSSSSSSSSSS SSSS ? awd     awd", "Voyons voir...", "Voila !", "Le...{p=0.5} petit...{p=0.5} livre...{p=0.5} rouge...", "[shake rate=20 level=10]RÉVOLUTION!!![/shake]"]
+
 [node name="EnemyTrigger2" parent="Level" unique_id=228520647 instance=ExtResource("3_mkw1v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31305957, 0.58077145, -32.230137)
 
 [node name="Player3DNoCamera" parent="." unique_id=2116747130 node_paths=PackedStringArray("_current_camera") instance=ExtResource("3_12kxl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -35.97648)
 _current_camera = NodePath("../Level/Cameras/CameraSystem/Camera3D")
+
+[node name="DialogueManager" type="Control" parent="." unique_id=1137936736 node_paths=PackedStringArray("next_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("7_hn0g3")
+script = ExtResource("5_uurd1")
+dialogue_position = Vector2(313, 350)
+next_label = NodePath("NextLabel")
+
+[node name="NextLabel" type="Label" parent="DialogueManager" unique_id=782504769]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 516.0
+offset_right = 1073.0
+offset_bottom = 558.0
+text = "Press Enter"
+horizontal_alignment = 1
 
 [editable path="Level/Cameras/CameraSystem"]
 [editable path="Level/Cameras/CameraSystem2"]

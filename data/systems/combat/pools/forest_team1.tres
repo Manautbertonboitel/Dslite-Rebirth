@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="FighterPool" format=3 uid="uid://dxryfnna46ibl"]
 
-[ext_resource type="Script" uid="uid://cvpf5ti0muw4u" path="res://data/systems/combat_system/fighter_data.gd" id="1_4wbo8"]
+[ext_resource type="Script" uid="uid://cvpf5ti0muw4u" path="res://data/systems/combat/fighter_data.gd" id="1_4wbo8"]
 [ext_resource type="Resource" uid="uid://rwlloviuqfec" path="res://data/characters/dark_lapine (enemy)/dark_lapine.tres" id="2_a0mkt"]
-[ext_resource type="Script" uid="uid://c0dv0pdupe1eb" path="res://data/systems/combat_system/pools/fighter_pool.gd" id="3_3xwcq"]
+[ext_resource type="Script" uid="uid://c0dv0pdupe1eb" path="res://data/systems/combat/pools/fighter_pool.gd" id="3_3xwcq"]
 
 [resource]
 script = ExtResource("3_3xwcq")

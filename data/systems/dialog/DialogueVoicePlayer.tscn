@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dhgmui02b5mmt"]
+
+[ext_resource type="AudioStream" uid="uid://b6pdl8o6na7hv" path="res://data/systems/dialog/Blop-Mark_DiAngelo-79054334-modified.wav" id="1"]
+[ext_resource type="Script" uid="uid://ypcfc0d2k4yi" path="res://data/systems/dialog/DialogueVoicePlayer.gd" id="2"]
+
+[node name="DialogueVoicePlayer" type="AudioStreamPlayer" unique_id=37910448]
+stream = ExtResource("1")
+script = ExtResource("2")

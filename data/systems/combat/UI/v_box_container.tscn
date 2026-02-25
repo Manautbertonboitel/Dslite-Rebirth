@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cn4c42b1k535h"]
 
-[ext_resource type="Script" uid="uid://ctwmo36jleysd" path="res://data/systems/combat_system/UI/character_ui_display.gd" id="1_6yd1n"]
+[ext_resource type="Script" uid="uid://ctwmo36jleysd" path="res://data/systems/combat/UI/character_ui_display.gd" id="1_6yd1n"]
 
 [sub_resource type="Theme" id="Theme_hfevk"]
 ProgressBar/colors/font_color = Color(0, 0, 0, 1)

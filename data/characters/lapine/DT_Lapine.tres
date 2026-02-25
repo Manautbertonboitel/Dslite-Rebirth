@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="FighterData" format=3 uid="uid://cu8ibno8qactw"]
 
-[ext_resource type="Script" uid="uid://cn8cd5f3ssjge" path="res://data/systems/combat_system/actions/action.gd" id="1_v6xox"]
-[ext_resource type="Resource" uid="uid://dsbiqs3aki1vq" path="res://data/systems/combat_system/actions/assembly_dissolution.tres" id="2_3yhg4"]
-[ext_resource type="Resource" uid="uid://b5gh2iwtsdaal" path="res://data/systems/combat_system/actions/power_slash.tres" id="3_3yhg4"]
-[ext_resource type="Resource" uid="uid://c1f5bhyhitk7h" path="res://data/systems/combat_system/actions/roll.tres" id="4_3qdor"]
+[ext_resource type="Script" uid="uid://cn8cd5f3ssjge" path="res://data/systems/combat/actions/action.gd" id="1_v6xox"]
+[ext_resource type="Resource" uid="uid://dsbiqs3aki1vq" path="res://data/systems/combat/actions/assembly_dissolution.tres" id="2_3yhg4"]
+[ext_resource type="Resource" uid="uid://b5gh2iwtsdaal" path="res://data/systems/combat/actions/power_slash.tres" id="3_3yhg4"]
+[ext_resource type="Resource" uid="uid://c1f5bhyhitk7h" path="res://data/systems/combat/actions/roll.tres" id="4_3qdor"]
 [ext_resource type="PackedScene" uid="uid://djstn15csah1r" path="res://data/characters/lapine/art/Lapine_fighter_scene.tscn" id="5_3yhg4"]
-[ext_resource type="Script" uid="uid://cvpf5ti0muw4u" path="res://data/systems/combat_system/fighter_data.gd" id="5_60puy"]
+[ext_resource type="Script" uid="uid://cvpf5ti0muw4u" path="res://data/systems/combat/fighter_data.gd" id="5_60puy"]
 [ext_resource type="PackedScene" uid="uid://l5boluq4n37e" path="res://data/characters/lapine/art/lapine.tscn" id="6_3qdor"]
 
 [resource]

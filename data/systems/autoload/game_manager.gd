@@ -15,7 +15,7 @@ var return_rotation: Vector3 = Vector3.ZERO
 const RETURN_TO_WORLD_ANIMATION_TIME = 0.5
 
 # === LOOT TABLES ===
-var loot_tables: Dictionary = {}  # Key: table_name, Value: LootTable resource
+var loot_tables: Dictionary = {}  # Key: table_name, Value: LootTable  
 
 # === TRIGGER MANAGEMENT ===
 var defeated_triggers: Dictionary = {}  # Key: trigger_id, Value: timestamp

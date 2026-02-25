@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://l5boluq4n37e"]
+[gd_scene format=3 uid="uid://l5boluq4n37e"]
 
 [ext_resource type="PackedScene" uid="uid://cgb04soevrhns" path="res://data/characters/lapine/art/Lapine.fbx" id="1_tqbee"]
 [ext_resource type="Shader" uid="uid://diwg8kbsjjmcw" path="res://data/effects/postprocess/PS1.gdshader" id="2_05syi"]
@@ -54,10 +54,10 @@ nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_tdmsc")
 nodes/StateMachine/position = Vector2(100, 140)
 node_connections = [&"output", 0, &"StateMachine"]
 
-[node name="Lapine" instance=ExtResource("1_tqbee")]
+[node name="Lapine" unique_id=2040652464 instance=ExtResource("1_tqbee")]
 
 [node name="Skeleton3D" parent="metarig_002" index="0"]
-bones/1/rotation = Quaternion(-0.09107416, -0.005099455, -0.007980123, 0.9957992)
+bones/1/rotation = Quaternion(-0.09156169, -0.0051031, -0.007977899, 0.9957545)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/position = Vector3(0, 0.00229707, -1.84775e-11)
 bones/2/rotation = Quaternion(0.28565875, 0.0017263159, 0.0003706799, 0.9583298)
@@ -66,27 +66,27 @@ bones/3/position = Vector3(9.77647e-11, 0.00170194, -0.000410055)
 bones/3/rotation = Quaternion(-0.0289744, -0.0012087, -0.0271918, 0.99921)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/position = Vector3(-0.00017410047, 0.0006642698, -0.0008766365)
-bones/4/rotation = Quaternion(-0.19144607, 0.39708218, -0.032190803, 0.8970161)
+bones/4/rotation = Quaternion(-0.19191165, 0.3970724, -0.03238751, 0.89691395)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/position = Vector3(0.00105834, 0.00324556, 0.000619315)
-bones/5/rotation = Quaternion(0.38563535, 0.34252495, -0.17384996, 0.8388911)
+bones/5/rotation = Quaternion(0.40210736, 0.33769822, -0.17875646, 0.83205515)
 bones/6/position = Vector3(-3.07154e-10, 0.00234237, -8.03335e-11)
-bones/6/rotation = Quaternion(0.56101364, -0.20107229, 0.036731545, 0.8021749)
+bones/6/rotation = Quaternion(0.56213754, -0.2005069, 0.036857933, 0.80152345)
 bones/6/scale = Vector3(1, 1, 1)
 bones/7/position = Vector3(-0.00105663, 0.00327591, 0.000623864)
-bones/7/rotation = Quaternion(0.2578418, -0.15877886, 0.20623706, 0.93046933)
+bones/7/rotation = Quaternion(0.2688976, -0.1600459, 0.22290592, 0.92325103)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/position = Vector3(3.72654e-10, 0.00234238, -9.09265e-11)
-bones/8/rotation = Quaternion(0.79341966, -0.028076509, 0.11334293, 0.59736955)
+bones/8/rotation = Quaternion(0.7948052, -0.027414085, 0.11419471, 0.59539294)
 bones/8/scale = Vector3(1, 1, 1)
 bones/9/position = Vector3(5.666e-05, 0.000855096, -0.00250914)
-bones/9/rotation = Quaternion(0.08907298, 0.01246044, 0.99543303, 0.03199954)
+bones/9/rotation = Quaternion(0.08904261, 0.011077914, 0.9954681, 0.031495728)
 bones/9/scale = Vector3(1, 1, 1)
 bones/10/position = Vector3(0.0011620545, -0.00035785136, 0.0011955907)
-bones/10/rotation = Quaternion(-0.0281963, 0.15802538, 0.98006356, 0.11708269)
+bones/10/rotation = Quaternion(-0.027994446, 0.16017419, 0.97946143, 0.11923035)
 bones/10/scale = Vector3(1, 1, 1)
 bones/11/position = Vector3(-0.0015752573, -0.000304652, 0.0011719272)
-bones/11/rotation = Quaternion(0.040341705, 0.12426204, 0.99035305, 0.04617919)
+bones/11/rotation = Quaternion(0.040342323, 0.12421293, 0.9903591, 0.046180796)
 bones/11/scale = Vector3(1, 1, 0.999999)
 bones/12/position = Vector3(0.0030394571, -0.0005851411, -0.0035146188)
 bones/12/rotation = Quaternion(-0.260684, 0.28056, -0.531177, 0.755765)
@@ -144,7 +144,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_xtl22")
 [node name="mesh_mai_005" parent="metarig_002/Skeleton3D" index="2"]
 surface_material_override/0 = SubResource("ShaderMaterial_5525h")
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="2" unique_id=632089044]
 root_motion_track = NodePath("metarig_002/Skeleton3D:spine")
 tree_root = SubResource("AnimationNodeBlendTree_nm8pq")
 anim_player = NodePath("../AnimationPlayer")

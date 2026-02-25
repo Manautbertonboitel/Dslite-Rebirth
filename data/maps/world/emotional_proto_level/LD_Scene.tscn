@@ -567,7 +567,7 @@ curve = SubResource("Curve3D_v4aji")
 curve = SubResource("Curve3D_f82lu")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D2" unique_id=655306643]
-transform = Transform3D(-0.9999256, -0.0024488736, -0.008926772, 1.16411644e-10, 0.9643648, -0.26455417, 0.009256328, -0.26454246, -0.96432495, 4.633362, 5.231702, 21.032114)
+transform = Transform3D(-0.99992555, -0.0024488736, -0.008926772, 1.1641164e-10, 0.9643648, -0.26455417, 0.0092563275, -0.26454246, -0.96432495, 4.633362, 5.231702, 21.032114)
 
 [node name="CameraSystem" parent="." unique_id=1388505660 instance=ExtResource("12_kub6w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 19)
