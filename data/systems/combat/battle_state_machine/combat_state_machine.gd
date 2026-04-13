@@ -1,5 +1,5 @@
-extends Node
 class_name CombatStateMachine
+extends Node
 
 var combat_manager: CombatManager
 var current_state: CombatState
@@ -27,5 +27,5 @@ func change_state(new_state: CombatState) -> void:
 		current_state.exit(combat_manager)
 
 	current_state = new_state
-	combat_manager.state_name = current_state.state_name
+	combat_manager.state_debug.text = current_state.state_name
 	current_state.enter(combat_manager)

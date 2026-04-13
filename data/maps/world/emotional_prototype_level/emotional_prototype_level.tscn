@@ -1,22 +1,22 @@
 [gd_scene format=4 uid="uid://bhd5hctgum126"]
 
-[ext_resource type="Shader" uid="uid://d1q3ratm6ww8o" path="res://data/effects/postprocess/PS1Scene.gdshader" id="1_fwsrj"]
-[ext_resource type="PackedScene" uid="uid://l5boluq4n37e" path="res://data/characters/lapine/art/lapine.tscn" id="2_22l76"]
-[ext_resource type="PackedScene" uid="uid://cq0wq2tirpdqa" path="res://data/characters/player/art/player_3d_no_camera.tscn" id="2_f82lu"]
-[ext_resource type="PackedScene" uid="uid://c0dsmo2w7aenb" path="res://data/environments/tower/tower.tscn" id="3_hn5ql"]
-[ext_resource type="Texture2D" uid="uid://0d3i74lhkpdd" path="res://data/environments/tower/Tower_medieval_wall_02_diff_256.jpg" id="5_v4aji"]
-[ext_resource type="Texture2D" uid="uid://cjd5egmj8i8wy" path="res://data/environments/tower/Tower_medieval_wall_02_nor_gl_256.png" id="6_f82lu"]
-[ext_resource type="Material" uid="uid://cyqjfyxoc1jh8" path="res://data/environments/tower/Tower_PS1.tres" id="7_e186a"]
-[ext_resource type="Material" uid="uid://dgdkum2ye5ijs" path="res://data/material_library/prototype_box.tres" id="8_acdm5"]
-[ext_resource type="Shader" uid="uid://diwg8kbsjjmcw" path="res://data/effects/postprocess/PS1.gdshader" id="8_kub6w"]
-[ext_resource type="PackedScene" uid="uid://dtfhci3vvkfgr" path="res://data/characters/anno/art/anno.tscn" id="9_e8iew"]
-[ext_resource type="PackedScene" uid="uid://5rcs18gvb8lt" path="res://data/systems/camera/placeable_camera.tscn" id="12_kub6w"]
-[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="12_w6f4t"]
-[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="13_8xxot"]
-[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_pkgp8"]
+[ext_resource type="Shader" uid="uid://d1q3ratm6ww8o" path="res://data/effects/postprocess/PS1Scene.gdshader" id="1_e8hua"]
+[ext_resource type="PackedScene" uid="uid://cq0wq2tirpdqa" path="res://data/characters/player/art/player_3d_no_camera.tscn" id="2_m302v"]
+[ext_resource type="PackedScene" uid="uid://dtfhci3vvkfgr" path="res://data/characters/anno/art/anno.tscn" id="3_wt6xk"]
+[ext_resource type="PackedScene" uid="uid://l5boluq4n37e" path="res://data/characters/lapine/art/lapine.tscn" id="4_w2r1k"]
+[ext_resource type="Material" uid="uid://dgdkum2ye5ijs" path="res://data/material_library/prototype_box.tres" id="5_hw2a2"]
+[ext_resource type="Texture2D" uid="uid://0d3i74lhkpdd" path="res://data/environments/tower/Tower_medieval_wall_02_diff_256.jpg" id="6_vuyh1"]
+[ext_resource type="Texture2D" uid="uid://cjd5egmj8i8wy" path="res://data/environments/tower/Tower_medieval_wall_02_nor_gl_256.png" id="7_4slxw"]
+[ext_resource type="Material" uid="uid://cyqjfyxoc1jh8" path="res://data/environments/tower/Tower_PS1.tres" id="8_vs2kt"]
+[ext_resource type="Shader" uid="uid://diwg8kbsjjmcw" path="res://data/effects/postprocess/PS1.gdshader" id="9_dsjti"]
+[ext_resource type="PackedScene" uid="uid://c0dsmo2w7aenb" path="res://data/environments/tower/tower.tscn" id="10_b51tj"]
+[ext_resource type="PackedScene" uid="uid://5rcs18gvb8lt" path="res://data/systems/character_camera_controller/placeable_camera.tscn" id="11_vud7f"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="12_fto1f"]
+[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="13_4tx75"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="14_ajwxk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ab3st"]
-shader = ExtResource("1_fwsrj")
+shader = ExtResource("1_e8hua")
 shader_parameter/enabled = true
 shader_parameter/dithering = true
 shader_parameter/colors = 16
@@ -45,10 +45,10 @@ volumetric_fog_albedo = Color(0.777223, 0.767115, 0.938221, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dya30"]
 resource_name = "Material.001"
 cull_mode = 2
-albedo_texture = ExtResource("5_v4aji")
+albedo_texture = ExtResource("6_vuyh1")
 roughness = 0.9272727
 normal_enabled = true
-normal_texture = ExtResource("6_f82lu")
+normal_texture = ExtResource("7_4slxw")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_61rom"]
 _surfaces = [{
@@ -119,7 +119,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_rr5v1")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ctydp"]
-albedo_texture = ExtResource("5_v4aji")
+albedo_texture = ExtResource("6_vuyh1")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nhejp"]
 
@@ -157,9 +157,9 @@ shadow_mesh = SubResource("ArrayMesh_iamvk")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8ftk1"]
 render_priority = 0
-shader = ExtResource("8_kub6w")
+shader = ExtResource("9_dsjti")
 shader_parameter/affine_mapping = false
-shader_parameter/albedo = ExtResource("5_v4aji")
+shader_parameter/albedo = ExtResource("6_vuyh1")
 shader_parameter/alpha_scissor = 0.5
 shader_parameter/jitter = 0.25
 shader_parameter/resolution = Vector2i(320, 240)
@@ -200,9 +200,9 @@ shadow_mesh = SubResource("ArrayMesh_an3fw")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_85u2j"]
 render_priority = 0
-shader = ExtResource("8_kub6w")
+shader = ExtResource("9_dsjti")
 shader_parameter/affine_mapping = false
-shader_parameter/albedo = ExtResource("5_v4aji")
+shader_parameter/albedo = ExtResource("6_vuyh1")
 shader_parameter/alpha_scissor = 0.5
 shader_parameter/jitter = 0.25
 shader_parameter/resolution = Vector2i(320, 240)
@@ -222,7 +222,7 @@ _data = {
 point_count = 3
 
 [sub_resource type="Resource" id="Resource_ilvjf"]
-script = ExtResource("14_pkgp8")
+script = ExtResource("14_ajwxk")
 
 [node name="Node3D" type="Node3D" unique_id=1121726285]
 
@@ -241,8 +241,8 @@ handle_input_locally = false
 size = Vector2i(1280, 720)
 render_target_update_mode = 0
 
-[node name="Player3DNoCamera" parent="." unique_id=205379790 node_paths=PackedStringArray("_current_camera") instance=ExtResource("2_f82lu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+[node name="Player3DNoCamera" parent="." unique_id=205379790 node_paths=PackedStringArray("_current_camera") instance=ExtResource("2_m302v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.207314, 0.5000005, 18.428974)
 _current_camera = NodePath("../Camera3D")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=458493203]
@@ -255,10 +255,10 @@ light_energy = 2.538
 shadow_enabled = true
 metadata/_edit_lock_ = true
 
-[node name="Anno" parent="." unique_id=1112256570 instance=ExtResource("9_e8iew")]
+[node name="Anno" parent="." unique_id=1112256570 instance=ExtResource("3_wt6xk")]
 transform = Transform3D(0.8404342, 0, -0.5419136, 0, 1, 0, 0.5419136, 0, 0.8404342, -32.039032, 0.5011008, 32.916958)
 
-[node name="Lapine" parent="." unique_id=1260480903 instance=ExtResource("2_22l76")]
+[node name="Lapine" parent="." unique_id=1260480903 instance=ExtResource("4_w2r1k")]
 transform = Transform3D(1.73047, 0, 0, 0, 1.73047, 0, 0, 0, 1.73047, -31.27439, 0.489635, 31.7765)
 
 [node name="Level" type="Node3D" parent="." unique_id=2128513235]
@@ -267,33 +267,33 @@ transform = Transform3D(1.73047, 0, 0, 0, 1.73047, 0, 0, 0, 1.73047, -31.27439, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -296.96924, 0, -701.1094)
 use_collision = true
 size = Vector3(2454, 1, 1465)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane2" type="CSGBox3D" parent="Level" unique_id=937333284]
 transform = Transform3D(1, 0, 0, 0, 0.99619484, 0.087155744, 0, -0.087155744, 0.99619484, 21.030762, 4.3142095, 72.70227)
 use_collision = true
 size = Vector3(7, 1, 117)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane3" type="CSGBox3D" parent="Level" unique_id=1170568839]
 transform = Transform3D(1, 0, 0, 0, 1.0000001, -7.450581e-09, 0, 7.450581e-09, 1.0000001, 21.030762, 9.314209, 188.70227)
 use_collision = true
 size = Vector3(176, 1, 117)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Arc" type="MeshInstance3D" parent="Level" unique_id=1607316523]
 transform = Transform3D(-2.7213705, 0.017577372, -0.32697552, 0.008343084, 2.7398813, 0.07785074, -0.32734138, -0.07629797, 2.7203138, -45.39561, 0.29794532, 7.8132)
 layers = 7
 mesh = SubResource("ArrayMesh_w6f4t")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("7_e186a")
+surface_material_override/0 = ExtResource("8_vs2kt")
 
 [node name="Arc-boutant" type="MeshInstance3D" parent="Level" unique_id=1488171595]
 transform = Transform3D(-2.7213702, 0.017577374, -0.3269755, 0.008343082, 2.7398813, 0.07785074, -0.32734138, -0.076297976, 2.7203138, -43.39561, 0.29794532, 10.813198)
 layers = 7
 mesh = SubResource("ArrayMesh_pkgp8")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("7_e186a")
+surface_material_override/0 = ExtResource("8_vs2kt")
 
 [node name="Porte" type="MeshInstance3D" parent="Level" unique_id=1383428181]
 transform = Transform3D(5.5110307, -0.061157465, 1.5617831, 0.017435832, 5.726045, 0.16269933, 1.5628825, 0.15177228, -5.508968, -37.431206, -3.6989021, 25.798145)
@@ -310,14 +310,14 @@ mesh = SubResource("ArrayMesh_uk6tj")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
 
-[node name="Tower" parent="Level" unique_id=1767851174 instance=ExtResource("3_hn5ql")]
+[node name="Tower" parent="Level" unique_id=1767851174 instance=ExtResource("10_b51tj")]
 transform = Transform3D(-2.7213705, 0.017577372, -0.32697552, 0.008343084, 2.7398813, 0.07785074, -0.32734138, -0.07629797, 2.7203138, -44.39561, 0.29794532, -37.1868)
 
 [node name="Ground plane24" type="CSGBox3D" parent="Level" unique_id=461381033]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 37.5, -33.5, 30.9)
 use_collision = true
 size = Vector3(1, 66, 176)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Church" type="Node3D" parent="Level" unique_id=734854820]
 metadata/_edit_lock_ = true
@@ -327,21 +327,21 @@ transform = Transform3D(-0.022717806, 0.041276027, -1.450235, 0.004416499, 1.450
 layers = 7
 mesh = SubResource("ArrayMesh_w6f4t")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("7_e186a")
+surface_material_override/0 = ExtResource("8_vs2kt")
 
 [node name="Arc3" type="MeshInstance3D" parent="Level/Church" unique_id=780289440]
 transform = Transform3D(-0.022717806, 0.041276027, -1.450235, 0.004416499, 1.4504077, 0.041211754, -1.4508154, 0.003768928, 0.022834232, 14.104389, -0.7020547, 11.1132)
 layers = 7
 mesh = SubResource("ArrayMesh_w6f4t")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("7_e186a")
+surface_material_override/0 = ExtResource("8_vs2kt")
 
 [node name="Arc7" type="MeshInstance3D" parent="Level/Church" unique_id=79574206]
 transform = Transform3D(-0.022717806, 0.041276027, -1.450235, 0.004416499, 1.4504077, 0.041211754, -1.4508154, 0.003768928, 0.022834232, 14.104389, 11.297945, 10.213201)
 layers = 7
 mesh = SubResource("ArrayMesh_w6f4t")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("7_e186a")
+surface_material_override/0 = ExtResource("8_vs2kt")
 
 [node name="Tour2" type="MeshInstance3D" parent="Level/Church" unique_id=1753681745]
 transform = Transform3D(-0.929297, 0.0060022958, -0.11165598, 0.0028489607, 0.93561804, 0.026584568, -0.11178089, -0.026054332, 0.928936, 13.604389, -0.7020547, 11.8132)
@@ -362,7 +362,7 @@ transform = Transform3D(1.4508154, -0.0037689302, -0.022834169, 0.0044164993, 1.
 layers = 7
 mesh = SubResource("ArrayMesh_w6f4t")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("7_e186a")
+surface_material_override/0 = ExtResource("8_vs2kt")
 
 [node name="Tour5" type="MeshInstance3D" parent="Level/Church" unique_id=842845630]
 transform = Transform3D(0.11178093, 0.026054334, -0.928936, 0.0028489602, 0.935618, 0.026584568, -0.9292969, 0.006002295, -0.11165602, 1.5377216, -0.7020547, -32.5868)
@@ -383,7 +383,7 @@ transform = Transform3D(0.022717683, -0.041276034, 1.450235, 0.0044164993, 1.450
 layers = 7
 mesh = SubResource("ArrayMesh_w6f4t")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("7_e186a")
+surface_material_override/0 = ExtResource("8_vs2kt")
 
 [node name="Tour7" type="MeshInstance3D" parent="Level/Church" unique_id=311430579]
 transform = Transform3D(0.92929685, -0.0060022944, 0.111656055, 0.0028489602, 0.93561786, 0.026584564, 0.11178098, 0.026054338, -0.9289361, 26.33772, -0.70205307, -51.653465)
@@ -404,7 +404,7 @@ transform = Transform3D(-1.4508154, 0.0037689337, 0.022834044, 0.0044164993, 1.4
 layers = 7
 mesh = SubResource("ArrayMesh_w6f4t")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("7_e186a")
+surface_material_override/0 = ExtResource("8_vs2kt")
 
 [node name="Tour9" type="MeshInstance3D" parent="Level/Church" unique_id=1099560914]
 transform = Transform3D(-0.111781016, -0.026054338, 0.9289361, 0.0028489605, 0.93561774, 0.02658456, 0.92929673, -0.0060022916, 0.111656085, 37.404385, -0.70205307, -20.253466)
@@ -431,133 +431,133 @@ surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 6, -4.5)
 use_collision = true
 size = Vector3(1, 11, 31)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane3" type="CSGBox3D" parent="Level/Church" unique_id=2092464384]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 6, -4.5)
 use_collision = true
 size = Vector3(1, 11, 31)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane10" type="CSGBox3D" parent="Level/Church" unique_id=1731078060]
 transform = Transform3D(0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0, 1, 16.5, 16.866026, -4.5)
 use_collision = true
 size = Vector3(1, 13, 31)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane19" type="CSGBox3D" parent="Level/Church" unique_id=263850503]
 transform = Transform3D(0.8660254, -0.5, 0, 0.5, 0.8660254, 0, 0, 0, 1, 23.5, 16.866026, -4.5)
 use_collision = true
 size = Vector3(1, 13, 31)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane20" type="CSGBox3D" parent="Level/Church" unique_id=1442791316]
 transform = Transform3D(0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0, 1, 16.5, 16.866026, -35.5)
 use_collision = true
 size = Vector3(1, 13, 31)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane21" type="CSGBox3D" parent="Level/Church" unique_id=1025727583]
 transform = Transform3D(0.8660254, -0.5, 0, 0.5, 0.8660254, 0, 0, 0, 1, 23.5, 16.866026, -35.5)
 use_collision = true
 size = Vector3(1, 13, 31)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane22" type="CSGBox3D" parent="Level/Church" unique_id=358993817]
 transform = Transform3D(-3.7855173e-08, -2.1855694e-08, -1, -0.5, 0.8660254, 0, 0.8660254, 0.5, -4.371139e-08, 20, 16.866026, -30)
 use_collision = true
 size = Vector3(1, 13, 35)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane23" type="CSGBox3D" parent="Level/Church" unique_id=2065023988]
 transform = Transform3D(-3.7855173e-08, 2.1855694e-08, -1, 0.5, 0.8660254, 0, 0.8660254, -0.5, -4.371139e-08, 20, 16.866026, -23)
 use_collision = true
 size = Vector3(1, 13, 35)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane4" type="CSGBox3D" parent="Level/Church" unique_id=582074956]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 6, -41.5)
 use_collision = true
 size = Vector3(1, 11, 17)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane5" type="CSGBox3D" parent="Level/Church" unique_id=51908720]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 6, -41.5)
 use_collision = true
 size = Vector3(1, 11, 17)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane6" type="CSGBox3D" parent="Level/Church" unique_id=955662740]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 32, 6, -32.5)
 use_collision = true
 size = Vector3(1, 11, 11)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane7" type="CSGBox3D" parent="Level/Church" unique_id=509788252]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 32, 6, -20.5)
 use_collision = true
 size = Vector3(1, 11, 11)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane11" type="CSGBox3D" parent="Level/Church" unique_id=1341118250]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 16.5, 6, 11.5)
 use_collision = true
 size = Vector3(1, 11, 4)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane12" type="CSGBox3D" parent="Level/Church" unique_id=805981111]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 23.5, 6, 11.5)
 use_collision = true
 size = Vector3(1, 11, 4)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane13" type="CSGBox3D" parent="Level/Church" unique_id=648103372]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 6, -23)
 use_collision = true
 size = Vector3(1, 11, 4)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane14" type="CSGBox3D" parent="Level/Church" unique_id=1193502997]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 6, -30)
 use_collision = true
 size = Vector3(1, 11, 4)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane15" type="CSGBox3D" parent="Level/Church" unique_id=1156941490]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 23.5, 6, -50.5)
 use_collision = true
 size = Vector3(1, 11, 4)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane16" type="CSGBox3D" parent="Level/Church" unique_id=1207150116]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 16.5, 6, -50.5)
 use_collision = true
 size = Vector3(1, 11, 4)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane17" type="CSGBox3D" parent="Level/Church" unique_id=1134554483]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2, 6, -30)
 use_collision = true
 size = Vector3(1, 11, 4)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane18" type="CSGBox3D" parent="Level/Church" unique_id=100578921]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2, 6, -23)
 use_collision = true
 size = Vector3(1, 11, 4)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane8" type="CSGBox3D" parent="Level/Church" unique_id=1458773543]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8, 6, -32.5)
 use_collision = true
 size = Vector3(1, 11, 11)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Ground plane9" type="CSGBox3D" parent="Level/Church" unique_id=254649420]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8, 6, -20.5)
 use_collision = true
 size = Vector3(1, 11, 11)
-material = ExtResource("8_acdm5")
+material = ExtResource("5_hw2a2")
 
 [node name="Path3D" type="Path3D" parent="." unique_id=217453087]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 26)
@@ -567,9 +567,9 @@ curve = SubResource("Curve3D_v4aji")
 curve = SubResource("Curve3D_f82lu")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D2" unique_id=655306643]
-transform = Transform3D(-0.99992555, -0.0024488736, -0.008926772, 1.1641164e-10, 0.9643648, -0.26455417, 0.0092563275, -0.26454246, -0.96432495, 4.633362, 5.231702, 21.032114)
+transform = Transform3D(-0.9999253, -0.0024488736, -0.008926772, 1.1641161e-10, 0.9643648, -0.26455417, 0.009256326, -0.26454246, -0.96432495, 4.633362, 5.231702, 21.032114)
 
-[node name="CameraSystem" parent="." unique_id=1388505660 instance=ExtResource("12_kub6w")]
+[node name="CameraSystem" parent="." unique_id=1388505660 instance=ExtResource("11_vud7f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 19)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=5274261]
@@ -579,11 +579,11 @@ fov = 65.0
 [node name="PhantomCameraHost" type="Node" parent="Camera3D" unique_id=522715566]
 process_priority = 300
 process_physics_priority = 300
-script = ExtResource("12_w6f4t")
+script = ExtResource("12_fto1f")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
 [node name="PhantomCamera3D" type="Node3D" parent="." unique_id=278076257]
-script = ExtResource("13_8xxot")
+script = ExtResource("13_4tx75")
 look_at_mode = 1
 tween_resource = SubResource("Resource_ilvjf")
 metadata/_custom_type_script = "uid://csjccrhj5wnx7"

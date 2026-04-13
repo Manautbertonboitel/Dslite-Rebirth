@@ -1,7 +1,7 @@
 extends RefCounted
 class_name Formation
 
-enum Position { UP, RIGHT, DOWN, LEFT }
+enum Position { UP, RIGHT, DOWN, LEFT, NULL }
 
 var slots: Dictionary = {
 	Position.UP: null,
@@ -32,7 +32,7 @@ func remove_fighter(fighter: Fighter) -> bool:
 	for pos in slots:
 		if slots[pos] == fighter:
 			slots[pos] = null
-			fighter.formation_position = -1  # Invalid position marker
+			fighter.formation_position = Position.NULL # TODO yavait " = -1 avant, j'ai rajouté un enum "NULL", à voir si ça fait des erreurs"
 			print("🗑️ [FORMATION] Removed %s from %s" % [fighter.character_name, Position.keys()[pos]])
 			return true
 	return false
@@ -75,6 +75,8 @@ func get_alive_fighters() -> Array[Fighter]:
 
 func can_dodge() -> bool:
 	"""Check if formation can dodge (needs 2+ alive fighters)"""
+	if get_alive_fighters().size() <= 1 :
+		print("Cannot dodge with only 1 alive fighter")
 	return get_alive_fighters().size() > 1
 
 
@@ -97,7 +99,8 @@ func get_occupied_positions() -> Array:
 # --------------------------------------------------------------------
 
 func dodge_clockwise():
-	"""Rotate all fighters clockwise around formation"""
+	##Rotate all fighters clockwise around formation
+	
 	var temp = slots[Position.UP]
 	slots[Position.UP] = slots[Position.LEFT]
 	slots[Position.LEFT] = slots[Position.DOWN]
@@ -117,12 +120,13 @@ func dodge_clockwise():
 # VISUAL UPDATES
 # --------------------------------------------------------------------
 
-func update_visual_positions(position_mapping, duration: float) -> void:
-	"""Update 3D visuals for all fighters based on current formation"""
+func update_visual_positions(position_mapping: CombatManager.PositionMapping, duration: float) -> void:
+	##Update 3D visuals for all fighters based on current formation
+	
 	for pos in slots:
 		var fighter = slots[pos]
 		if fighter and fighter.visuals and is_instance_valid(fighter.visuals):
-			var target_node = position_mapping.get_node(pos)
+			var target_node: Node3D = position_mapping.get_pos_node(pos)
 			if target_node:
 				fighter.visuals.move_to(target_node.global_transform, duration)
 
@@ -132,7 +136,8 @@ func update_visual_positions(position_mapping, duration: float) -> void:
 # --------------------------------------------------------------------
 
 func get_formation_visual_string() -> String:
-	"""Debug: Visual representation of formation"""
+	##Debug: Visual representation of formation
+	
 	var up = slots[Position.UP].character_name if slots[Position.UP] else "-"
 	var right = slots[Position.RIGHT].character_name if slots[Position.RIGHT] else "-"
 	var down = slots[Position.DOWN].character_name if slots[Position.DOWN] else "-"
@@ -146,7 +151,8 @@ func get_formation_visual_string() -> String:
 
 
 func print_formation_state() -> void:
-	"""Debug: Print detailed formation state"""
+	##Debug: Print detailed formation state
+	
 	print("=== Formation State ===")
 	print("Revolt Count: %d" % revolt_count)
 	print("Total Fighters: %d" % get_fighters().size())

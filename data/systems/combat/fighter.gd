@@ -1,9 +1,12 @@
-extends Node
 class_name Fighter
+extends Node
 
 # --------------------------------------------------------------------
-# DATA & IDENTITY
+# VARIABLES
 # --------------------------------------------------------------------
+
+signal ready_to_act(fighter)
+signal died(fighter)
 
 var original_data: FighterData = null
 var character_name: String
@@ -18,11 +21,6 @@ var controller: FighterController = null
 # Visual representation (NEW)
 var visuals: FighterVisuals = null
 
-
-# --------------------------------------------------------------------
-# COMBAT STATS
-# --------------------------------------------------------------------
-
 var hp: int
 var max_hp: int
 var attack: int
@@ -33,28 +31,9 @@ var atb_speed: float
 var atb_ready: bool = false
 var atb_paused: bool = false
 
-
-# --------------------------------------------------------------------
-# ACTIONS
-# --------------------------------------------------------------------
-
 var actions: Array[Action] = []
-var selected_action: Action = null
-
-
-# --------------------------------------------------------------------
-# SIGNALS
-# --------------------------------------------------------------------
-
-signal ready_to_act(fighter)
-signal died(fighter)
-
-# --------------------------------------------------------------------
-# ACTIONS
-# --------------------------------------------------------------------
-
 var is_chosing: bool = false
-
+var selected_action: Action = null
 
 # --------------------------------------------------------------------
 # INITIALIZATION
@@ -104,7 +83,7 @@ func _process(delta: float) -> void:
 	if atb >= 100.0:
 		atb = 100.0
 		atb_ready = true
-		emit_signal("ready_to_act", self)
+		ready_to_act.emit(self)
 
 
 func pause_atb(paused: bool) -> void:
@@ -138,15 +117,14 @@ func _die() -> void:
 	if visuals:
 		visuals.play_death_animation()
 	
-	emit_signal("died", self)
+	died.emit(self)
 
 
 func is_alive() -> bool:
 	return hp > 0
 
-
 # --------------------------------------------------------------------
-# VISUAL MANAGEMENT (NEW)
+# VISUAL MANAGEMENT
 # --------------------------------------------------------------------
 
 func set_visuals(visual_node: FighterVisuals) -> void:

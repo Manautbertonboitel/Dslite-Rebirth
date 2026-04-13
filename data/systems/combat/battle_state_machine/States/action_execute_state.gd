@@ -2,9 +2,12 @@ class_name ActionExecuteState
 extends CombatState
 
 var state_name: String = "Action Execute State"
+var combat_manager: CombatManager
+var request: ActionRequest
 
-func enter(combat_manager: CombatManager):		
-	var request: ActionRequest = combat_manager.action_queue[0]
+func enter(mgr: CombatManager):		
+	combat_manager = mgr
+	request = combat_manager.action_queue[0]
 
 	# Vérifier si le caster est vivant
 	if not request.caster.is_alive():
@@ -19,26 +22,16 @@ func enter(combat_manager: CombatManager):
 		combat_manager.evaluate_battle_state()
 		return
 
-
-	# Connexion dodge window
-	if request.action is AttackAction:
-		request.action.request_dodge_window.connect(combat_manager._start_dodge_window)
+	#request.action.completed.connect(_on_action_completed)
 	
 	# Exécution de l'action
+	# warning "(REDUNDANT_AWAIT)" en cours de fix -> github.com/godotengine/godot/pull/110996 (ça met un warning alors qu'on met bien des await dans la method qui hérite)
 	await request.action.execute(request.caster, combat_manager, request.target)
-	
-	# Déconnexion dodge window
-	if request.action is AttackAction:
-		if request.action.request_dodge_window.is_connected(combat_manager._start_dodge_window):
-			request.action.request_dodge_window.disconnect(combat_manager._start_dodge_window)
-	
-	combat_manager.action_queue.pop_front()
-	request.caster.reset_atb()
-	combat_manager.update_action_queue()
-	combat_manager.evaluate_battle_state()
 
-func update(manager: CombatManager, delta: float):
+func update(_manager: CombatManager, _delta: float):
 	pass
 
-func exit(manager: CombatManager):
-	pass
+func exit(_manager: CombatManager):
+	# reset des variables au cas où, je sais pas si c'est utile mais au moins c'est la
+	combat_manager = null
+	request = null

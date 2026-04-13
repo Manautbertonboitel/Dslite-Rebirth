@@ -5,7 +5,7 @@ var state_name: String = "Dodge Window State"
 
 func enter(combat_manager: CombatManager):
 	print("[STATE] Entered Dodge Window")
-	combat_manager.set_time_paused(false)  # Permettre aux joueurs d'agir
+	# combat_manager.set_time_paused(false)
 
 func update(combat_manager: CombatManager, delta: float):
 	if not combat_manager.dodge_window_active:

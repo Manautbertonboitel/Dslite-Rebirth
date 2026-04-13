@@ -7,8 +7,8 @@ var state_name: String = "End State"
 func enter(manager: CombatManager):
 	manager.set_time_paused(true)
 	
-func update(manager: CombatManager, delta: float):
+func update(_manager: CombatManager, _delta: float):
 	pass
 	
-func exit(manager: CombatManager):
+func exit(_manager: CombatManager):
 	pass

@@ -90,7 +90,7 @@ func transition_to_combat():
 			await play_zoom_transition()
 	
 	# Actually change scene
-	get_tree().change_scene_to_file("res://data/maps/combat/combat_arena_1.tscn")
+	get_tree().change_scene_to_file("res://data/maps/combat_arenas/combat_arena_1.tscn")
 	
 	# Fade in combat scene
 	await play_fade_in()
