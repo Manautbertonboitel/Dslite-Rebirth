@@ -45,6 +45,7 @@ func execute(caster: Fighter, combat_manager: CombatManager, target: Fighter) ->
 		target.take_damage(power)
 		
 	caster.reset_atb()
+	combat_manager.action_queue.pop_front()
 	combat_manager.evaluate_battle_state()
 	
 	combat_manager.update_action_queue_debug()

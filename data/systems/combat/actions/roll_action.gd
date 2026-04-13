@@ -42,5 +42,6 @@ func execute(caster: Fighter, combat_manager: CombatManager, _target: Fighter = 
 
 	caster.reset_atb()
 	combat_manager.evaluate_battle_state()
+	# Pas besoin de "combat_manager.action_queue.pop_front()" comme dans attack_action.gd, car ici on a bypass la action_queue pour lancer l'action
 	
 	combat_manager.update_action_queue_debug()
