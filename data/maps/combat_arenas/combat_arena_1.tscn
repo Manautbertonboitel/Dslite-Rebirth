@@ -1,16 +1,85 @@
-[gd_scene format=3 uid="uid://ce6xqcfyhxyut"]
+[gd_scene format=4 uid="uid://ce6xqcfyhxyut"]
 
 [ext_resource type="Script" uid="uid://cnkp5d0n06omu" path="res://data/systems/combat/combat_manager.gd" id="1_pbkuh"]
 [ext_resource type="PackedScene" uid="uid://cn4c42b1k535h" path="res://data/systems/combat/UI/v_box_container.tscn" id="2_dj5a4"]
+[ext_resource type="Texture2D" uid="uid://0d3i74lhkpdd" path="res://data/environments/tower/Tower_medieval_wall_02_diff_256.jpg" id="3_jl7yp"]
+[ext_resource type="Texture2D" uid="uid://cjd5egmj8i8wy" path="res://data/environments/tower/Tower_medieval_wall_02_nor_gl_256.png" id="4_4xj8f"]
 [ext_resource type="Script" uid="uid://bnwj20lgxfhqw" path="res://data/systems/combat/UI/action_panel.gd" id="5_3c7v3"]
+[ext_resource type="Material" uid="uid://cyqjfyxoc1jh8" path="res://data/environments/tower/Tower_PS1.tres" id="5_dvjm2"]
 [ext_resource type="Script" uid="uid://dac6xgeuf84cj" path="res://data/systems/combat/UI/victory_panel.gd" id="5_kltxb"]
 [ext_resource type="Script" uid="uid://dpmsmv0miv5nu" path="res://data/systems/combat/UI/target_panel.gd" id="6_etgvb"]
 [ext_resource type="Script" uid="uid://dnudpbi6dhsfn" path="res://data/systems/combat/UI/defeat_panel.gd" id="6_pbkuh"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3k0ek"]
+sky_horizon_color = Color(0.40392157, 0.5254902, 0.67058825, 1)
+sky_curve = 0.27990973
+
+[sub_resource type="Sky" id="Sky_3sm11"]
+sky_material = SubResource("ProceduralSkyMaterial_3k0ek")
+
+[sub_resource type="Environment" id="Environment_cmmy2"]
+background_mode = 2
+background_color = Color(0.45506775, 0.5841923, 0.8767696, 1)
+sky = SubResource("Sky_3sm11")
+ambient_light_source = 2
+ambient_light_color = Color(0.543979, 0.680659, 0.89865, 1)
+ambient_light_energy = 1.95
+reflected_light_source = 2
+fog_density = 0.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0523
+volumetric_fog_albedo = Color(0.777223, 0.767115, 0.938221, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dya30"]
+resource_name = "Material.001"
+cull_mode = 2
+albedo_texture = ExtResource("3_jl7yp")
+roughness = 0.9272727
+normal_enabled = true
+normal_texture = ExtResource("4_4xj8f")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_61rom"]
+_surfaces = [{
+"aabb": AABB(-0.9347218, 0.09123516, -6.0955663, 1.868868, 7.8971868, 5.587887),
+"format": 34896613377,
+"index_count": 492,
+"index_data": PackedByteArray("JQAIAAUABQAIAAQAJQAmAAgABQAnACUAJgAdAAgAKAAmACUACAAdAAcACAAHAAQAJgApAB0AJQAnACoAJQAqACgAKAArACYAKwApACYAKAAqAAoALAArACgAKAAKACwAKgAtAAoAJwAVACoAKgAVAC0AJwAuABUALAAvACsAKwAwACkALwAwACsAMAAxACkAFQAuADEALwAyADAAFQAxADMALQAVADMAMAAzADEAMgAzADAAKQAxABoALgAaADEAKQAaAB0ALQAzADQAMgA0ADMAFAAtADQACgAtABQAHQAaADUAHQA1AAcACgAUADYALAAKADYAFAA0ABYALAA2AAsACwAvACwANgAUABMAEwAUABYACwA2AA8ANgATAA8ACwAMAC8ADAAyAC8ADQA0ADIADAANADIADQAWADQADgAMAAsACwAPAA4ABgANAAwADgAGAAwAHgAWAA0ABgAeAA0AHgAXABYAEwAWABcAAQAeAAYADwATABIAEgATABcADgAPABAADwASABAAAgAGAA4ADgAQAAIAAgABAAYAHwAXAB4AAQAfAB4AEgAXABgAHwAYABcAEAASABEAEQASABgAAgAQADcAEAARADcAOAABAAIAAgA3ADgAOQAfAAEAOAA5AAEAOgAYAB8AOQA6AB8AOgAgABgAEQAYACAAOwA6ADkAPAA5ADgAPAA7ADkAOAA9ADwAOAA3AD0APgA7ADwANwARAD8ANwA/AD0APAA9AEAAPABAAD4APQA/AEEAPQBBAEAAEQBCAD8APwBDAEEAPwBCAEMAEQAhAEIAIAAhABEAQABBAEQAQQBDAEUAQQBFAEQAQgBGAEMAQwAbAEUAQwBGABsARQAbABwAQgBHAEYAIQBHAEIAGwBGAEgAGwBIABwARQAcAEkASQAcAEgARABFAEkAIQAkAEcARgBKAEgARgBHAEoASQBIAEsASwBIAEoARABJADUANQBJAEsARwAkACMARwAjAEoAIgAkACEAIgAjACQAIAAiACEATABKACMATAAjACIASwBKAEwATQAiACAATQBMACIATgBLAEwATgBMAE0ANQBLAE4ABwA1AE4ABwBOAE8ATwBOAE0ABAAHAE8AUABNACAATwBNAFAAUAAgADoAOwBQADoAUQBPAFAAUQBQADsABABPAFEAPgBRADsAAAAEAFEAAABRAD4ABQAEAAAAPgADAAAAPgBAAAMAQABEAAMAAAAJAAUAAAADAAkABQAJACcACQAuACcAAwAZAAkACQAZAC4AAwBEABkALgAZABoAGQBEADUAGQA1ABoA"),
+"lods": [0.9646864, PackedByteArray("AAABAAIAAgADAAAAAAAEAAEABQAEAAAAAgABAAYABAAHAAEABQAIAAQACAAHAAQAAAAJAAUAAAADAAkABQAJAAoACwAIAAUABQAKAAsACwAMAAgADAANAAgABgANAAwADgAMAAsADgAGAAwAAgAGAA4ACwAPAA4ACwAKAA8ADgAQAAIADgAPABAAAgAQAAMAEAARAAMADwASABAAEAASABEACgATAA8ADwATABIACgAUABMACgAVABQAEwAUABYAFAAVABYACQAVAAoAEgATABcAEwAWABcAEgAXABgAEQASABgACQAZABUAAwAZAAkAFQAaABYAFQAZABoAAwAbABkAEQAbAAMAGQAcABoAGQAbABwADQAWABoADQAaAB0AHQAaABwACAANAB0ACAAdAAcAHQAcAAcAHgAWAA0ABgAeAA0AHgAXABYAAQAeAAYAHwAXAB4AAQAfAB4AAQAHAB8AHwAYABcABwAgAB8AHwAgABgABwAcACAAEQAYACAAIAAhABEAEQAhABsAHAAiACAAIAAiACEAHAAjACIAIQAkABsAGwAkABwAIgAkACEAJAAjABwAIgAjACQA")],
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 82,
+"vertex_data": PackedByteArray("/C+nEoScAABe4YvSs4AAADggjNIhgQAAPgv4CSGuAACA0qcSKJwAAJItpxJqIgAAFewO5AxfAAD795cKNq0AABbQpxIOIgAAIwj4CfYQAAAAAC63rRsAAOMejNLePQAACeCL0nI9AACx+ynbVTIAAMwUH+SGXwAANQGd85FfAAAnBJrbiIwAAL8Sn7vesAAArATU4tyVAADWAf//kF8AAIcC1OJDKQAAgwNdiYoAAADk+srivCgAAC791v8CXwAACv3K4kqVAACNAwAAaAIAANf4AADdAQAAhixKCT7+AADT2UoJ3P0AAOT0lwrWEAAAwv7F8gFfAAB1/SnbsIsAAIrwnrtgsAAArR5ruATSAADr5Wu4k9EAAE3bRMbF8gAAmypExinzAABuKF9DHCIAADjVX0O6IQAAagE7O5IQAABBIe2HQCAAAJT7mztrEAAALAEBiV8PAABR3O2H1h8AAGIfSLBOKwAAYgGfuzoOAACKA0A17QEAAKDeSLDhKgAAyfv8iDUPAADU+EA1YgEAAFP97bZ/GwAAzfhdiQAAAAB4+567rA0AAKXuAAAyvAAAYAKa25cyAACvAi63dKMAAHIhSLCwkwAAsOBIsESTAAD//+22hKIAANHe7YdSngAAwSPth7yeAABXBAGJwa8AANsqX0PYnAAAJRVdiYq+AACKBDs7ja4AAB4VQDUovQAA2iCdh0TfAADTIGs37d0AABwVAACtvAAA0SClBHXdAACILJU5sv4AAI8s3IX//wAA1dmVOVD+AAA85KUEB90AANzZ3IWc/wAAPuRrN3/dAABF5J2H1t4AAK7uXYkPvgAAp+5ANa28AACw/ps7mq0AAPD+/IjPrgAApddfQ3acAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ixr0q"]
+resource_name = "Tower_Cylinder"
+_surfaces = [{
+"aabb": AABB(-0.9347218, 0.09123516, -6.0955663, 1.868868, 7.8971868, 5.587887),
+"attribute_data": PackedByteArray("Cqr7auWzFLCvqzO+erD3eK+rM77guLexv7mtxOWzFLC/ua3E174trzPItr3guLexM8i2vde+La8DwvN5/ciCcP3IgnB6sPd4Cqr7agPC83lErhLoSrE/6h9h3v9aZIH78bW127S6XduMrJDQO6/7zcmgMsfaXwHICWDKspyfpr6ipBe2IFpl8LxVtvODii6UtH7WnfU9V5svjZ6WjJNUiCWYaIiffcd1rY3WedJsa24APnZzVzrCb+08ZLBpfYOmW4JFrx2pG9TaXwHIjKyQ0HhjlM3xtbXbWrAd3FyqFuVErhLoXGar9VpkgftasB3c8bW12xiHjH+Mk1SIjY06iJ99x3VwQqt4AD52c8WGspD1PVebHEI7loOKLpSNjTqIjJNUiBxCO5YAPnZzcEKrePU9V5vfXsPs2l8ByHhjlM0gWmXw8TKAVuVCrWoEM51p0kJGVdJCRlVtVLhq5UKtamNUD1VjVA9V9mWcam1UuGrzZTVV82U1VXmIXVX2ZZxqfrqAan66XVV8YufVuqPw53xiCuu6owHZVylTsDIpSGtGOFOwazhIa2IqrWhmIIRYUiqBV3UgvmcEM51pUiqBV/EygFZiKq1oUNTKgJ7FwIUlrLuGgJnRf4CZ0X/rqtWcgJnToCWsu4aAmdOgza5kqA6hirHrqtWcDqGKsc2uZKjuw2ynNdO8rzXTvK8lx2ibHtiine7DbKce2KKdnsXAhVDUyoAlx2ibzaGh71eS6fikkQ/18qPt8lmO58cVn/rKgo66w6VsR3JWf09yn33HdQx9HZo4bC+hIGwWnbR+1p2MrJDQtLpd2/G1tds7r/vNXVzXw9pfAciMk1SIJZhoiESuEujyo+3yzaGh70qxP+pDcv/Hgo66w1mO58f7b/HDVzrCbwA+dnNXOgCfrY3WefCKNHxWf09y3434zBWf+sqInKfPWY7nx5aeX+ukkQ/1c5Ae8M2hoe8dU9mWClBinPCKNHxDcv/H/3SEzUSuEuhcqhblYlBicmFT93fFhrKQDH0dmlp6VJWDii6UYVP3d6VsR3IYbHZ3YlBicst3K/PkdQj5iJynzxWf+spzkB7w5HUI+ct3K/OkkQ/1tmvtlwpQYpwdU9mWIGwWncF6hXrwijR8GIeMf/90hM1ZjufH3434zENy/8fNoaHvlp5f6x2pG9SMrJDQWnpUlSBsFp22a+2XDH0dmhhsdneffcd1wXqFeqVsR3Iap11VGqeAajhOtaiaO7OnuE5HscFNOKBXOgCf0XBsu0uNybLnjT+7r3Hssvtv8cOCjrrDpmo4snFrsKnWdbVq1nUoVdZ1KFV5iIBq1nW1anmIXVUap4BqeYiAahqnXVV8ktjpfJIZ1wpQYpxXOgCf9T1Xm8FNOKDwijR8+2/xw0Ny/8ddXNfDJE6zbmJQYnKDii6UtH7WnQx9HZovjZ6WYlBictJsa26lbEdyJE6zbuR1CPkydC/9FZ/6ysmgMsekkQ/1MnQv/eR1CPlXkun4IGwWncFNOKAKUGKcOGwvoUY4vp5XKb6eVym+nkY494JGOL6eVyn3glcp94JGOPeC540/u5yfpr5LjcmycWuwqbhOR7E4TrWopmo4sjhsL6HBTTigNV5Ou69x7LLRcGy7XVzXw/tv8cMbmw3YG5vk6HySGdd8ktjpgo66w8mgMsfnjT+7cWuwqThsL6FpfYOm"),
+"format": 34896613399,
+"index_count": 492,
+"index_data": PackedByteArray("cgAOAA8AcgBzAA4AAAB0AHUAAAADAHQAdgB3AHgAdgB5AHcAegB7AHwAegB9AHsAfgABAAIAfgB/AAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADACAAIEADAANAIAAggCDAIQAggCFAIMAhgCHAIgAhgCJAIcAEAARABIAEAATABEAigCLAIwAigCNAIsAjgAcAI8AjgCQABwAkQCSAJMAkQArAJIAlACVAJYAlACXAJUAmACZAJoAmACbAJkAIQCcAJ0AIQAiAJwAngAmACMAngCfACYAoAChAKIAoACjAKEApAClAKYApACnAKUAJQCoAKkAJQCqAKgAKQCrAKwAKQCtAKsArgCvALAArgCxAK8AsgCzALQAsgC1ALMAtgBEAEUAtgC3AEQAPQA+AD8APQC4AD4ANAC5ALoANAAyALkAOwC7ALwAOwA8ALsAQQC9AL4AQQBCAL0AvwDAAMEAvwDCAMAAwwDEAMUAwwDGAMQAxwA6ADkAxwDIADoAyQAzADEAyQDKADMAywDMAM0AywDOAMwAzwDQANEAzwDSANAA0wDUANUA0wBAANQASQBKAEsASQBMAEoA1gDXANgA1gDZANcANwDaANsANwA4ANoARwBGAEMARwBIAEYATQBOAE8ATQBQAE4A3AA1ADYA3ADdADUA3gDfAOAA3gDhAN8A4gDjAOQA4gDlAOMA5gBgAOcA5gBhAGAA6AAuAOkA6ADqAC4A6wDoAOkA6wDpAOwA7QDuAO8A7QDwAO4A8QDtAO8A8QDvAPIALwDzAPQALwAwAPMAUQBSAFMAUQBUAFIAVQBWAFcAVQBYAFYAWQBaAFsAWQBcAFoAXQD1AF8AXQD2APUA9wD4APkA9wD6APgAXgD7APwAXgD9APsAYgD+AGQAYgD/AP4AAAEBAQIBAAEDAQEBBAEoACcABAEqACgAHQAFAQYBHQAHAQUBGAAVABQAGAAZABUALAAIAQkBLAAtAAgBCgELAQwBCgENAQsBDgEPARABDgERAQ8BEgEWABcAEgETARYAFAEbABoAFAEVARsAFgEXARgBFgEZARcBGgEbARwBGgEdARsBZgAeAWgAZgAfAR4BIAEhASIBIAEjASEBJAFpACUBJAFnAGkAJgEgACcBJgEoASAAKQEqASsBKQEsASoBLQEpASsBLQErAS4BLwEwATEBLwEeADABMgEvATEBMgExATMBNAFjADUBNAFlAGMANgE0ATUBNgE1ATcBagBrAGwAagBtAGsAbgBvAHAAbgBxAG8AOAEfADkBOAE6AR8AJAA7ATwBJAA9ATsB"),
+"lods": [0.9646864, PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAOAA8AEAARABIAEAATABEAFAAVABYAFAAWABcAGAAVABQAGAAZABUAGgAZABgAGgAbABkAGgAcABsAHQAcABoAHQAeABwAHgAfABwAHgAgAB8AIQAeAB0AIQAiAB4AIwAkACUAIwAmACQAJwAmACMAJwAoACYAKQAoACcAKQAqACgAKQArACoALAArACkALAAtACsAJQAtACwAJQAuAC0AJAAuACUAJAAvAC4ALwAwAC4AMQAyADMANAAyADEAMQAzADUAMQA1ADYANwA4ADkAOQA4ADoAOwA4ADcAOwA8ADgAPQA+AD8APQBAAD4AQQBAAD0AQQBCAEAAQwBEAEUAQwBGAEQARwBGAEMARwBIAEYASQBKAEsASQBMAEoATQBOAE8ATQBQAE4AUQBSAFMAUQBUAFIAVQBWAFcAVQBYAFYAWQBaAFsAWQBcAFoAXQBeAF8AXgBgAF8AXgBhAGAAYgBjAGQAYgBlAGMAZgBnAGgAZwBpAGgAagBrAGwAagBtAGsAbgBvAHAAbgBxAG8A")],
+"material": SubResource("StandardMaterial3D_dya30"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 318,
+"vertex_data": PackedByteArray("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")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_61rom")
+
 [sub_resource type="LabelSettings" id="LabelSettings_dj5a4"]
 font_size = 44
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jl7yp"]
+albedo_color = Color(0.5132329, 0.5132329, 0.5132329, 1)
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_dj5a4"]
+material = SubResource("StandardMaterial3D_jl7yp")
 
 [sub_resource type="BoxMesh" id="BoxMesh_dj5a4"]
 
@@ -18,27 +87,183 @@ font_size = 44
 
 [node name="CombatManager" type="Node" parent="." unique_id=306041233 node_paths=PackedStringArray("models_container", "hero_pos_up", "hero_pos_right", "hero_pos_down", "hero_pos_left", "enemy_pos_up", "enemy_pos_right", "enemy_pos_down", "enemy_pos_left", "action_panel", "target_panel", "defeat_panel", "victory_panel", "heroes_ui_container", "enemies_ui_container", "fighter_ui_queue", "action_ui_queue", "state_debug")]
 script = ExtResource("1_pbkuh")
-models_container = NodePath("../level/ModelsContainer")
-hero_pos_up = NodePath("../level/ModelsContainer/HeroePosUp")
-hero_pos_right = NodePath("../level/ModelsContainer/HeroePosRight")
-hero_pos_down = NodePath("../level/ModelsContainer/HeroePosDown")
-hero_pos_left = NodePath("../level/ModelsContainer/HeroePosLeft")
-enemy_pos_up = NodePath("../level/ModelsContainer/EnemyPosUp")
-enemy_pos_right = NodePath("../level/ModelsContainer/EnemyPosRight")
-enemy_pos_down = NodePath("../level/ModelsContainer/EnemyPosDown")
-enemy_pos_left = NodePath("../level/ModelsContainer/EnemyPosLeft")
-action_panel = NodePath("../ActionPanel")
-target_panel = NodePath("../TargetPanel")
-defeat_panel = NodePath("../DefeatPanel")
-victory_panel = NodePath("../VictoryPanel")
-heroes_ui_container = NodePath("../HeroesUI/HBoxContainer")
-enemies_ui_container = NodePath("../EnemiesUI/HBoxContainer")
+models_container = NodePath("../LD/ModelsContainer")
+hero_pos_up = NodePath("../LD/ModelsContainer/HeroePosUp")
+hero_pos_right = NodePath("../LD/ModelsContainer/HeroePosRight")
+hero_pos_down = NodePath("../LD/ModelsContainer/HeroePosDown")
+hero_pos_left = NodePath("../LD/ModelsContainer/HeroePosLeft")
+enemy_pos_up = NodePath("../LD/ModelsContainer/EnemyPosUp")
+enemy_pos_right = NodePath("../LD/ModelsContainer/EnemyPosRight")
+enemy_pos_down = NodePath("../LD/ModelsContainer/EnemyPosDown")
+enemy_pos_left = NodePath("../LD/ModelsContainer/EnemyPosLeft")
+action_panel = NodePath("../UI/ActionPanel")
+target_panel = NodePath("../UI/TargetPanel")
+defeat_panel = NodePath("../UI/DefeatPanel")
+victory_panel = NodePath("../UI/VictoryPanel")
+heroes_ui_container = NodePath("../UI/HeroesUI/HBoxContainer")
+enemies_ui_container = NodePath("../UI/EnemiesUI/HBoxContainer")
 character_ui_prefab = ExtResource("2_dj5a4")
-fighter_ui_queue = NodePath("../Queue debug/FighterReadyQueue")
-action_ui_queue = NodePath("../Queue debug/ActionQueue")
-state_debug = NodePath("../State debug/Label")
+fighter_ui_queue = NodePath("../UI/Queue debug/FighterReadyQueue")
+action_ui_queue = NodePath("../UI/Queue debug/ActionQueue")
+state_debug = NodePath("../UI/State debug/Label")
 
-[node name="Queue debug" type="Control" parent="." unique_id=1944889830]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=397924740]
+transform = Transform3D(0.8376886, 0.2774898, -0.47040108, -3.7252903e-09, 0.8613068, 0.50808525, 0.5461481, -0.42561722, 0.7215069, -6.549292, 6.9819026, 8.154913)
+fov = 47.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1863206008]
+environment = SubResource("Environment_cmmy2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=2012706277]
+transform = Transform3D(0.6734625, -0.27138838, 0.6876019, -0.34496957, 0.7072926, 0.6170358, -0.653792, -0.65275246, 0.38271424, 5.00624, 9.33842, -0.482016)
+light_color = Color(0.6661935, 0.76812303, 0.9709651, 1)
+light_energy = 2.538
+shadow_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Arc" type="MeshInstance3D" parent="WorldEnvironment" unique_id=1375138088]
+transform = Transform3D(-0.81093544, 0.0027494838, -0.009860765, 0.00246849, 0.81066895, 0.02303428, -0.009934834, -0.023002427, 0.8106128, 10.966226, -0.4407727, -5.288498)
+layers = 7
+mesh = SubResource("ArrayMesh_ixr0q")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_dvjm2")
+
+[node name="Arc2" type="MeshInstance3D" parent="WorldEnvironment" unique_id=388929653]
+transform = Transform3D(-0.81093544, 0.0027494838, -0.009860765, 0.00246849, 0.81066895, 0.02303428, -0.009934834, -0.023002427, 0.8106128, 10.966226, -0.4407727, -1.2933016)
+layers = 7
+mesh = SubResource("ArrayMesh_ixr0q")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_dvjm2")
+
+[node name="Arc3" type="MeshInstance3D" parent="WorldEnvironment" unique_id=1618480549]
+transform = Transform3D(-0.81093544, 0.0027494838, -0.009860765, 0.00246849, 0.81066895, 0.02303428, -0.009934834, -0.023002427, 0.8106128, 10.966226, -0.4407727, 2.8504343)
+layers = 7
+mesh = SubResource("ArrayMesh_ixr0q")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_dvjm2")
+
+[node name="Arc4" type="MeshInstance3D" parent="WorldEnvironment" unique_id=640429142]
+transform = Transform3D(-0.81093544, 0.0027494838, -0.009860765, 0.00246849, 0.81066895, 0.02303428, -0.009934834, -0.023002427, 0.8106128, 10.966226, -0.4407727, 6.9041257)
+layers = 7
+mesh = SubResource("ArrayMesh_ixr0q")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_dvjm2")
+
+[node name="Arc5" type="MeshInstance3D" parent="WorldEnvironment" unique_id=461749035]
+transform = Transform3D(-0.81093544, 0.0027494838, -0.009860765, 0.00246849, 0.81066895, 0.02303428, -0.009934834, -0.023002427, 0.8106128, 10.966226, -0.4407727, 10.961752)
+layers = 7
+mesh = SubResource("ArrayMesh_ixr0q")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_dvjm2")
+
+[node name="Arc6" type="MeshInstance3D" parent="WorldEnvironment" unique_id=1339447095]
+transform = Transform3D(-0.81093544, 0.0027494838, -0.009860765, 0.00246849, 0.81066895, 0.02303428, -0.009934834, -0.023002427, 0.8106128, -10.591935, -0.4407727, -5.288498)
+layers = 7
+mesh = SubResource("ArrayMesh_ixr0q")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_dvjm2")
+
+[node name="Arc7" type="MeshInstance3D" parent="WorldEnvironment" unique_id=1700905553]
+transform = Transform3D(-0.81093544, 0.0027494838, -0.009860765, 0.00246849, 0.81066895, 0.02303428, -0.009934834, -0.023002427, 0.8106128, -10.591935, -0.4407727, -1.2933016)
+layers = 7
+mesh = SubResource("ArrayMesh_ixr0q")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_dvjm2")
+
+[node name="Arc8" type="MeshInstance3D" parent="WorldEnvironment" unique_id=666789063]
+transform = Transform3D(-0.81093544, 0.0027494838, -0.009860765, 0.00246849, 0.81066895, 0.02303428, -0.009934834, -0.023002427, 0.8106128, -10.591935, -0.4407727, 2.8504343)
+layers = 7
+mesh = SubResource("ArrayMesh_ixr0q")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_dvjm2")
+
+[node name="Arc9" type="MeshInstance3D" parent="WorldEnvironment" unique_id=190123082]
+transform = Transform3D(-0.81093544, 0.0027494838, -0.009860765, 0.00246849, 0.81066895, 0.02303428, -0.009934834, -0.023002427, 0.8106128, -10.591935, -0.4407727, 6.9041257)
+layers = 7
+mesh = SubResource("ArrayMesh_ixr0q")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_dvjm2")
+
+[node name="Arc10" type="MeshInstance3D" parent="WorldEnvironment" unique_id=403788818]
+transform = Transform3D(-0.81093544, 0.0027494838, -0.009860765, 0.00246849, 0.81066895, 0.02303428, -0.009934834, -0.023002427, 0.8106128, -10.591935, -0.4407727, 10.961752)
+layers = 7
+mesh = SubResource("ArrayMesh_ixr0q")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_dvjm2")
+
+[node name="Arc11" type="MeshInstance3D" parent="WorldEnvironment" unique_id=234469402]
+transform = Transform3D(0.009934869, 0.023002427, -0.81061274, 0.0024684896, 0.8106689, 0.02303428, -0.8109354, 0.0027494843, -0.009860799, 5.345682, -0.4407727, -10.574349)
+layers = 7
+mesh = SubResource("ArrayMesh_ixr0q")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_dvjm2")
+
+[node name="Arc12" type="MeshInstance3D" parent="WorldEnvironment" unique_id=1202823627]
+transform = Transform3D(0.009934869, 0.023002427, -0.81061274, 0.0024684896, 0.8106689, 0.02303428, -0.8109354, 0.0027494843, -0.009860799, 1.3504858, -0.4407727, -10.574349)
+layers = 7
+mesh = SubResource("ArrayMesh_ixr0q")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_dvjm2")
+
+[node name="Arc13" type="MeshInstance3D" parent="WorldEnvironment" unique_id=715293162]
+transform = Transform3D(0.009934869, 0.023002427, -0.81061274, 0.0024684896, 0.8106689, 0.02303428, -0.8109354, 0.0027494843, -0.009860799, -2.79325, -0.4407727, -10.574349)
+layers = 7
+mesh = SubResource("ArrayMesh_ixr0q")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_dvjm2")
+
+[node name="Arc14" type="MeshInstance3D" parent="WorldEnvironment" unique_id=251264158]
+transform = Transform3D(0.009934869, 0.023002427, -0.81061274, 0.0024684896, 0.8106689, 0.02303428, -0.8109354, 0.0027494843, -0.009860799, -6.8469415, -0.4407727, -10.574349)
+layers = 7
+mesh = SubResource("ArrayMesh_ixr0q")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_dvjm2")
+
+[node name="Arc15" type="MeshInstance3D" parent="WorldEnvironment" unique_id=1754931464]
+transform = Transform3D(0.009934869, 0.023002427, -0.81061274, 0.0024684896, 0.8106689, 0.02303428, -0.8109354, 0.0027494843, -0.009860799, -10.904568, -0.4407727, -10.574349)
+layers = 7
+mesh = SubResource("ArrayMesh_ixr0q")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_dvjm2")
+
+[node name="Arc16" type="MeshInstance3D" parent="WorldEnvironment" unique_id=2123455644]
+transform = Transform3D(0.009934869, 0.023002427, -0.81061274, 0.0024684896, 0.8106689, 0.02303428, -0.8109354, 0.0027494843, -0.009860799, 5.345682, -0.4407727, 10.833085)
+layers = 7
+mesh = SubResource("ArrayMesh_ixr0q")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_dvjm2")
+
+[node name="Arc17" type="MeshInstance3D" parent="WorldEnvironment" unique_id=662698760]
+transform = Transform3D(0.009934869, 0.023002427, -0.81061274, 0.0024684896, 0.8106689, 0.02303428, -0.8109354, 0.0027494843, -0.009860799, 1.3504858, -0.4407727, 10.833085)
+layers = 7
+mesh = SubResource("ArrayMesh_ixr0q")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_dvjm2")
+
+[node name="Arc18" type="MeshInstance3D" parent="WorldEnvironment" unique_id=1532432657]
+transform = Transform3D(0.009934869, 0.023002427, -0.81061274, 0.0024684896, 0.8106689, 0.02303428, -0.8109354, 0.0027494843, -0.009860799, -2.79325, -0.4407727, 10.833085)
+layers = 7
+mesh = SubResource("ArrayMesh_ixr0q")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_dvjm2")
+
+[node name="Arc19" type="MeshInstance3D" parent="WorldEnvironment" unique_id=1313475533]
+transform = Transform3D(0.009934869, 0.023002427, -0.81061274, 0.0024684896, 0.8106689, 0.02303428, -0.8109354, 0.0027494843, -0.009860799, -6.8469415, -0.4407727, 10.833085)
+layers = 7
+mesh = SubResource("ArrayMesh_ixr0q")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_dvjm2")
+
+[node name="Arc20" type="MeshInstance3D" parent="WorldEnvironment" unique_id=1812342736]
+transform = Transform3D(0.009934869, 0.023002427, -0.81061274, 0.0024684896, 0.8106689, 0.02303428, -0.8109354, 0.0027494843, -0.009860799, -10.904568, -0.4407727, 10.833085)
+layers = 7
+mesh = SubResource("ArrayMesh_ixr0q")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("5_dvjm2")
+
+[node name="UI" type="Node" parent="." unique_id=1232826399]
+
+[node name="Queue debug" type="Control" parent="UI" unique_id=1944889830]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,9 +272,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("5_3c7v3")
-metadata/_edit_use_anchors_ = true
 
-[node name="FighterReadyQueue" type="VBoxContainer" parent="Queue debug" unique_id=524154737]
+[node name="FighterReadyQueue" type="VBoxContainer" parent="UI/Queue debug" unique_id=524154737]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -62,7 +286,7 @@ offset_bottom = 52.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="ActionQueue" type="VBoxContainer" parent="Queue debug" unique_id=830166984]
+[node name="ActionQueue" type="VBoxContainer" parent="UI/Queue debug" unique_id=830166984]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -71,7 +295,7 @@ offset_left = -63.0
 offset_bottom = 131.0
 grow_horizontal = 0
 
-[node name="State debug" type="Control" parent="." unique_id=2071902209]
+[node name="State debug" type="Control" parent="UI" unique_id=2071902209]
 layout_mode = 3
 anchor_left = 0.3640625
 anchor_top = 0.022222223
@@ -81,9 +305,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("5_3c7v3")
-metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="State debug" unique_id=2144155891]
+[node name="Label" type="Label" parent="UI/State debug" unique_id=2144155891]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -93,7 +316,7 @@ grow_vertical = 2
 text = "State"
 horizontal_alignment = 1
 
-[node name="HeroesUI" type="Control" parent="." unique_id=487963089]
+[node name="HeroesUI" type="Control" parent="UI" unique_id=487963089]
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
@@ -103,14 +326,13 @@ offset_right = 40.0
 offset_bottom = -119.0
 grow_vertical = 0
 script = ExtResource("5_3c7v3")
-metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HeroesUI" unique_id=1979882483]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HeroesUI" unique_id=1979882483]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="EnemiesUI" type="Control" parent="." unique_id=1490052883]
+[node name="EnemiesUI" type="Control" parent="UI" unique_id=1490052883]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -123,9 +345,8 @@ offset_bottom = -119.0
 grow_horizontal = 0
 grow_vertical = 0
 script = ExtResource("5_3c7v3")
-metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="EnemiesUI" unique_id=1117017450]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/EnemiesUI" unique_id=1117017450]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -11.6
@@ -134,18 +355,18 @@ offset_right = 40.0
 offset_bottom = 40.0
 metadata/_edit_use_anchors_ = true
 
-[node name="TargetPanel" type="Control" parent="." unique_id=1883963302]
+[node name="TargetPanel" type="Control" parent="UI" unique_id=1883963302]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("6_etgvb")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TargetPanel" unique_id=201805090]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/TargetPanel" unique_id=201805090]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 alignment = 1
 
-[node name="VictoryPanel" type="Control" parent="." unique_id=1806648360 node_paths=PackedStringArray("continue_button")]
+[node name="VictoryPanel" type="Control" parent="UI" unique_id=1806648360 node_paths=PackedStringArray("continue_button")]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -156,7 +377,7 @@ grow_vertical = 2
 script = ExtResource("5_kltxb")
 continue_button = NodePath("VBoxContainer/Button")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VictoryPanel" unique_id=1447899135]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/VictoryPanel" unique_id=1447899135]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -170,20 +391,20 @@ offset_bottom = 63.48999
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="VictoryPanel/VBoxContainer" unique_id=2128727990]
+[node name="Label" type="Label" parent="UI/VictoryPanel/VBoxContainer" unique_id=2128727990]
 layout_mode = 2
 text = "Victory !"
 label_settings = SubResource("LabelSettings_dj5a4")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="VictoryPanel/VBoxContainer" unique_id=1997914383]
+[node name="Button" type="Button" parent="UI/VictoryPanel/VBoxContainer" unique_id=1997914383]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 10
 text = "Continue"
 
-[node name="DefeatPanel" type="Control" parent="." unique_id=122025363]
+[node name="DefeatPanel" type="Control" parent="UI" unique_id=122025363]
 visible = false
 layout_mode = 3
 anchors_preset = 0
@@ -191,107 +412,93 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("6_pbkuh")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DefeatPanel" unique_id=565245469]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/DefeatPanel" unique_id=565245469]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Label" type="Label" parent="DefeatPanel/VBoxContainer" unique_id=594348964]
+[node name="Label" type="Label" parent="UI/DefeatPanel/VBoxContainer" unique_id=594348964]
 layout_mode = 2
 text = "Defeat..."
 
-[node name="Button" type="Button" parent="DefeatPanel/VBoxContainer" unique_id=1690959631]
+[node name="Button" type="Button" parent="UI/DefeatPanel/VBoxContainer" unique_id=1690959631]
 layout_mode = 2
 text = "Continue"
 
-[node name="ActionPanel" type="Control" parent="." unique_id=377493291]
+[node name="ActionPanel" type="Control" parent="UI" unique_id=377493291]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("5_3c7v3")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ActionPanel" unique_id=1828394591]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ActionPanel" unique_id=1828394591]
 layout_mode = 1
 offset_right = 63.0
 offset_bottom = 77.0
 alignment = 1
 
-[node name="level" type="Node3D" parent="." unique_id=1079232525]
+[node name="LD" type="Node3D" parent="." unique_id=1079232525]
 
-[node name="Ground" type="MeshInstance3D" parent="level" unique_id=866406329]
+[node name="Ground" type="MeshInstance3D" parent="LD" unique_id=866406329]
 transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0)
 mesh = SubResource("PlaneMesh_dj5a4")
 
-[node name="ModelsContainer" type="Node3D" parent="level" unique_id=953384787]
+[node name="ModelsContainer" type="Node3D" parent="LD" unique_id=953384787]
 
-[node name="HeroePosUp" type="Node3D" parent="level/ModelsContainer" unique_id=614508237]
+[node name="HeroePosUp" type="Node3D" parent="LD/ModelsContainer" unique_id=614508237]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="level/ModelsContainer/HeroePosUp" unique_id=496486129]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LD/ModelsContainer/HeroePosUp" unique_id=496486129]
 visible = false
 mesh = SubResource("BoxMesh_dj5a4")
 
-[node name="HeroePosRight" type="Node3D" parent="level/ModelsContainer" unique_id=614173665]
+[node name="HeroePosRight" type="Node3D" parent="LD/ModelsContainer" unique_id=614173665]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="level/ModelsContainer/HeroePosRight" unique_id=773151522]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LD/ModelsContainer/HeroePosRight" unique_id=773151522]
 visible = false
 mesh = SubResource("BoxMesh_dj5a4")
 
-[node name="HeroePosDown" type="Node3D" parent="level/ModelsContainer" unique_id=1116766793]
+[node name="HeroePosDown" type="Node3D" parent="LD/ModelsContainer" unique_id=1116766793]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="level/ModelsContainer/HeroePosDown" unique_id=342708536]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LD/ModelsContainer/HeroePosDown" unique_id=342708536]
 visible = false
 mesh = SubResource("BoxMesh_dj5a4")
 
-[node name="HeroePosLeft" type="Node3D" parent="level/ModelsContainer" unique_id=491029467]
+[node name="HeroePosLeft" type="Node3D" parent="LD/ModelsContainer" unique_id=491029467]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="level/ModelsContainer/HeroePosLeft" unique_id=547292657]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LD/ModelsContainer/HeroePosLeft" unique_id=547292657]
 visible = false
 mesh = SubResource("BoxMesh_dj5a4")
 
-[node name="EnemyPosUp" type="Node3D" parent="level/ModelsContainer" unique_id=1204831841]
+[node name="EnemyPosUp" type="Node3D" parent="LD/ModelsContainer" unique_id=1204831841]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="level/ModelsContainer/EnemyPosUp" unique_id=2090221015]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LD/ModelsContainer/EnemyPosUp" unique_id=2090221015]
 visible = false
 mesh = SubResource("BoxMesh_dj5a4")
 
-[node name="EnemyPosRight" type="Node3D" parent="level/ModelsContainer" unique_id=914739274]
+[node name="EnemyPosRight" type="Node3D" parent="LD/ModelsContainer" unique_id=914739274]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="level/ModelsContainer/EnemyPosRight" unique_id=502790852]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LD/ModelsContainer/EnemyPosRight" unique_id=502790852]
 visible = false
 mesh = SubResource("BoxMesh_dj5a4")
 
-[node name="EnemyPosDown" type="Node3D" parent="level/ModelsContainer" unique_id=1291626594]
+[node name="EnemyPosDown" type="Node3D" parent="LD/ModelsContainer" unique_id=1291626594]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="level/ModelsContainer/EnemyPosDown" unique_id=832595737]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LD/ModelsContainer/EnemyPosDown" unique_id=832595737]
 visible = false
 mesh = SubResource("BoxMesh_dj5a4")
 
-[node name="EnemyPosLeft" type="Node3D" parent="level/ModelsContainer" unique_id=960194556]
+[node name="EnemyPosLeft" type="Node3D" parent="LD/ModelsContainer" unique_id=960194556]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="level/ModelsContainer/EnemyPosLeft" unique_id=1619360687]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LD/ModelsContainer/EnemyPosLeft" unique_id=1619360687]
 visible = false
 mesh = SubResource("BoxMesh_dj5a4")
 
-[node name="Enemy Team positions" type="Node3D" parent="level" unique_id=140270287]
+[node name="Enemy Team positions" type="Node3D" parent="LD" unique_id=140270287]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=397924740]
-transform = Transform3D(0.8376886, 0.24330081, -0.48896065, 0, 0.8952894, 0.44548503, 0.5461481, -0.37317774, 0.7499738, -6.549292, 3.3323224, 8.154913)
-fov = 47.5
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=869966189]
-transform = Transform3D(0.98714745, 0, -0.15981227, 0.055857696, 0.93692863, 0.34502843, 0.14973271, -0.34952065, 0.9248867, 0, 0, 0)
-light_color = Color(0.5708413, 0.40628642, 6.738305e-07, 1)
-light_energy = 4.261
-light_indirect_energy = 2.019
-light_volumetric_fog_energy = 1.51
-light_angular_distance = 2.86
-light_specular = 2.834
-shadow_enabled = true

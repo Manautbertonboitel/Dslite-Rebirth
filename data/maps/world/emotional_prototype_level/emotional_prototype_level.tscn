@@ -28,6 +28,26 @@ shader_parameter/dithering = true
 shader_parameter/colors = 16
 shader_parameter/dither_size = 1
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v4aji"]
+sky_horizon_color = Color(0.40392157, 0.5254902, 0.67058825, 1)
+sky_curve = 0.27990973
+
+[sub_resource type="Sky" id="Sky_4slxw"]
+sky_material = SubResource("ProceduralSkyMaterial_v4aji")
+
+[sub_resource type="Environment" id="Environment_ab3st"]
+background_mode = 2
+background_color = Color(0.45506775, 0.5841923, 0.8767696, 1)
+sky = SubResource("Sky_4slxw")
+ambient_light_source = 2
+ambient_light_color = Color(0.543979, 0.680659, 0.89865, 1)
+ambient_light_energy = 1.95
+reflected_light_source = 2
+fog_density = 0.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0135
+volumetric_fog_albedo = Color(0.777223, 0.767115, 0.938221, 1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_wt6xk"]
 size = Vector3(15.963989, 0.4098633, 30.403366)
 
@@ -60,7 +80,7 @@ roughness = 0.9272727
 normal_enabled = true
 normal_texture = ExtResource("7_4slxw")
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_61rom"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_vs2kt"]
 _surfaces = [{
 "aabb": AABB(-0.9347218, 0.09123516, -6.0955663, 1.868868, 7.8971868, 5.587887),
 "format": 34896613377,
@@ -92,7 +112,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("/C+nEoSc6P9e4YvSs4A68jggjNIhgS3ygNKnEiic8/84IIzSIYHE4BXsDuQMX3PhzBQf5IZfDOBe4YvSs4BU4swUH+SGX+rYCeCL0nI9GtbjHozS3j1l3BXsDuQMXwrT4x6M0t492uQJ4IvScj3a2BbQpxIOIljpki2nEmoiiOaSLacSaiJo14DSpxIonNzY/C+nEoScs9kW0KcSDiKX1rH7KdtVMhnU5PrK4rwoN9TX+AAA3QH80OT0lwrWEPvQwv7F8gFfudQu/db/Al/N1HX9Kduwi7nRCv3K4kqVwdGK8J67YLA0z/v3lwo2rV3P09lKCdz9OtPr5Wu4k9EX003bRMbF8i/T5PSXCtYQ+tbX+AAA3QEK1ycEmtuIjInUvxKfu96wn9I+C/gJIa6f1qwE1OLclZ3UNQGd85Ff2NXWAf//kF/o1QAALretG+/VhwLU4kMpI9aDA12JigDF1iMI+An2EJzTjQMAAGgCoNOGLEoJPv7J060ea7gE0s7SmypExinz0NJe4YvSs4CU3fv3lwo2rdDldf0p27CLk92A0qcSKJzL5cL+xfIBXxPSFewO5AxfOdIJ4IvScj3gwbH7KdtVMtHBFtCnEg4itMLk9JcK1hCrwhXsDuQMXwzGwv7F8gFf4sXjHozS3j3d2TUBnfORX1LazBQf5IZfr9oAAC63rRvQ0JItpxJqImLHIwj4CfYQScc4IIzSIYEN5D4L+Akhrjzm/C+nEoScLuYnBJrbiIzE48wUH+SGXzPjNQGd85Ff/+L8L6cShJwPxCMI+An2EHHIki2nEmoidsk+C/gJIa7SwxbQpxIOIjjw+/eXCjatRvKA0qcSKJyt8uT0lwrWEBfwvxKfu96w+cEK/criSpX5wYrwnrtgsPnBrATU4tyV+cGsBNTi3JUWyC791v8CXxbICv3K4kqVFsjWAf//kF8WyNYB//+QXwzm5PrK4rwoDOYu/db/Al8M5ocC1OJDKQzmhwLU4kMpJfODA12JigB4/+T6yuK8KCXz1/gAAN0Bn/+NAwAAaAKf/40DAABoAizV09lKCdz9tNDX+AAA3QEs1YYsSgk+/rTQhixKCT7+YICbKkTGKfO2hdPZSgnc/WCATdtExsXytoXr5Wu4k9Hr4psqRMYp8+virR5ruATS6+JN20TGxfLr4orwnrtgsETSrR5ruATSRNK/Ep+73rBE0uvla7iT0UTSbihfQxwiLOo41V9DuiHe7KXXX0N2nOX/2ypfQ9ic3P/bKl9D2Jw//9He7YdSnjf/wSPth7yeMP+l119DdpxM/8Ej7Ye8nmb4sOBIsESTZPhyIUiwsJN4+NHe7YdSnlX4ciFIsLCTNvKw4EiwRJNE8qDeSLDhKurhYh9IsE4rAe5iH0iwTivW8lHc7YfWH9jxQSHth0AgZ/ug3kiw4Spp6UEh7YdAIKb/ONVfQ7ohEPtuKF9DHCKi9FHc7YfWH5X5U/3ttn8botPN+F2JAACZ08n7/Ig1D5fTePueu6wNpNPw/vyIz642z///7baEojTPru5diQ++Ns8sAQGJXw/F1mIBn7s6DsXWAAAut60bxdavAi63dKNczCUVXYmKvmnMVwQBicGvbMy/Ep+73rBazHX9KduwiyHULv3W/wJfxtPC/sXyAV+m0wr9yuJKlTTUpe4AADK8ptX795cKNq171TUBnfORX/vU1gH//5BfCdWx+ynbVTKt03j7nrusDV/TU/3ttn8bTtPk+srivCi807D+mzuardnNru5diQ++7M3w/vyIz67uzafuQDWtvNfNjQMAAGgCXNYjCPgJ9hBU1hwVAACtvKHWhwLU4kMp69VgAprblzLq1WIBn7s6DvDV0d7th1Ke9uD//+22hKL04LDgSLBEk/Tg8P78iM+u9uCg3kiw4SrQwsn7/Ig1D+XCUdzth9Yf7MJT/e22fxvLwtsqX0PYnFnmigQ7O42uZuZgAprblzKq2bD+mzuarbjlpddfQ3acs+Wx+ynbVTKJxgngi9JyPcTGagE7O5IQwcduKF9DHCLbxzggjNIhgQ/mrwIut3SjTOZyIUiwsJNi5icEmtuIjPrlbihfQxwiEsksAQGJXw8tyUEh7YdAIDLJagE7O5IQD8k41V9DuiGYwpT7mztrEI/CsOBIsESTk93//+22hKKS3VHc7YfWH/vDlPubO2sQ7cM41V9DuiHqw8n7/Ig1D/3DwSPth7yeouSKBDs7ja6e5NsqX0PYnJ3kVwQBicGvo+RiH0iwTivZ0GACmtuXMvHQ4x6M0t49/9Cl119DdpwY5fD+/IjPrh3l0d7th1KeHuWw/ps7mq0X5VP97bZ/Gw7CoN5IsOEqHsJe4YvSs4Dh0XX9Kduwi83RciFIsLCTZOVXBAGJwa9q5cEj7Ye8nmzlrwIut3SjYuVBIe2HQCBhzQAALretG17NYh9IsE4rXc0sAQGJXw9izYoDQDXtAZ//1PhANWIBn//TIGs37d3J09EgpQR13ejTiCyVObL+uNMeFUA1KL3j0xwVAACtvAfUPuRrN3/dA9Pc2dyFnP8B00XknYfW3v3S1dmVOVD+CdOn7kA1rbz/0q7uXYkPvvjSjyzchf//ydLaIJ2HRN/F0nj7nrusDSXzYgGfuzoOJfNiAZ+7Og61+s34XYkAALX6ePueu6wNtfqDA12JigC1+tT4QDViAXj/zfhdiQAAeP+KA0A17QF4/6XuAAAyvCzVHBUAAK28LNWKBDs7ja4E0RwVAACtvBHRPgv4CSGuFtEeFUA1KL0A0WACmtuXMhrWp+5ANa28D8+w/ps7mq0Cz6XuAAAyvGjPigNANe0BgdNqATs7khB90ycEmtuIjKbPvxKfu96wf8+vAi63dKN3z6wE1OLcla3PagE7O5IQm9aDA12JigCz1iwBAYlfD7bWigNANe0BmdaU+5s7axD+0NT4QDViAf/Q///ttoSi3NGK8J67YLDh0cn7/Ig1D3nT1PhANWIBcNOU+5s7axBv0834XYkAAHrTVwQBicGvEM4eFUA1KL31zYoEOzuNrvHNJRVdiYq+E87V2ZU5UP5ggIgslTmy/mCAiCyVObL+joDc2dyFnP+OgNXZlTlQ/o6Ajyzchf//joCPLNyF//+2hdzZ3IWc/7aFReSdh9beMNPr5Wu4k9Ev09zZ3IWc/zDT2iCdh0TfLNOILJU5sv4r09Mgazft3SbTjyzchf//LNMlFV2Jir4p0x4VQDUovSDTPOSlBAfdNNPV2ZU5UP400z7kazd/3S/Tpe4AADK8L9On7kA1rbwp09EgpQR13bTQPOSlBAfdtNAcFQAArby00KXuAAAyvLTQru5diQ++HNOK8J67YLAV00XknYfW3h7T2iCdh0TfkdIlFV2Jir6H0q0ea7gE0qnSmd42Xvsop11BKERegdUgVShAfVU3Qh5U0z0LV7NEd1KQaixc62i5XIxsg1sRZ1ZdonnmbHp2WG1pAFYAbQBTABvUOChK05Um09KpJZTUKylYLhIpMC4nKVkuqihaLqkohy1+KW0tiymXKQQmjikJJpom0CMnJl4nuihWKVgpuihSKd0o2CUaLsclIi6j1Y/Vq9eK1grVN9e81YTVv9XF1NPVu9RK1kfUGdaX1DjVcNRV1ALXWdQA11PYetaj14PWpdeC1qsvBTeJMkI0qy8EN5UyOjSeKhw4TCo9OMEiXSjRIlkokCOAH5cjfR8uJFgyaiRIMrDTjeIQ1E3iW9Qa4oTa7+KP3vrgfN4B4cLOUdudzfvMgM0PzXDOjdvLzQbcj80y3E3epbqW6cG4wOtkuIndxrqzMQEZPzCDGvcvzRrLMegYfOv8E3zr/BN86/wTfOv8E+LftR/i37Uf4t+1H+LftR+xzB0zscwdM7HMHTOxzB0zqcY9Oeo/E8Cpxj05AED+vwBA/r+SKiTVoScK2JIqJNWhJwrYI0AjQDb60nkiQCFANvrSeUHOvTFBzr0xQc69MUHOvTE+15koPteZKD7XmSg+15koaABWAGQAWQCK4SZhu+tVa/Hxb3Fg/fB8GfUti5Lm/mUnFy9rvRaQa5saBmgEE/huzijMXYgpL13ieAFt6XuTbJB+23Rtft10v3/KdD197nRrgDeBPgFXAEcBPwCCgC+BeS9gKYYvWSmJL1cpdy9hKZgm0SOaJtAjmCbRIzjVcNQ41XDUONVw1Bvc79gm3OrYKdzq2Bnc8NgULDYpgyz+KKss6ij9K0IpZydfLZonRy0r1k3VO9ZF1aMuwSgML4soIi+AKJAuyyhGJaYlNSWtJTMlriVIJaUlvtRf17XUZNcN1TbXRdZJ1ETWStRL1kbU2TA0NdwwMjXeMDE12DA1NaIjZySPI2wkiSNuJKgjZSTazdLM982/zIbTqeLBMh00zTIVNH4jhTIsI5oy1N7i4Ofe2+A+zE3UoMwH1MTM7tMczGXUV98932rfNt9u3zXfVN8+36cjeB+uI3YfrS8DN64vAzedJIQfqCSAH6okfx+bJIUf680xzeLNN83fzTjN7M0wzYva6+Kc2uLiptrd4qcyATOcMggzmjIKM6kyADOSImgogiJrKAsr8Dc4K903Ls0O0TnNBtE9zQPRKs0Q0ZncQ+GX3EThltxF4ZrcQ+EAQP6/AED+v1PYetZz2GrWQNiD1m7YbdaV2FvW7yhBKfIoPyn3KD0p6ShDKfUoPin8KDspndeF1prXh9apxj05qcY9Of3C+Dz9wvg8/cL4PP3C+DzqPxPA6j8TwOo/E8CSKiTVkiok1cfaa9nT2mbZ19pk2cPabdkO1p3UdSY9J4EmOCccJmInNdQS1zDUFddY2ZnWL9mq1ifZrtZg2ZbWrdSc1MzUjNTP1IrUqtSd1FYuqyhVLqwodCkVJm4pGCYHMEQpEzA+KRUwPSkGMEUpTtvK2jbb1Noy29baUdvJ2iRAI0AlQCVAoi2yUqItslKiLbFSoi2yUjb60nk2+tJ5UineKFMp3ShRKd4oo9fQ1qPX0Nae19LWpNfQ1qHX0daX19XWwChTKcAoUynGKFEpxihRKcwoTimhJwrYoScK2KEnCtihJwrYUym8KFspuChQKb0onNeR1pHXlta314XW")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_61rom")
+shadow_mesh = SubResource("ArrayMesh_vs2kt")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_rr5v1"]
 _surfaces = [{
@@ -217,26 +237,6 @@ shader_parameter/alpha_scissor = 0.5
 shader_parameter/jitter = 0.25
 shader_parameter/resolution = Vector2i(320, 240)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_v4aji"]
-sky_horizon_color = Color(0.40392157, 0.5254902, 0.67058825, 1)
-sky_curve = 0.27990973
-
-[sub_resource type="Sky" id="Sky_3sm11"]
-sky_material = SubResource("ProceduralSkyMaterial_v4aji")
-
-[sub_resource type="Environment" id="Environment_ab3st"]
-background_mode = 2
-background_color = Color(0.45506775, 0.5841923, 0.8767696, 1)
-sky = SubResource("Sky_3sm11")
-ambient_light_source = 2
-ambient_light_color = Color(0.543979, 0.680659, 0.89865, 1)
-ambient_light_energy = 1.95
-reflected_light_source = 2
-fog_density = 0.0
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.0135
-volumetric_fog_albedo = Color(0.777223, 0.767115, 0.938221, 1)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_iiga4"]
 size = Vector3(3.3623047, 1.2788086, 3.2764893)
 
@@ -261,7 +261,7 @@ size = Vector2i(1280, 720)
 render_target_update_mode = 0
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=5274261]
-transform = Transform3D(0.9036899, -0.12730129, -0.40882623, 0, 0.95478326, -0.29730272, 0.42818746, 0.2686695, 0.862828, 10.785777, 1.7273932, 28.933895)
+transform = Transform3D(0.15890695, 0.07238104, -0.9846367, 0, 0.997309, 0.073312595, 0.98729354, -0.011649882, 0.15847936, 11.857239, 3.542966, 20.193739)
 top_level = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera3D" unique_id=522715566]
@@ -271,8 +271,18 @@ script = ExtResource("12_fto1f")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
 [node name="Player3DNoCamera" parent="." unique_id=205379790 node_paths=PackedStringArray("_current_camera") instance=ExtResource("2_m302v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.207314, 0.5000005, 18.428974)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.207314, 0.5000005, 21.795115)
 _current_camera = NodePath("../Camera3D")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=458493203]
+environment = SubResource("Environment_ab3st")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1176231910]
+transform = Transform3D(0.755879, -0.440902, 0.483996, -0.242683, 0.497906, 0.832583, -0.608072, -0.74679, 0.269357, 5.00624, 9.33842, -0.482016)
+light_color = Color(0.6661935, 0.76812303, 0.9709651, 1)
+light_energy = 2.538
+shadow_enabled = true
+metadata/_edit_lock_ = true
 
 [node name="Camera" type="Node" parent="." unique_id=1540268178]
 
@@ -289,7 +299,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6040611, -0.15493166, 4.045
 shape = SubResource("BoxShape3D_wt6xk")
 
 [node name="PhantomCamera3D" type="Node3D" parent="Camera/CameraModule2" unique_id=314998288]
-transform = Transform3D(0.9036899, -0.12730129, -0.40882623, 0, 0.95478326, -0.29730272, 0.42818746, 0.2686695, 0.862828, 10.785777, 1.7273932, 28.933895)
+transform = Transform3D(0.15890695, 0.07238104, -0.9846367, 0, 0.997309, 0.073312595, 0.98729354, -0.011649882, 0.15847936, 11.857239, 3.542966, 20.193739)
 script = ExtResource("13_4tx75")
 priority = 20
 tween_resource = SubResource("Resource_e8hua")
@@ -307,7 +317,7 @@ transform = Transform3D(0.9988059, -0.048849754, 0, 0.048849754, 0.9988059, 0, 0
 shape = SubResource("BoxShape3D_m302v")
 
 [node name="PathPhantomCamera3D" type="Node3D" parent="Camera/CameraModule" unique_id=129758663 node_paths=PackedStringArray("follow_target", "follow_path", "look_at_target")]
-transform = Transform3D(0.86581844, 0.1253685, -0.48439544, 7.4505717e-09, 0.96810055, 0.25055832, 0.50035596, -0.21693827, 0.8382003, 9.367787, 6.1068525, 37.185745)
+transform = Transform3D(0.8175778, 0.1643688, -0.5518572, -7.450567e-09, 0.9583917, 0.28545356, 0.57581496, -0.23338097, 0.78356105, 9.367787, 6.1068525, 37.185745)
 top_level = true
 script = ExtResource("13_4tx75")
 follow_mode = 4
@@ -335,9 +345,9 @@ size = Vector3(2454, 1, 1465)
 material = ExtResource("5_hw2a2")
 
 [node name="Ground plane2" type="CSGBox3D" parent="LD blockout" unique_id=937333284]
-transform = Transform3D(1, 0, 0, 0, 0.99619484, 0.087155744, 0, -0.087155744, 0.99619484, 21.030762, 4.3142095, 72.70227)
+transform = Transform3D(1, 0, 0, 0, 0.99619484, 0.087155744, 0, -0.087155744, 0.99619484, 21.030762, 2.0457747, 72.900734)
 use_collision = true
-size = Vector3(7, 1, 117)
+size = Vector3(7, 5.554199, 117)
 material = ExtResource("5_hw2a2")
 
 [node name="Ground plane3" type="CSGBox3D" parent="LD blockout" unique_id=1170568839]
@@ -348,6 +358,69 @@ material = ExtResource("5_hw2a2")
 
 [node name="Arc" type="MeshInstance3D" parent="LD blockout" unique_id=1607316523]
 transform = Transform3D(-2.7213705, 0.017577372, -0.32697552, 0.008343084, 2.7398813, 0.07785074, -0.32734138, -0.07629797, 2.7203138, -45.39561, 0.29794532, 7.8132)
+layers = 7
+mesh = SubResource("ArrayMesh_w6f4t")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("8_vs2kt")
+
+[node name="Arc2" type="MeshInstance3D" parent="LD blockout" unique_id=495244912]
+transform = Transform3D(-2.9458835, 0.0060536317, -0.022615764, 0.0067158216, 1.8330156, 0.32446808, -0.025279809, -0.21847838, 2.7216337, 19.674427, -12.997173, 46.47238)
+layers = 7
+mesh = SubResource("ArrayMesh_w6f4t")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("8_vs2kt")
+
+[node name="Arc3" type="MeshInstance3D" parent="LD blockout" unique_id=479662602]
+transform = Transform3D(-2.9458835, 0.0060536317, -0.022615764, 0.0067158216, 1.8330156, 0.32446808, -0.025279809, -0.21847838, 2.7216337, 19.674427, -11.781517, 59.905533)
+layers = 7
+mesh = SubResource("ArrayMesh_w6f4t")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("8_vs2kt")
+
+[node name="Arc4" type="MeshInstance3D" parent="LD blockout" unique_id=1355884401]
+transform = Transform3D(-2.9458835, 0.0060536317, -0.022615764, 0.0067158216, 1.8330156, 0.32446808, -0.025279809, -0.21847838, 2.7216337, 19.674427, -10.57681, 73.21766)
+layers = 7
+mesh = SubResource("ArrayMesh_w6f4t")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("8_vs2kt")
+
+[node name="Arc5" type="MeshInstance3D" parent="LD blockout" unique_id=1970687011]
+transform = Transform3D(-2.9458835, 0.0060536317, -0.022615764, 0.0067158216, 1.8330156, 0.32446808, -0.025279809, -0.21847838, 2.7216337, 19.674427, -9.314545, 87.16585)
+layers = 7
+mesh = SubResource("ArrayMesh_w6f4t")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("8_vs2kt")
+
+[node name="Arc6" type="MeshInstance3D" parent="LD blockout" unique_id=1217019394]
+transform = Transform3D(-2.9458835, 0.0060536317, -0.022615764, 0.0067158216, 1.8330156, 0.32446808, -0.025279809, -0.21847838, 2.7216337, 19.674427, -8.05702, 101.06163)
+layers = 7
+mesh = SubResource("ArrayMesh_w6f4t")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("8_vs2kt")
+
+[node name="Arc7" type="MeshInstance3D" parent="LD blockout" unique_id=434093117]
+transform = Transform3D(-2.9458835, 0.0060536317, -0.022615764, 0.0067158216, 1.8330156, 0.32446808, -0.025279809, -0.21847838, 2.7216337, 19.674427, -6.8418274, 114.48965)
+layers = 7
+mesh = SubResource("ArrayMesh_w6f4t")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("8_vs2kt")
+
+[node name="Arc8" type="MeshInstance3D" parent="LD blockout" unique_id=541973897]
+transform = Transform3D(-2.9458835, 0.0060536317, -0.022615764, 0.0067158216, 1.8330156, 0.32446808, -0.025279809, -0.21847838, 2.7216337, 19.674427, -5.6353316, 127.82157)
+layers = 7
+mesh = SubResource("ArrayMesh_w6f4t")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("8_vs2kt")
+
+[node name="Arc9" type="MeshInstance3D" parent="LD blockout" unique_id=344864382]
+transform = Transform3D(-2.9458835, 0.0060536317, -0.022615764, 0.0067158216, 1.8330156, 0.32446808, -0.025279809, -0.21847838, 2.7216337, 19.674427, -4.3983035, 141.49086)
+layers = 7
+mesh = SubResource("ArrayMesh_w6f4t")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("8_vs2kt")
+
+[node name="Arc10" type="MeshInstance3D" parent="LD blockout" unique_id=1078339406]
+transform = Transform3D(-2.9458835, 0.0060536317, -0.022615764, 0.0067158216, 1.8330156, 0.32446808, -0.025279809, -0.21847838, 2.7216337, 19.674427, -3.2031627, 154.69731)
 layers = 7
 mesh = SubResource("ArrayMesh_w6f4t")
 skeleton = NodePath("")
@@ -370,6 +443,41 @@ surface_material_override/0 = SubResource("ShaderMaterial_8ftk1")
 
 [node name="Tour" type="MeshInstance3D" parent="LD blockout" unique_id=777493696]
 transform = Transform3D(-0.929297, 0.0060022958, -0.11165598, 0.0028489607, 0.93561804, 0.026584568, -0.11178089, -0.026054332, 0.928936, -44.39561, -0.7020547, 28.8132)
+layers = 7
+mesh = SubResource("ArrayMesh_uk6tj")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
+
+[node name="Tour2" type="MeshInstance3D" parent="LD blockout" unique_id=1933847742]
+transform = Transform3D(-0.929297, 0.0060022958, -0.11165598, 0.0028489607, 0.93561804, 0.026584568, -0.11178089, -0.026054332, 0.928936, 25.2265, 0.47435027, 30.334993)
+layers = 7
+mesh = SubResource("ArrayMesh_uk6tj")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
+
+[node name="Tour3" type="MeshInstance3D" parent="LD blockout" unique_id=1916076281]
+transform = Transform3D(-0.929297, 0.0060022958, -0.11165598, 0.0028489607, 0.93561804, 0.026584568, -0.11178089, -0.026054332, 0.928936, 26.034864, 4.669564, 82.2404)
+layers = 7
+mesh = SubResource("ArrayMesh_uk6tj")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
+
+[node name="Tour5" type="MeshInstance3D" parent="LD blockout" unique_id=412564747]
+transform = Transform3D(-0.929297, 0.0060022958, -0.11165598, 0.0028489607, 0.93561804, 0.026584568, -0.11178089, -0.026054332, 0.928936, 16.74446, 4.669564, 82.2404)
+layers = 7
+mesh = SubResource("ArrayMesh_uk6tj")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
+
+[node name="Tour6" type="MeshInstance3D" parent="LD blockout" unique_id=1791610497]
+transform = Transform3D(-0.929297, 0.006002296, -0.11165597, -0.0028489514, -0.935618, -0.02658465, 0.11178086, 0.026054416, -0.92893595, 16.74446, 4.819547, 82.2404)
+layers = 7
+mesh = SubResource("ArrayMesh_uk6tj")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
+
+[node name="Tour4" type="MeshInstance3D" parent="LD blockout" unique_id=231471872]
+transform = Transform3D(-0.929297, 0.0060022958, -0.11165598, 0.0028489607, 0.93561804, 0.026584568, -0.11178089, -0.026054332, 0.928936, 26.034864, 9.137059, 130.85419)
 layers = 7
 mesh = SubResource("ArrayMesh_uk6tj")
 skeleton = NodePath("")
@@ -630,16 +738,6 @@ transform = Transform3D(0.8404342, 0, -0.5419136, 0, 1, 0, 0.5419136, 0, 0.84043
 [node name="Lapine" parent="LD blockout" unique_id=1260480903 instance=ExtResource("4_w2r1k")]
 transform = Transform3D(0.9782066, 0, -1.4274586, 0, 1.73047, 0, 1.4274586, 0, 0.9782066, 22.063581, 0.489635, 14.950001)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=458493203]
-environment = SubResource("Environment_ab3st")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1176231910]
-transform = Transform3D(0.755879, -0.440902, 0.483996, -0.242683, 0.497906, 0.832583, -0.608072, -0.74679, 0.269357, 5.00624, 9.33842, -0.482016)
-light_color = Color(0.6661935, 0.76812303, 0.9709651, 1)
-light_energy = 2.538
-shadow_enabled = true
-metadata/_edit_lock_ = true
-
 [node name="Interactables" type="Node" parent="." unique_id=1071517342]
 
 [node name="DialogTrigger" type="Area3D" parent="Interactables" unique_id=1539635708 node_paths=PackedStringArray("dialogue_manager")]
@@ -653,7 +751,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1811523, 0.1394043, 1.1382
 shape = SubResource("BoxShape3D_iiga4")
 
 [node name="EnemyTrigger2" type="Area3D" parent="Interactables" unique_id=105995297]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.063135, 8.602142, 99.782684)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.063135, 7.264124, 86.19455)
 script = ExtResource("17_4slxw")
 enemy_team = ExtResource("18_vs2kt")
 
