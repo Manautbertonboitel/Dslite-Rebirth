@@ -12,8 +12,7 @@ func _ready():
 	next_label = dialogue_manager.next_label
 
 func _on_body_entered(body):
-	
-	if body.is_in_group("player"):
+	if body is CharacterBody3D:
 		dialogue_manager.show_messages(message_list, dialogue_position)
 
 func _on_DialogueManager_message_completed() -> void:

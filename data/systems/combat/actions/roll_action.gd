@@ -1,14 +1,20 @@
 class_name RollAction
 extends Action
 
+#signal dodge_window_requested(caster: Fighter, target: Fighter, duration: float)
+
+#const ACTION_WINDUP_TIME = 0.5
+#const DAMAGE_DELAY_TIME = 0.5
+#const DODGE_WINDOW_DURATION = 5.0
+#
+#@export var power: int = 0
+#@export var cost: int = 0
+
 func can_execute(caster: Fighter, combat_manager: CombatManager) -> bool:
 	# Peut seulement esquiver pendant une dodge window
 	if not combat_manager.dodge_window_active and combat_manager.state_machine.current_state == ActionExecuteState:
 		print("Cannot roll - attack hits!")
 		return false
-#	elif combat_manager.pending_attack_target != combat_manager.current_character:
-#		print("You are not the target of this attack!")
-#		return false
 	
 	# Vérifier si la formation permet l'esquive (besoin de 2+ fighters vivants)
 	var formation: Formation = combat_manager.hero_formation if caster.faction == Faction.Type.PLAYER else combat_manager.enemy_formation

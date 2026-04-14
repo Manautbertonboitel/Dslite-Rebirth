@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bbrxswu30677a"]
 
 [ext_resource type="PackedScene" uid="uid://cnedxfn2pxh2t" path="res://addons/gdquest/level/level.tscn" id="1_hw72q"]
-[ext_resource type="PackedScene" uid="uid://5rcs18gvb8lt" path="res://data/systems/character_camera_controller/placeable_camera.tscn" id="2_oe7a1"]
+[ext_resource type="PackedScene" uid="uid://5rcs18gvb8lt" path="res://data/systems/character_camera_controller/camera/placeable_camera.tscn" id="2_oe7a1"]
 [ext_resource type="PackedScene" uid="uid://mbkif2wgqod3" path="res://data/systems/combat/triggers/enemy_trigger.tscn" id="3_74hvw"]
 [ext_resource type="Script" uid="uid://dxbrooln481kq" path="res://data/systems/dialog/dialogue_trigger.gd" id="4_pavll"]
 [ext_resource type="PackedScene" uid="uid://cq0wq2tirpdqa" path="res://data/characters/player/art/player_3d_no_camera.tscn" id="5_cwj17"]

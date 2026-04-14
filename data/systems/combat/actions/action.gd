@@ -3,7 +3,7 @@ class_name Action
 extends Resource
 
 # ignore le warning, ce signal est bien utilisé dans les class qui hérient de action.gd
-signal completed
+#signal completed
 
 # Types de ciblage
 enum TargetingType {

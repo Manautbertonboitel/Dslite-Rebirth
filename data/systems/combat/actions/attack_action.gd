@@ -9,9 +9,6 @@ const DODGE_WINDOW_DURATION = 5.0
 
 @export var power: int = 0
 @export var cost: int = 0
-
-func _init():
-	pass
 	
 func can_execute(caster: Fighter, combat_manager: CombatManager) -> bool:
 	return caster.hp > 0 and get_valid_targets(caster, combat_manager).size() > 0
@@ -20,7 +17,7 @@ func execute(caster: Fighter, combat_manager: CombatManager, target: Fighter) ->
 	
 	if target == null or not target.is_alive():
 		push_error("AttackAction requires a valid target")
-		completed.emit()
+#		completed.emit()
 		return
 	
 	await _play_windup(caster)
@@ -37,7 +34,7 @@ func execute(caster: Fighter, combat_manager: CombatManager, target: Fighter) ->
 			target.take_damage(power)
 			
 		if dodged:
-			print("=== Target Dodged the attack ! ===")
+			print("=== Target Dodged the attack! ===")
 			target.visuals.hide_dodge_indicator()
 			caster.visuals.clear_attack_indicator()
 	else:

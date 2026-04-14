@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_wdvto")
-action_name = "Vente de Drogue"
 power = 5
+action_name = "Cinétose"
 metadata/_custom_type_script = "uid://bs0mfywd5eycu"
