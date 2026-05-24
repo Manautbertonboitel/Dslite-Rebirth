@@ -15,10 +15,13 @@ void vertex() {
 	worldPos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	
 	float offset = TIME * wind_speed;
-	float noise = texture(noise_tex, NODE_POSITION_WORLD.xz-offset).r;
+	//float noise = texture(noise_tex, NODE_POSITION_WORLD.xz-offset).r;
+	float noise = texture(noise_tex, worldPos.xz / noiseScale - offset).r;
 	noise -= .5;
 	noise *= wind_strength;
-	VERTEX.xy += noise * length(VERTEX.y-NODE_POSITION_WORLD.y);
+	//VERTEX.xy += noise * length(VERTEX.y-NODE_POSITION_WORLD.y);
+	float height_factor = clamp(VERTEX.y, 0.0, 1.0);
+	VERTEX.xz += noise * height_factor;
 }
 
 void fragment() {
