@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://cvpf5ti0muw4u" path="res://data/systems/combat/fighter_data.gd" id="2_mxl8c"]
 [ext_resource type="Resource" uid="uid://7dsedw0bk4nm" path="res://data/systems/combat/actions/biffle.tres" id="3_56xev"]
 [ext_resource type="Resource" uid="uid://ccnhhcn7t7mrx" path="res://data/systems/combat/actions/drug_resell.tres" id="4_qdodo"]
-[ext_resource type="PackedScene" uid="uid://bpc4wqseslpai" path="res://data/characters/lapine_2/art/lapine.tscn" id="6_lxaet"]
+[ext_resource type="PackedScene" uid="uid://bpc4wqseslpai" path="res://data/characters/lapine_2/lapine.tscn" id="6_lxaet"]
 [ext_resource type="Resource" uid="uid://c1f5bhyhitk7h" path="res://data/systems/combat/actions/roll.tres" id="6_phbr5"]
 
 [resource]

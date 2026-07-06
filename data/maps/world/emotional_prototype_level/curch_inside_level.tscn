@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://d1q3ratm6ww8o" path="res://data/effects/postprocess/PS1Scene.gdshader" id="1_4qd0a"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_p37g5"]
-[ext_resource type="PackedScene" uid="uid://cq0wq2tirpdqa" path="res://data/characters/player/art/player_3d_no_camera.tscn" id="3_kjs7x"]
+[ext_resource type="PackedScene" uid="uid://cq0wq2tirpdqa" path="res://data/characters/player/player_3d_no_camera.tscn" id="3_kjs7x"]
 [ext_resource type="Texture2D" uid="uid://brhd3c61j25f7" path="res://data/environments/sky/sky_13_2k.png" id="4_6v6u0"]
 [ext_resource type="Script" uid="uid://du3wan1obv1h5" path="res://data/systems/character_camera_controller/camera/camera_switcher.gd" id="5_r8pik"]
 [ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="6_8ag4k"]
@@ -17,8 +17,8 @@
 [ext_resource type="Script" uid="uid://b2binuh54pjah" path="res://data/systems/combat/triggers/enemy_trigger.gd" id="15_tn2e5"]
 [ext_resource type="Resource" uid="uid://dxryfnna46ibl" path="res://data/systems/combat/pools/forest_team1.tres" id="16_pfako"]
 [ext_resource type="Material" uid="uid://dgdkum2ye5ijs" path="res://data/material_library/prototype_box.tres" id="17_r81sk"]
-[ext_resource type="PackedScene" uid="uid://dtfhci3vvkfgr" path="res://data/characters/anno/art/anno.tscn" id="19_lbuq0"]
-[ext_resource type="PackedScene" uid="uid://l5boluq4n37e" path="res://data/characters/lapine/art/lapine.tscn" id="20_4jxkp"]
+[ext_resource type="PackedScene" uid="uid://dtfhci3vvkfgr" path="res://data/characters/anno/anno.tscn" id="19_lbuq0"]
+[ext_resource type="PackedScene" uid="uid://l5boluq4n37e" path="res://data/characters/lapine/lapine.tscn" id="20_4jxkp"]
 [ext_resource type="Script" uid="uid://cecku3tu1lc0n" path="res://data/systems/SpawnPoint/SpawnPoint.gd" id="22_4qd0a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ab3st"]

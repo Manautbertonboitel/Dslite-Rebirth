@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://5rcs18gvb8lt" path="res://data/systems/character_camera_controller/camera/placeable_camera.tscn" id="2_oe7a1"]
 [ext_resource type="PackedScene" uid="uid://mbkif2wgqod3" path="res://data/systems/combat/triggers/enemy_trigger.tscn" id="3_74hvw"]
 [ext_resource type="Script" uid="uid://dxbrooln481kq" path="res://data/systems/dialog/dialogue_trigger.gd" id="4_pavll"]
-[ext_resource type="PackedScene" uid="uid://cq0wq2tirpdqa" path="res://data/characters/player/art/player_3d_no_camera.tscn" id="5_cwj17"]
+[ext_resource type="PackedScene" uid="uid://cq0wq2tirpdqa" path="res://data/characters/player/player_3d_no_camera.tscn" id="5_cwj17"]
 [ext_resource type="Theme" uid="uid://du7pjewgb4h87" path="res://data/systems/dialog/MainTheme.tres" id="6_5xv6l"]
 [ext_resource type="Script" uid="uid://dgvtsq2i4seff" path="res://data/systems/dialog/dialogueManager.gd" id="7_trk6y"]
 

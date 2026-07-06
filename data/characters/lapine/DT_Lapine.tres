@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://c1f5bhyhitk7h" path="res://data/systems/combat/actions/roll.tres" id="4_3qdor"]
 [ext_resource type="PackedScene" uid="uid://djstn15csah1r" path="res://data/characters/lapine/art/Lapine_fighter_scene.tscn" id="5_3yhg4"]
 [ext_resource type="Script" uid="uid://cvpf5ti0muw4u" path="res://data/systems/combat/fighter_data.gd" id="5_60puy"]
-[ext_resource type="PackedScene" uid="uid://l5boluq4n37e" path="res://data/characters/lapine/art/lapine.tscn" id="6_3qdor"]
+[ext_resource type="PackedScene" uid="uid://l5boluq4n37e" path="res://data/characters/lapine/lapine.tscn" id="6_3qdor"]
 
 [resource]
 script = ExtResource("5_60puy")
