@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://cepw8ni1y0d8u"]
+
+[ext_resource type="Shader" uid="uid://csyoqh6eli3ly" path="res://data/effects/explosion/explosion.gdshader" id="1_f2nnm"]
+[ext_resource type="Texture2D" uid="uid://brhd3c61j25f7" path="res://data/environments/sky/sky_13_2k.png" id="2_yo12u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yo12u"]
+shader = ExtResource("1_f2nnm")
+shader_parameter/time = 2.105
+shader_parameter/speed = 1.6
+shader_parameter/thickness = 0.255
+shader_parameter/intensity = 0.795
+
+[sub_resource type="BoxMesh" id="BoxMesh_ppmbr"]
+material = SubResource("ShaderMaterial_yo12u")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ppmbr"]
+shader = ExtResource("1_f2nnm")
+shader_parameter/time = 0.0
+shader_parameter/speed = 1.5
+shader_parameter/thickness = 0.05
+shader_parameter/intensity = 2.0
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ppmbr"]
+panorama = ExtResource("2_yo12u")
+
+[sub_resource type="Sky" id="Sky_jkt7w"]
+sky_material = SubResource("PanoramaSkyMaterial_ppmbr")
+
+[sub_resource type="Environment" id="Environment_4jxbh"]
+background_mode = 2
+sky = SubResource("Sky_jkt7w")
+glow_enabled = true
+
+[node name="Test" type="Node3D" unique_id=1715697216]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=46218834]
+transform = Transform3D(15.81, 0, 0, 0, 15.81, 0, 0, 0, 15.81, 0, 0, 0)
+mesh = SubResource("BoxMesh_ppmbr")
+surface_material_override/0 = SubResource("ShaderMaterial_ppmbr")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1764937046]
+environment = SubResource("Environment_4jxbh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1380139355]
+transform = Transform3D(0.86479235, 0, -0.5021297, 0.23614563, 0.8825129, 0.40670156, 0.44313592, -0.47028813, 0.76319045, -12.133364, 0, 13.776646)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1924302322]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.307355)

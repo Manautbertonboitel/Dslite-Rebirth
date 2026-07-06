@@ -16,7 +16,6 @@ var cur_dialogue_instance: Dialogue
 @export var dialogue_position: Vector2
 @export var next_label: Label
 
-
 func _input(event: InputEvent) -> void:
 	if (
 		event.is_pressed()
@@ -33,7 +32,7 @@ func _input(event: InputEvent) -> void:
 			_hide()
 
 
-func show_messages(message_list: Array, position: Vector2) -> void:
+func show_messages(message_list: Array) -> void:
 	if _is_active:
 		return
 
@@ -44,9 +43,10 @@ func show_messages(message_list: Array, position: Vector2) -> void:
 	var dialogue := DIALOGUE_SCENE.instantiate()
 	get_tree().current_scene.add_child(dialogue)
 
-	dialogue.global_position = position
+	dialogue.global_position = dialogue_position
 	dialogue.modulate.a = 0.0
 	dialogue.message_completed.connect(_on_message_completed)
+	next_label.visible = true
 
 	cur_dialogue_instance = dialogue
 
@@ -61,6 +61,7 @@ func show_messages(message_list: Array, position: Vector2) -> void:
 
 func _show_current() -> void:
 	message_requested.emit()
+	next_label.visible = false
 	cur_dialogue_instance.update_message(_messages[_active_dialogue_offset])
 
 
@@ -78,6 +79,7 @@ func _hide() -> void:
 	_is_active = false
 
 	finished.emit()
+	next_label.visible = false
 
 
 func _on_message_completed() -> void:

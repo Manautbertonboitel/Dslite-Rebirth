@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DialogResource" format=3 uid="uid://bqmppe2rw81x3"]
+
+[ext_resource type="Script" uid="uid://cwh2bpfh32xqc" path="res://data/systems/dialog/dialog_resources/dialog_resource.gd" id="1_lx55w"]
+
+[resource]
+script = ExtResource("1_lx55w")
+message_list = Array[String](["Hello there little one!", "I see you are new around", "What if you continue on this path?"])
+metadata/_custom_type_script = "uid://cwh2bpfh32xqc"
