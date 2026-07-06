@@ -19,8 +19,7 @@
 [ext_resource type="Material" uid="uid://dgdkum2ye5ijs" path="res://data/material_library/prototype_box.tres" id="17_r81sk"]
 [ext_resource type="PackedScene" uid="uid://dtfhci3vvkfgr" path="res://data/characters/anno/art/anno.tscn" id="19_lbuq0"]
 [ext_resource type="PackedScene" uid="uid://l5boluq4n37e" path="res://data/characters/lapine/art/lapine.tscn" id="20_4jxkp"]
-[ext_resource type="Theme" uid="uid://du7pjewgb4h87" path="res://data/systems/dialog/MainTheme.tres" id="21_euwrd"]
-[ext_resource type="Script" uid="uid://dgvtsq2i4seff" path="res://data/systems/dialog/dialogueManager.gd" id="22_7vgfu"]
+[ext_resource type="Script" uid="uid://cecku3tu1lc0n" path="res://data/systems/SpawnPoint/SpawnPoint.gd" id="22_4qd0a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ab3st"]
 shader = ExtResource("1_4qd0a")
@@ -28,42 +27,6 @@ shader_parameter/enabled = true
 shader_parameter/dithering = true
 shader_parameter/colors = 16
 shader_parameter/dither_size = 1
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_vs2kt"]
-panorama = ExtResource("4_6v6u0")
-energy_multiplier = 1.5
-
-[sub_resource type="Sky" id="Sky_4slxw"]
-sky_material = SubResource("PanoramaSkyMaterial_vs2kt")
-
-[sub_resource type="Environment" id="Environment_ab3st"]
-background_mode = 2
-background_color = Color(0.45506775, 0.5841923, 0.8767696, 1)
-sky = SubResource("Sky_4slxw")
-sky_rotation = Vector3(0, 2.6110125, 0)
-ambient_light_source = 2
-ambient_light_color = Color(0.543979, 0.680659, 0.89865, 1)
-ambient_light_energy = 1.95
-reflected_light_source = 2
-glow_enabled = true
-fog_density = 0.0
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.0135
-volumetric_fog_albedo = Color(0.777223, 0.767115, 0.938221, 1)
-adjustment_enabled = true
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_wt6xk"]
-size = Vector3(20.873379, 11.416614, 38.195824)
-
-[sub_resource type="Resource" id="Resource_e8hua"]
-script = ExtResource("7_eahmn")
-duration = 0.0
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_08l2d"]
-size = Vector3(27.17653, 11.851374, 39.245495)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_t6v4w"]
-size = Vector3(17.510828, 11.63006, 38.195824)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dya30"]
 resource_name = "Material.001"
@@ -193,6 +156,29 @@ size = Vector3(5.983341, 9.984299, 5.812561)
 [sub_resource type="BoxShape3D" id="BoxShape3D_dsjti"]
 size = Vector3(9.135986, 1.2788086, 12.22467)
 
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_vs2kt"]
+panorama = ExtResource("4_6v6u0")
+energy_multiplier = 1.5
+
+[sub_resource type="Sky" id="Sky_4slxw"]
+sky_material = SubResource("PanoramaSkyMaterial_vs2kt")
+
+[sub_resource type="Environment" id="Environment_ab3st"]
+background_mode = 2
+background_color = Color(0.45506775, 0.5841923, 0.8767696, 1)
+sky = SubResource("Sky_4slxw")
+sky_rotation = Vector3(0, 2.6110125, 0)
+ambient_light_source = 2
+ambient_light_color = Color(0.543979, 0.680659, 0.89865, 1)
+ambient_light_energy = 1.95
+reflected_light_source = 2
+glow_enabled = true
+fog_density = 0.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0135
+volumetric_fog_albedo = Color(0.777223, 0.767115, 0.938221, 1)
+adjustment_enabled = true
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_an3fw"]
 _surfaces = [{
 "aabb": AABB(-1.2892445, 0.05708933, -1.2892445, 2.578489, 18.265253, 2.578489),
@@ -256,6 +242,19 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_p37g5"]
 gradient = SubResource("Gradient_t6v4w")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_wt6xk"]
+size = Vector3(20.873379, 11.416614, 38.195824)
+
+[sub_resource type="Resource" id="Resource_e8hua"]
+script = ExtResource("7_eahmn")
+duration = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_08l2d"]
+size = Vector3(27.17653, 11.851374, 39.245495)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t6v4w"]
+size = Vector3(17.510828, 11.63006, 38.195824)
+
 [node name="Node3D" type="Node3D" unique_id=1121726285]
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1670392050]
@@ -287,101 +286,27 @@ process_physics_priority = 300
 script = ExtResource("2_p37g5")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
-[node name="Player3DNoCamera" parent="." unique_id=205379790 node_paths=PackedStringArray("_current_camera") instance=ExtResource("3_kjs7x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.29234, 0.6185219, -23.695314)
-_current_camera = NodePath("../Camera3D")
+[node name="World" type="Node" parent="." unique_id=782261563]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=458493203]
-environment = SubResource("Environment_ab3st")
+[node name="Resources" type="Node" parent="World" unique_id=546810188]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1176231910]
-transform = Transform3D(0.75587916, -0.44090208, 0.48399585, -0.242683, 0.49790588, 0.8325831, -0.60807204, -0.74678975, 0.26935726, 5.00624, 9.33842, -0.482016)
-light_color = Color(0.6661935, 0.76812303, 0.9709651, 1)
-light_energy = 2.538
-shadow_enabled = true
-metadata/_edit_lock_ = true
+[node name="LevelArtResources" type="Node" parent="World/Resources" unique_id=1378235889]
 
-[node name="Camera" type="Node" parent="." unique_id=1540268178]
-
-[node name="CameraModule2" type="Node" parent="Camera" unique_id=2033144718]
-
-[node name="CameraTrigger" type="Area3D" parent="Camera/CameraModule2" unique_id=491257499 node_paths=PackedStringArray("linked_camera")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.33923, 0.88345265, -23.997152)
-priority = 5
-script = ExtResource("5_r8pik")
-linked_camera = NodePath("../PhantomCamera3D")
-active_priority = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera/CameraModule2/CameraTrigger" unique_id=1773272795]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.698683, 5.348444, 0.14933014)
-shape = SubResource("BoxShape3D_wt6xk")
-
-[node name="PhantomCamera3D" type="Node3D" parent="Camera/CameraModule2" unique_id=314998288]
-transform = Transform3D(0.70583785, 0.0666372, -0.70523196, 0, 0.9955653, 0.09407073, 0.7083731, -0.06639869, 0.7027077, 14.556674, 3.7464314, -20.953022)
-script = ExtResource("6_8ag4k")
-priority = 2
-tween_resource = SubResource("Resource_e8hua")
-metadata/_custom_type_script = "uid://csjccrhj5wnx7"
-
-[node name="CameraModule3" type="Node" parent="Camera" unique_id=1750481904]
-
-[node name="CameraTrigger" type="Area3D" parent="Camera/CameraModule3" unique_id=1483544977 node_paths=PackedStringArray("linked_camera")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.33923, 0.88345265, -23.997152)
-priority = 5
-script = ExtResource("5_r8pik")
-linked_camera = NodePath("../PhantomCamera3D")
-active_priority = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera/CameraModule3/CameraTrigger" unique_id=178290040]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3364925, 5.1310635, 0.6741314)
-shape = SubResource("BoxShape3D_08l2d")
-
-[node name="PhantomCamera3D" type="Node3D" parent="Camera/CameraModule3" unique_id=973480207]
-transform = Transform3D(-0.6704623, 0.12753382, -0.7309, 0, 0.9851157, 0.17189161, 0.7419432, 0.11524686, -0.66048306, 14.505225, 4.0582495, -32.35778)
-script = ExtResource("6_8ag4k")
-priority = 1
-tween_resource = SubResource("Resource_e8hua")
-metadata/_custom_type_script = "uid://csjccrhj5wnx7"
-
-[node name="CameraModule4" type="Node" parent="Camera" unique_id=637474562]
-
-[node name="CameraTrigger" type="Area3D" parent="Camera/CameraModule4" unique_id=1068858963 node_paths=PackedStringArray("linked_camera")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.33923, 0.88345265, -23.997152)
-priority = 5
-script = ExtResource("5_r8pik")
-linked_camera = NodePath("../PhantomCamera3D")
-active_priority = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera/CameraModule4/CameraTrigger" unique_id=359755794]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.70776, 5.455167, 0.14930916)
-shape = SubResource("BoxShape3D_t6v4w")
-
-[node name="PhantomCamera3D" type="Node3D" parent="Camera/CameraModule4" unique_id=1559073716]
-transform = Transform3D(-0.9998772, 0.0038409235, -0.015174318, 0, 0.96942645, 0.24538125, 0.015652878, 0.24535115, -0.9693076, 20.206005, 6.0559797, -8.385984)
-script = ExtResource("6_8ag4k")
-priority = 1
-tween_resource = SubResource("Resource_e8hua")
-metadata/_custom_type_script = "uid://csjccrhj5wnx7"
-
-[node name="LD blockout" type="Node" parent="." unique_id=782261563]
-
-[node name="LevelArtResources" type="Node" parent="LD blockout" unique_id=1378235889]
-
-[node name="Arc" type="MeshInstance3D" parent="LD blockout/LevelArtResources" unique_id=1607316523]
+[node name="Arc" type="MeshInstance3D" parent="World/Resources/LevelArtResources" unique_id=1607316523]
 transform = Transform3D(-2.7213705, 0.017577372, -0.32697552, 0.008343084, 2.7398813, 0.07785074, -0.32734138, -0.07629797, 2.7203138, -45.39561, 0.29794532, 7.8132)
 layers = 7
 mesh = SubResource("ArrayMesh_w6f4t")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("11_pnsvy")
 
-[node name="Arc-boutant" type="MeshInstance3D" parent="LD blockout/LevelArtResources" unique_id=1488171595]
+[node name="Arc-boutant" type="MeshInstance3D" parent="World/Resources/LevelArtResources" unique_id=1488171595]
 transform = Transform3D(-2.7213702, 0.017577374, -0.3269755, 0.008343082, 2.7398813, 0.07785074, -0.32734138, -0.076297976, 2.7203138, -43.39561, 0.29794532, 10.813198)
 layers = 7
 mesh = SubResource("ArrayMesh_pkgp8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("11_pnsvy")
 
-[node name="Porte" type="MeshInstance3D" parent="LD blockout/LevelArtResources" unique_id=1383428181]
+[node name="Porte" type="MeshInstance3D" parent="World/Resources/LevelArtResources" unique_id=1383428181]
 transform = Transform3D(5.5110307, -0.061157465, 1.5617831, 0.017435832, 5.726045, 0.16269933, 1.5628825, 0.15177228, -5.508968, -37.431206, -3.6989021, 25.798145)
 layers = 7
 material_override = SubResource("StandardMaterial3D_ctydp")
@@ -389,345 +314,359 @@ mesh = SubResource("ArrayMesh_jd322")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_8ftk1")
 
-[node name="Tower" parent="LD blockout/LevelArtResources" unique_id=1767851174 instance=ExtResource("13_gf82n")]
+[node name="Tower" parent="World/Resources/LevelArtResources" unique_id=1767851174 instance=ExtResource("13_gf82n")]
 transform = Transform3D(-2.7213705, 0.017577372, -0.32697552, 0.008343084, 2.7398813, 0.07785074, -0.32734138, -0.07629797, 2.7203138, -44.39561, 0.29794532, -37.1868)
 
-[node name="InteractablesResources" type="Node" parent="LD blockout" unique_id=1780570439]
+[node name="InteractablesResources" type="Node" parent="World/Resources" unique_id=1780570439]
 
-[node name="DialogTriggerPrefab" type="Area3D" parent="LD blockout/InteractablesResources" unique_id=1996842291 node_paths=PackedStringArray("dialogue_manager")]
+[node name="DialogTriggerPrefab" type="Area3D" parent="World/Resources/InteractablesResources" unique_id=1996842291]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.6515, 0.580771, 22.079838)
 script = ExtResource("14_680k4")
-dialogue_manager = NodePath("../../../DialogueManager")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LD blockout/InteractablesResources/DialogTriggerPrefab" unique_id=195252706]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Resources/InteractablesResources/DialogTriggerPrefab" unique_id=195252706]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1811523, 0.1394043, 1.1382446)
 shape = SubResource("BoxShape3D_iiga4")
 
-[node name="EnemyTriggerPrefab" type="Area3D" parent="LD blockout/InteractablesResources" unique_id=136752931]
+[node name="EnemyTriggerPrefab" type="Area3D" parent="World/Resources/InteractablesResources" unique_id=136752931]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.144, 1, 9.138)
 script = ExtResource("15_tn2e5")
 enemy_team = ExtResource("16_pfako")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LD blockout/InteractablesResources/EnemyTriggerPrefab" unique_id=1686855922]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Resources/InteractablesResources/EnemyTriggerPrefab" unique_id=1686855922]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 shape = SubResource("BoxShape3D_dsjti")
 
-[node name="LevelArt" type="Node" parent="LD blockout" unique_id=1161098492]
+[node name="LevelDesign" type="Node" parent="World" unique_id=1381709483]
 
-[node name="Church" type="Node3D" parent="LD blockout/LevelArt" unique_id=734854820]
+[node name="Ground plane" type="CSGBox3D" parent="World/LevelDesign" unique_id=386790570]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.576797, -40.37793, -14.244812)
+use_collision = true
+size = Vector3(42.00418, 81.75586, 91.270874)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane24" type="CSGBox3D" parent="World/LevelDesign" unique_id=461381033]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10.4375, -33.5, 30.899998)
+use_collision = true
+size = Vector3(1, 66, 121.875)
+material = ExtResource("17_r81sk")
+
+[node name="LevelArt" type="Node" parent="World" unique_id=1161098492]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World/LevelArt" unique_id=458493203]
+environment = SubResource("Environment_ab3st")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World/LevelArt/WorldEnvironment" unique_id=1176231910]
+transform = Transform3D(0.75587916, -0.44090208, 0.48399585, -0.242683, 0.49790588, 0.8325831, -0.60807204, -0.74678975, 0.26935726, 5.00624, 9.33842, -0.482016)
+light_color = Color(0.6661935, 0.76812303, 0.9709651, 1)
+light_energy = 2.538
+shadow_enabled = true
 metadata/_edit_lock_ = true
 
-[node name="Arc2" type="MeshInstance3D" parent="LD blockout/LevelArt/Church" unique_id=1556240964]
+[node name="Church" type="Node3D" parent="World/LevelArt" unique_id=734854820]
+metadata/_edit_lock_ = true
+
+[node name="Arc2" type="MeshInstance3D" parent="World/LevelArt/Church" unique_id=1556240964]
 transform = Transform3D(-0.022717806, 0.041276027, -1.450235, 0.004416499, 1.4504077, 0.041211754, -1.4508154, 0.003768928, 0.022834232, 14.104389, -0.7020547, 11.1132)
 layers = 7
 mesh = SubResource("ArrayMesh_w6f4t")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("11_pnsvy")
 
-[node name="Arc3" type="MeshInstance3D" parent="LD blockout/LevelArt/Church" unique_id=780289440]
+[node name="Arc3" type="MeshInstance3D" parent="World/LevelArt/Church" unique_id=780289440]
 transform = Transform3D(-0.022717806, 0.041276027, -1.450235, 0.004416499, 1.4504077, 0.041211754, -1.4508154, 0.003768928, 0.022834232, 14.104389, -0.7020547, 11.1132)
 layers = 7
 mesh = SubResource("ArrayMesh_w6f4t")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("11_pnsvy")
 
-[node name="Arc4" type="MeshInstance3D" parent="LD blockout/LevelArt/Church" unique_id=1896345760]
+[node name="Arc4" type="MeshInstance3D" parent="World/LevelArt/Church" unique_id=1896345760]
 transform = Transform3D(1.4508154, -0.0037689302, -0.022834169, 0.0044164993, 1.4504077, 0.041211758, -0.022717744, 0.04127603, -1.450235, 2.2377205, -0.7020547, -32.0868)
 layers = 7
 mesh = SubResource("ArrayMesh_w6f4t")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("11_pnsvy")
 
-[node name="Tour5" type="MeshInstance3D" parent="LD blockout/LevelArt/Church" unique_id=842845630]
+[node name="Tour5" type="MeshInstance3D" parent="World/LevelArt/Church" unique_id=842845630]
 transform = Transform3D(0.11178093, 0.026054334, -0.928936, 0.0028489602, 0.935618, 0.026584568, -0.9292969, 0.006002295, -0.11165602, 1.5377216, -0.7020547, -32.5868)
 layers = 7
 mesh = SubResource("ArrayMesh_uk6tj")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
 
-[node name="Tour6" type="MeshInstance3D" parent="LD blockout/LevelArt/Church" unique_id=1271505023]
+[node name="Tour6" type="MeshInstance3D" parent="World/LevelArt/Church" unique_id=1271505023]
 transform = Transform3D(0.11178093, 0.026054334, -0.928936, 0.0028489602, 0.935618, 0.026584568, -0.9292969, 0.006002295, -0.11165602, 1.5377216, -0.7020547, -20.5868)
 layers = 7
 mesh = SubResource("ArrayMesh_uk6tj")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
 
-[node name="Tour7" type="MeshInstance3D" parent="LD blockout/LevelArt/Church" unique_id=311430579]
+[node name="Tour7" type="MeshInstance3D" parent="World/LevelArt/Church" unique_id=311430579]
 transform = Transform3D(0.92929685, -0.0060022944, 0.111656055, 0.0028489602, 0.93561786, 0.026584564, 0.11178098, 0.026054338, -0.9289361, 26.33772, -0.70205307, -51.653465)
 layers = 7
 mesh = SubResource("ArrayMesh_uk6tj")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
 
-[node name="Tour8" type="MeshInstance3D" parent="LD blockout/LevelArt/Church" unique_id=973931303]
+[node name="Tour8" type="MeshInstance3D" parent="World/LevelArt/Church" unique_id=973931303]
 transform = Transform3D(0.92929685, -0.0060022944, 0.111656055, 0.0028489602, 0.93561786, 0.026584564, 0.11178098, 0.026054338, -0.9289361, 14.337721, -0.70205307, -51.653465)
 layers = 7
 mesh = SubResource("ArrayMesh_uk6tj")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
 
-[node name="Tour9" type="MeshInstance3D" parent="LD blockout/LevelArt/Church" unique_id=1099560914]
+[node name="Tour9" type="MeshInstance3D" parent="World/LevelArt/Church" unique_id=1099560914]
 transform = Transform3D(-0.111781016, -0.026054338, 0.9289361, 0.0028489605, 0.93561774, 0.02658456, 0.92929673, -0.0060022916, 0.111656085, 37.404385, -0.70205307, -20.253466)
 layers = 7
 mesh = SubResource("ArrayMesh_uk6tj")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
 
-[node name="Tour10" type="MeshInstance3D" parent="LD blockout/LevelArt/Church" unique_id=470325591]
+[node name="Tour10" type="MeshInstance3D" parent="World/LevelArt/Church" unique_id=470325591]
 transform = Transform3D(-0.111781016, -0.026054338, 0.9289361, 0.0028489605, 0.93561774, 0.02658456, 0.92929673, -0.0060022916, 0.111656085, 37.40439, -0.70205307, -32.253464)
 layers = 7
 mesh = SubResource("ArrayMesh_uk6tj")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
 
-[node name="Tour14" type="MeshInstance3D" parent="LD blockout/LevelArt/Church" unique_id=1418209499]
+[node name="Tour14" type="MeshInstance3D" parent="World/LevelArt/Church" unique_id=1418209499]
 transform = Transform3D(-0.111781016, -0.026054338, 0.9289361, 0.0028489605, 0.93561774, 0.02658456, 0.92929673, -0.0060022916, 0.111656085, 26.331543, -0.70205307, -32.740227)
 layers = 7
 mesh = SubResource("ArrayMesh_uk6tj")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
 
-[node name="Tour15" type="MeshInstance3D" parent="LD blockout/LevelArt/Church" unique_id=1656527560]
+[node name="Tour15" type="MeshInstance3D" parent="World/LevelArt/Church" unique_id=1656527560]
 transform = Transform3D(-0.111781016, -0.026054338, 0.9289361, 0.0028489605, 0.93561774, 0.02658456, 0.92929673, -0.0060022916, 0.111656085, 26.502432, -0.70205307, -20.409386)
 layers = 7
 mesh = SubResource("ArrayMesh_uk6tj")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
 
-[node name="Tour16" type="MeshInstance3D" parent="LD blockout/LevelArt/Church" unique_id=646051187]
+[node name="Tour16" type="MeshInstance3D" parent="World/LevelArt/Church" unique_id=646051187]
 transform = Transform3D(-0.111781016, -0.026054338, 0.9289361, 0.0028489605, 0.93561774, 0.02658456, 0.92929673, -0.0060022916, 0.111656085, 13.859415, -0.70205355, -20.223112)
 layers = 7
 mesh = SubResource("ArrayMesh_uk6tj")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
 
-[node name="Tour17" type="MeshInstance3D" parent="LD blockout/LevelArt/Church" unique_id=971583684]
+[node name="Tour17" type="MeshInstance3D" parent="World/LevelArt/Church" unique_id=971583684]
 transform = Transform3D(-0.111781016, -0.026054338, 0.9289361, 0.0028489605, 0.93561774, 0.02658456, 0.92929673, -0.0060022916, 0.111656085, 13.631996, -0.702054, -32.956795)
 layers = 7
 mesh = SubResource("ArrayMesh_uk6tj")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
 
-[node name="Tour11" type="MeshInstance3D" parent="LD blockout/LevelArt/Church" unique_id=773695414]
+[node name="Tour11" type="MeshInstance3D" parent="World/LevelArt/Church" unique_id=773695414]
 transform = Transform3D(-0.11178098, -0.033570025, 0.92893606, 0.0028489598, 1.2055079, 0.026584584, 0.9292967, -0.007733734, 0.11165611, 37.40439, -0.70205307, -29.38611)
 layers = 7
 mesh = SubResource("ArrayMesh_uk6tj")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
 
-[node name="Tour13" type="MeshInstance3D" parent="LD blockout/LevelArt/Church" unique_id=1639353517]
+[node name="Tour13" type="MeshInstance3D" parent="World/LevelArt/Church" unique_id=1639353517]
 transform = Transform3D(-0.111781016, -0.040389806, 0.928936, 0.0028489607, 1.4504079, 0.026584582, 0.929297, -0.0093048485, 0.1116561, 37.40439, -0.70205307, -26.161297)
 layers = 7
 mesh = SubResource("ArrayMesh_uk6tj")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
 
-[node name="Tour12" type="MeshInstance3D" parent="LD blockout/LevelArt/Church" unique_id=1403246837]
+[node name="Tour12" type="MeshInstance3D" parent="World/LevelArt/Church" unique_id=1403246837]
 transform = Transform3D(-0.11178098, -0.033570025, 0.92893606, 0.0028489598, 1.2055079, 0.026584584, 0.9292967, -0.007733734, 0.11165611, 37.40439, -0.70205307, -23.185223)
 layers = 7
 mesh = SubResource("ArrayMesh_uk6tj")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
 
-[node name="Ground plane2" type="CSGBox3D" parent="LD blockout/LevelArt/Church" unique_id=78059769]
+[node name="Ground plane2" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=78059769]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 6, -4.5)
 use_collision = true
 size = Vector3(1, 11, 31)
 material = ExtResource("17_r81sk")
 
-[node name="Ground plane3" type="CSGBox3D" parent="LD blockout/LevelArt/Church" unique_id=2092464384]
+[node name="Ground plane3" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=2092464384]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 6, -4.5)
 use_collision = true
 size = Vector3(1, 11, 31)
 material = ExtResource("17_r81sk")
 
-[node name="Ground plane10" type="CSGBox3D" parent="LD blockout/LevelArt/Church" unique_id=1731078060]
+[node name="Ground plane10" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=1731078060]
 transform = Transform3D(0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0, 1, 16.5, 16.866026, -4.5)
 use_collision = true
 size = Vector3(1, 13, 31)
 material = ExtResource("17_r81sk")
 
-[node name="Ground plane19" type="CSGBox3D" parent="LD blockout/LevelArt/Church" unique_id=263850503]
+[node name="Ground plane19" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=263850503]
 transform = Transform3D(0.8660254, -0.5, 0, 0.5, 0.8660254, 0, 0, 0, 1, 23.5, 16.866026, -4.5)
 use_collision = true
 size = Vector3(1, 13, 31)
 material = ExtResource("17_r81sk")
 
-[node name="Ground plane20" type="CSGBox3D" parent="LD blockout/LevelArt/Church" unique_id=1442791316]
+[node name="Ground plane20" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=1442791316]
 transform = Transform3D(0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0, 1, 16.5, 16.866026, -35.5)
 use_collision = true
 size = Vector3(1, 13, 31)
 material = ExtResource("17_r81sk")
 
-[node name="Ground plane21" type="CSGBox3D" parent="LD blockout/LevelArt/Church" unique_id=1025727583]
+[node name="Ground plane21" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=1025727583]
 transform = Transform3D(0.8660254, -0.5, 0, 0.5, 0.8660254, 0, 0, 0, 1, 23.5, 16.866026, -35.5)
 use_collision = true
 size = Vector3(1, 13, 31)
 material = ExtResource("17_r81sk")
 
-[node name="Ground plane22" type="CSGBox3D" parent="LD blockout/LevelArt/Church" unique_id=358993817]
+[node name="Ground plane22" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=358993817]
 transform = Transform3D(-3.7855173e-08, -2.1855694e-08, -1, -0.5, 0.8660254, 0, 0.8660254, 0.5, -4.371139e-08, 20, 16.866026, -30)
 use_collision = true
 size = Vector3(1, 13, 35)
 material = ExtResource("17_r81sk")
 
-[node name="Ground plane23" type="CSGBox3D" parent="LD blockout/LevelArt/Church" unique_id=2065023988]
+[node name="Ground plane23" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=2065023988]
 transform = Transform3D(-3.7855173e-08, 2.1855694e-08, -1, 0.5, 0.8660254, 0, 0.8660254, -0.5, -4.371139e-08, 20, 16.866026, -23)
 use_collision = true
 size = Vector3(1, 13, 35)
 material = ExtResource("17_r81sk")
 
-[node name="Ground plane4" type="CSGBox3D" parent="LD blockout/LevelArt/Church" unique_id=582074956]
+[node name="Ground plane4" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=582074956]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 6, -41.5)
 use_collision = true
 size = Vector3(1, 11, 17)
 material = ExtResource("17_r81sk")
 
-[node name="Ground plane5" type="CSGBox3D" parent="LD blockout/LevelArt/Church" unique_id=51908720]
+[node name="Ground plane5" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=51908720]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 6, -41.5)
 use_collision = true
 size = Vector3(1, 11, 17)
 material = ExtResource("17_r81sk")
 
-[node name="Ground plane6" type="CSGBox3D" parent="LD blockout/LevelArt/Church" unique_id=955662740]
+[node name="Ground plane6" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=955662740]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 32, 6, -32.5)
 use_collision = true
 size = Vector3(1, 11, 11)
 material = ExtResource("17_r81sk")
 
-[node name="Ground plane7" type="CSGBox3D" parent="LD blockout/LevelArt/Church" unique_id=509788252]
+[node name="Ground plane7" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=509788252]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 32, 6, -20.5)
 use_collision = true
 size = Vector3(1, 11, 11)
 material = ExtResource("17_r81sk")
 
-[node name="Ground plane11" type="CSGBox3D" parent="LD blockout/LevelArt/Church" unique_id=1341118250]
+[node name="Ground plane11" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=1341118250]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 16.17456, 6, 11.5)
 use_collision = true
 size = Vector3(1, 11, 3.349121)
 material = ExtResource("17_r81sk")
 
-[node name="Ground plane13" type="CSGBox3D" parent="LD blockout/LevelArt/Church" unique_id=660887825]
+[node name="Ground plane13" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=660887825]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 19.970612, 15.973515, 11.5)
 use_collision = true
 size = Vector3(1, 12.507324, 15.294006)
 material = ExtResource("17_r81sk")
 
-[node name="Ground plane12" type="CSGBox3D" parent="LD blockout/LevelArt/Church" unique_id=805981111]
+[node name="Ground plane12" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=805981111]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 24.809875, 6, 11.5)
 use_collision = true
 size = Vector3(1, 11, 4.460327)
 material = ExtResource("17_r81sk")
 
-[node name="Ground plane16" type="CSGBox3D" parent="LD blockout/LevelArt/Church" unique_id=1207150116]
+[node name="Ground plane16" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=1207150116]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20, 13, -50.5)
 use_collision = true
 size = Vector3(1, 25, 11)
 material = ExtResource("17_r81sk")
 
-[node name="Ground plane17" type="CSGBox3D" parent="LD blockout/LevelArt/Church" unique_id=1134554483]
+[node name="Ground plane17" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=1134554483]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2, 6, -30)
 use_collision = true
 size = Vector3(1, 11, 4)
 material = ExtResource("17_r81sk")
 
-[node name="Ground plane18" type="CSGBox3D" parent="LD blockout/LevelArt/Church" unique_id=100578921]
+[node name="Ground plane18" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=100578921]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2, 6, -23)
 use_collision = true
 size = Vector3(1, 11, 4)
 material = ExtResource("17_r81sk")
 
-[node name="Ground plane8" type="CSGBox3D" parent="LD blockout/LevelArt/Church" unique_id=1458773543]
+[node name="Ground plane8" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=1458773543]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8, 6, -32.5)
 use_collision = true
 size = Vector3(1, 11, 11)
 material = ExtResource("17_r81sk")
 
-[node name="Ground plane9" type="CSGBox3D" parent="LD blockout/LevelArt/Church" unique_id=254649420]
+[node name="Ground plane9" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=254649420]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8, 6, -20.5)
 use_collision = true
 size = Vector3(1, 11, 11)
 material = ExtResource("17_r81sk")
 
-[node name="Tour" type="MeshInstance3D" parent="LD blockout/LevelArt" unique_id=777493696]
+[node name="Tour" type="MeshInstance3D" parent="World/LevelArt" unique_id=777493696]
 transform = Transform3D(-0.929297, 0.0060022958, -0.11165598, 0.0028489607, 0.93561804, 0.026584568, -0.11178089, -0.026054332, 0.928936, -44.39561, -0.7020547, 28.8132)
 layers = 7
 mesh = SubResource("ArrayMesh_uk6tj")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
 
-[node name="Tour8" type="MeshInstance3D" parent="LD blockout/LevelArt" unique_id=911183006]
+[node name="Tour8" type="MeshInstance3D" parent="World/LevelArt" unique_id=911183006]
 transform = Transform3D(-0.929297, 0.0060022958, -0.11165598, 0.0028489607, 0.93561804, 0.026584568, -0.11178089, -0.026054332, 0.928936, 39.43654, -0.042098522, 8.753395)
 layers = 7
 mesh = SubResource("ArrayMesh_uk6tj")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
 
-[node name="Tour9" type="MeshInstance3D" parent="LD blockout/LevelArt" unique_id=1048816651]
+[node name="Tour9" type="MeshInstance3D" parent="World/LevelArt" unique_id=1048816651]
 transform = Transform3D(-0.929297, 0.0060022958, -0.11165598, 0.0028489607, 0.93561804, 0.026584568, -0.11178089, -0.026054332, 0.928936, 55.023476, -0.042098522, 9.672874)
 layers = 7
 mesh = SubResource("ArrayMesh_uk6tj")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_85u2j")
 
-[node name="Sol1" type="MeshInstance3D" parent="LD blockout/LevelArt" unique_id=1294429192]
+[node name="Sol1" type="MeshInstance3D" parent="World/LevelArt" unique_id=1294429192]
 transform = Transform3D(21.3111, 0, 0, 0, 0.478999, 0, 0, 0, 23.6998, -13.289377, 0.5235343, -27.588678)
 mesh = SubResource("PlaneMesh_4slxw")
 skeleton = NodePath("../CSGBox3D")
 
-[node name="Porte" type="MeshInstance3D" parent="LD blockout/LevelArt" unique_id=1523280130]
+[node name="Porte" type="MeshInstance3D" parent="World/LevelArt" unique_id=1523280130]
 transform = Transform3D(1.04, 0, 0, 0, -7.081245e-08, 2.795, 0, -1.62, -1.2217333e-07, 20.349209, 4.6080685, 11.245915)
 mesh = SubResource("PlaneMesh_t6v4w")
 skeleton = NodePath("../CSGBox3D")
 
-[node name="LevelBlockout" type="Node" parent="LD blockout" unique_id=1381709483]
+[node name="Characters" type="Node" parent="World" unique_id=911758090]
 
-[node name="Ground plane" type="CSGBox3D" parent="LD blockout/LevelBlockout" unique_id=386790570]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.576797, -40.37793, -14.244812)
-use_collision = true
-size = Vector3(42.00418, 81.75586, 91.270874)
-material = ExtResource("17_r81sk")
-
-[node name="Ground plane24" type="CSGBox3D" parent="LD blockout/LevelBlockout" unique_id=461381033]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10.4375, -33.5, 30.899998)
-use_collision = true
-size = Vector3(1, 66, 121.875)
-material = ExtResource("17_r81sk")
-
-[node name="Characters" type="Node" parent="LD blockout" unique_id=911758090]
-
-[node name="Anno" parent="LD blockout/Characters" unique_id=1112256570 instance=ExtResource("19_lbuq0")]
+[node name="Anno" parent="World/Characters" unique_id=1112256570 instance=ExtResource("19_lbuq0")]
 transform = Transform3D(0.8404342, 0, -0.5419136, 0, 1, 0, 0.5419136, 0, 0.8404342, -32.039032, 0.5011008, 32.916958)
 
-[node name="Lapine" parent="LD blockout/Characters" unique_id=1260480903 instance=ExtResource("20_4jxkp")]
+[node name="Lapine" parent="World/Characters" unique_id=1260480903 instance=ExtResource("20_4jxkp")]
 transform = Transform3D(0.9782066, 0, -1.4274586, 0, 1.73047, 0, 1.4274586, 0, 0.9782066, 22.063581, 0.489635, 14.950001)
 
-[node name="Interactables" type="Node" parent="LD blockout" unique_id=1071517342]
+[node name="PlayerCharacter" parent="World/Characters" unique_id=205379790 node_paths=PackedStringArray("_current_camera") instance=ExtResource("3_kjs7x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.29234, 0.6185219, -23.695314)
+_current_camera = NodePath("../../../Camera3D")
 
-[node name="DoorTrigger" type="Area3D" parent="LD blockout/Interactables" unique_id=1819888897 node_paths=PackedStringArray("prompt_ui", "prompt_ui_world_pos")]
+[node name="Interactables" type="Node" parent="World" unique_id=1071517342]
+
+[node name="DoorTrigger" type="Area3D" parent="World/Interactables" unique_id=1819888897 node_paths=PackedStringArray("prompt_ui", "prompt_ui_world_pos")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.943115, 0.580771, 7.5440063)
 script = ExtResource("13_t6v4w")
 prompt_ui = NodePath("PromptUIPos/CanvasLayer/PromptUI")
 prompt_ui_world_pos = NodePath("PromptUIPos")
 is_door = true
 scene_path = "res://data/maps/world/emotional_prototype_level/emotional_prototype_level.tscn"
+target_spawn_id = "spawn_church_door_outside_1"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LD blockout/Interactables/DoorTrigger" unique_id=1813966339]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/DoorTrigger" unique_id=1813966339]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.216959, 4.5047836, -0.12979126)
 shape = SubResource("BoxShape3D_iiga4")
 
-[node name="PromptUIPos" type="Node3D" parent="LD blockout/Interactables/DoorTrigger" unique_id=819115605]
+[node name="PromptUIPos" type="Node3D" parent="World/Interactables/DoorTrigger" unique_id=819115605]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.617982, 3.6365433)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="LD blockout/Interactables/DoorTrigger/PromptUIPos" unique_id=710139505]
+[node name="CanvasLayer" type="CanvasLayer" parent="World/Interactables/DoorTrigger/PromptUIPos" unique_id=710139505]
 
-[node name="PromptUI" type="Control" parent="LD blockout/Interactables/DoorTrigger/PromptUIPos/CanvasLayer" unique_id=1023308595]
+[node name="PromptUI" type="Control" parent="World/Interactables/DoorTrigger/PromptUIPos/CanvasLayer" unique_id=1023308595]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 156.0
 offset_bottom = 35.0
 
-[node name="TextureRect" type="TextureRect" parent="LD blockout/Interactables/DoorTrigger/PromptUIPos/CanvasLayer/PromptUI" unique_id=1207689214]
+[node name="TextureRect" type="TextureRect" parent="World/Interactables/DoorTrigger/PromptUIPos/CanvasLayer/PromptUI" unique_id=1207689214]
 z_index = -40
 layout_mode = 0
 offset_left = 1.0
@@ -736,7 +675,7 @@ offset_bottom = 34.0
 texture = SubResource("GradientTexture1D_p37g5")
 expand_mode = 1
 
-[node name="Input" type="Label" parent="LD blockout/Interactables/DoorTrigger/PromptUIPos/CanvasLayer/PromptUI" unique_id=521565362]
+[node name="Input" type="Label" parent="World/Interactables/DoorTrigger/PromptUIPos/CanvasLayer/PromptUI" unique_id=521565362]
 z_index = 84
 layout_mode = 0
 offset_left = 12.0
@@ -745,7 +684,7 @@ offset_right = 52.0
 offset_bottom = 29.0
 text = "E"
 
-[node name="Description" type="Label" parent="LD blockout/Interactables/DoorTrigger/PromptUIPos/CanvasLayer/PromptUI" unique_id=1606607000]
+[node name="Description" type="Label" parent="World/Interactables/DoorTrigger/PromptUIPos/CanvasLayer/PromptUI" unique_id=1606607000]
 layout_mode = 0
 offset_left = 45.0
 offset_top = 7.0
@@ -753,40 +692,86 @@ offset_right = 232.0
 offset_bottom = 30.0
 text = "Go Outside"
 
-[node name="DialogTrigger" type="Area3D" parent="LD blockout/Interactables" unique_id=1539635708 node_paths=PackedStringArray("dialogue_manager")]
+[node name="DialogTrigger" type="Area3D" parent="World/Interactables" unique_id=1539635708]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.12751, 0.580771, 14.922703)
 script = ExtResource("14_680k4")
-dialogue_manager = NodePath("../../../DialogueManager")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LD blockout/Interactables/DialogTrigger" unique_id=939370530]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/DialogTrigger" unique_id=939370530]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1811523, 0.1394043, 1.1382446)
 shape = SubResource("BoxShape3D_iiga4")
 
-[node name="DialogueManager" type="Control" parent="." unique_id=621263063 node_paths=PackedStringArray("next_label")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-theme = ExtResource("21_euwrd")
-script = ExtResource("22_7vgfu")
-dialogue_position = Vector2(313, 600)
-next_label = NodePath("NextLabel")
+[node name="Camera" type="Node" parent="World" unique_id=1540268178]
 
-[node name="NextLabel" type="Label" parent="DialogueManager" unique_id=1292496621]
-layout_mode = 0
-offset_left = 105.0
-offset_top = 690.0
-offset_right = 1174.0
-offset_bottom = 732.0
-text = "Press Enter"
-horizontal_alignment = 1
+[node name="CameraModule2" type="Node" parent="World/Camera" unique_id=2033144718]
 
-[connection signal="body_entered" from="Camera/CameraModule2/CameraTrigger" to="Camera/CameraModule2/CameraTrigger" method="_on_body_entered"]
-[connection signal="body_exited" from="Camera/CameraModule2/CameraTrigger" to="Camera/CameraModule2/CameraTrigger" method="_on_body_exited"]
-[connection signal="body_entered" from="Camera/CameraModule3/CameraTrigger" to="Camera/CameraModule3/CameraTrigger" method="_on_body_entered"]
-[connection signal="body_exited" from="Camera/CameraModule3/CameraTrigger" to="Camera/CameraModule3/CameraTrigger" method="_on_body_exited"]
-[connection signal="body_entered" from="Camera/CameraModule4/CameraTrigger" to="Camera/CameraModule4/CameraTrigger" method="_on_body_entered"]
-[connection signal="body_exited" from="Camera/CameraModule4/CameraTrigger" to="Camera/CameraModule4/CameraTrigger" method="_on_body_exited"]
+[node name="CameraTrigger" type="Area3D" parent="World/Camera/CameraModule2" unique_id=491257499 node_paths=PackedStringArray("linked_camera")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.33923, 0.88345265, -23.997152)
+priority = 5
+script = ExtResource("5_r8pik")
+linked_camera = NodePath("../PhantomCamera3D")
+active_priority = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Camera/CameraModule2/CameraTrigger" unique_id=1773272795]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.698683, 5.348444, 0.14933014)
+shape = SubResource("BoxShape3D_wt6xk")
+
+[node name="PhantomCamera3D" type="Node3D" parent="World/Camera/CameraModule2" unique_id=314998288]
+transform = Transform3D(0.70583785, 0.0666372, -0.70523196, 0, 0.9955653, 0.09407073, 0.7083731, -0.06639869, 0.7027077, 14.556674, 3.7464314, -20.953022)
+script = ExtResource("6_8ag4k")
+priority = 2
+tween_resource = SubResource("Resource_e8hua")
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="CameraModule3" type="Node" parent="World/Camera" unique_id=1750481904]
+
+[node name="CameraTrigger" type="Area3D" parent="World/Camera/CameraModule3" unique_id=1483544977 node_paths=PackedStringArray("linked_camera")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.33923, 0.88345265, -23.997152)
+priority = 5
+script = ExtResource("5_r8pik")
+linked_camera = NodePath("../PhantomCamera3D")
+active_priority = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Camera/CameraModule3/CameraTrigger" unique_id=178290040]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3364925, 5.1310635, 0.6741314)
+shape = SubResource("BoxShape3D_08l2d")
+
+[node name="PhantomCamera3D" type="Node3D" parent="World/Camera/CameraModule3" unique_id=973480207]
+transform = Transform3D(-0.6704623, 0.12753382, -0.7309, 0, 0.9851157, 0.17189161, 0.7419432, 0.11524686, -0.66048306, 14.505225, 4.0582495, -32.35778)
+script = ExtResource("6_8ag4k")
+priority = 1
+tween_resource = SubResource("Resource_e8hua")
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="CameraModule4" type="Node" parent="World/Camera" unique_id=637474562]
+
+[node name="CameraTrigger" type="Area3D" parent="World/Camera/CameraModule4" unique_id=1068858963 node_paths=PackedStringArray("linked_camera")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.33923, 0.88345265, -23.997152)
+priority = 5
+script = ExtResource("5_r8pik")
+linked_camera = NodePath("../PhantomCamera3D")
+active_priority = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Camera/CameraModule4/CameraTrigger" unique_id=359755794]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.70776, 5.455167, 0.14930916)
+shape = SubResource("BoxShape3D_t6v4w")
+
+[node name="PhantomCamera3D" type="Node3D" parent="World/Camera/CameraModule4" unique_id=1559073716]
+transform = Transform3D(-0.9998772, 0.0038409235, -0.015174318, 0, 0.96942645, 0.24538125, 0.015652878, 0.24535115, -0.9693076, 20.206005, 6.0559797, -8.385984)
+script = ExtResource("6_8ag4k")
+priority = 1
+tween_resource = SubResource("Resource_e8hua")
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="SpawnPoints" type="Node" parent="World" unique_id=228138795]
+
+[node name="spawn_church_door_inside_1" type="Node3D" parent="World/SpawnPoints" unique_id=1112273059 groups=["SpawnPoints"]]
+transform = Transform3D(-0.9049236, 0, 0.425574, 0, 1, 0, -0.425574, 0, -0.9049236, 19.943115, 0.580771, 5.878275)
+script = ExtResource("22_4qd0a")
+spawn_id = "spawn_church_door_inside_1"
+
+[connection signal="body_entered" from="World/Camera/CameraModule2/CameraTrigger" to="World/Camera/CameraModule2/CameraTrigger" method="_on_body_entered"]
+[connection signal="body_exited" from="World/Camera/CameraModule2/CameraTrigger" to="World/Camera/CameraModule2/CameraTrigger" method="_on_body_exited"]
+[connection signal="body_entered" from="World/Camera/CameraModule3/CameraTrigger" to="World/Camera/CameraModule3/CameraTrigger" method="_on_body_entered"]
+[connection signal="body_exited" from="World/Camera/CameraModule3/CameraTrigger" to="World/Camera/CameraModule3/CameraTrigger" method="_on_body_exited"]
+[connection signal="body_entered" from="World/Camera/CameraModule4/CameraTrigger" to="World/Camera/CameraModule4/CameraTrigger" method="_on_body_entered"]
+[connection signal="body_exited" from="World/Camera/CameraModule4/CameraTrigger" to="World/Camera/CameraModule4/CameraTrigger" method="_on_body_exited"]

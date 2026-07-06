@@ -1,10 +1,10 @@
 extends Area3D
 
 enum trigger_action {DOOR, DIALOG, COMBAT, INTERACT}
-@export var selected_trigger_action : trigger_action
+@export var selected_trigger_action: trigger_action
 
-@export var prompt_ui : Control
-@export var prompt_ui_world_pos : Node3D
+@export var prompt_ui: Control
+@export var prompt_ui_world_pos: Node3D
 
 var player_in = false
 var screen_pos
@@ -13,6 +13,7 @@ var camera
 @export_group("Door Trigger")
 @export_custom(PROPERTY_HINT_GROUP_ENABLE, "") var is_door: bool = false
 @export_dir var scene_path
+@export var target_spawn_id: String
 
 @export_group("Dialog Trigger")
 @export_custom(PROPERTY_HINT_GROUP_ENABLE, "") var is_dialog: bool = false
@@ -52,6 +53,7 @@ func _execute_trigger_action():
 	match selected_trigger_action:
 		trigger_action.DOOR:
 			prompt_ui.visible = false
+			GameManager.target_spawn_id = target_spawn_id
 			SceneFade.fade_to_scene(scene_path)
 		trigger_action.COMBAT:
 			print("COMBATTRIGGER ")

@@ -21,11 +21,23 @@ var _current_move_direction := Vector3.ZERO  # direction monde calculée
 func _ready():
 	add_to_group("player")
 	
-	# Restore position after combat
-	if GameManager.return_position != Vector3.ZERO:
-		global_position = GameManager.return_position
-		rotation = GameManager.return_rotation
-		GameManager.return_position = Vector3.ZERO  # Clear
+	if GameManager.target_spawn_id != "":
+		for spawn_point in get_tree().get_nodes_in_group("SpawnPoints"):
+			if spawn_point.spawn_id == GameManager.target_spawn_id:
+				global_position = spawn_point.global_position
+				#rotation = spawn_point.global_rotation
+				GameManager.target_spawn_id = ""  # Clear
+				GameManager.target_spawn_position = Vector3.ZERO  # Clear
+				#GameManager.target_spawn_rotation = Vector3.ZERO  # Clear
+	elif GameManager.target_spawn_position != Vector3.ZERO:
+		global_position = GameManager.target_spawn_position
+		GameManager.target_spawn_position = Vector3.ZERO  # Clear
+		GameManager.target_spawn_id = ""  # Clear
+		#if GameManager.target_spawn_rotation != Vector3.ZERO:
+			#rotation = GameManager.target_spawn_rotation
+			#GameManager.target_spawn_id = ""  # Clear
+			#GameManager.target_spawn_rotation = Vector3.ZERO  # Clear
+		#TODO Setup aussi la rotation
 
 func _physics_process(delta: float) -> void:
 	if _current_camera == null:

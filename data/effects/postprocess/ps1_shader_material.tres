@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bklahhvwjp0ro"]
+
+[ext_resource type="Shader" uid="uid://d1q3ratm6ww8o" path="res://data/effects/postprocess/PS1Scene.gdshader" id="1_hpycl"]
+
+[resource]
+shader = ExtResource("1_hpycl")
+shader_parameter/enabled = true
+shader_parameter/dithering = true
+shader_parameter/colors = 16
+shader_parameter/dither_size = 1

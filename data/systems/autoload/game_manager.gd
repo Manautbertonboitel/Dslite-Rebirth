@@ -1,5 +1,7 @@
 extends Node
 
+const RETURN_TO_WORLD_ANIMATION_TIME = 0.5
+
 # === PLAYER PARTY DATA ===
 var player_party: Array[PartyMember] = []  # Array of PartyMember resources
 var player_inventory: Array[ItemData] = []  # Items collected
@@ -9,10 +11,13 @@ var player_gold: int = 0
 var combat_heroes_pool: FighterPool = null
 var combat_enemies_pool: FighterPool = null
 var combat_atb_advantage: bool = false  # True if player attacked first
+
+# === PLAYER CHARACTER SPAWN ===
 var return_scene_path: String = ""
-var return_position: Vector3 = Vector3.ZERO
-var return_rotation: Vector3 = Vector3.ZERO
-const RETURN_TO_WORLD_ANIMATION_TIME = 0.5
+var target_spawn_id: String = ""
+var target_spawn_position: Vector3 = Vector3.ZERO
+var target_spawn_rotation: Vector3 = Vector3.ZERO
+
 
 # === LOOT TABLES ===
 var loot_tables: Dictionary = {}  # Key: table_name, Value: LootTable  
@@ -22,7 +27,7 @@ var defeated_triggers: Dictionary = {}  # Key: trigger_id, Value: timestamp
 
 func _ready():
 	
-	# Load loot tables (you'll create these as resources)
+	# Load loot tables (resources)
 	load_loot_tables()
 	
 	# Initialize default party if empty (for testing)
@@ -51,7 +56,6 @@ func initialize_default_party():
 	print("Initialized default party with PartyMembers")
 
 func load_loot_tables():
-	# Load your loot table resources
 	# Example: loot_tables["forest"] = load("res://data/loot/forest_loot.tres")
 	pass
 
@@ -64,8 +68,8 @@ func start_combat(enemies_pool: FighterPool, atb_advantage: bool = false):
 	# Get player position from the world
 	var player = get_tree().get_first_node_in_group("player")
 	if player:
-		return_position = player.global_position
-		return_rotation = player.rotation
+		target_spawn_position = player.global_position
+		target_spawn_rotation = player.rotation
 	
 	# Setup combat data
 	combat_enemies_pool = enemies_pool
@@ -162,7 +166,7 @@ func return_to_world():
 	# Return to saved scene
 	if return_scene_path != "":
 		get_tree().change_scene_to_file(return_scene_path)
-		# Position will be restored in the world scene's _ready()
+		# Character Position restored in player_3d_camera_system
 
 # === TRIGGER MANAGEMENT - make sure the player doens't encounter the same triggers (e.g. enemy teams or closed already looted chests) ===
 func register_defeated_trigger(trigger_id: String) -> void:
