@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://7efexvbfuvkw"]
+
+[ext_resource type="Theme" uid="uid://du7pjewgb4h87" path="res://data/systems/dialog/MainTheme.tres" id="1_f5koq"]
+[ext_resource type="Script" uid="uid://dgvtsq2i4seff" path="res://data/systems/dialog/dialogueManager.gd" id="2_q2e42"]
+
+[node name="DialogueManager" type="Control" unique_id=1679884682 node_paths=PackedStringArray("next_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("1_f5koq")
+script = ExtResource("2_q2e42")
+dialogue_position = Vector2(313, 600)
+next_label = NodePath("NextLabel")
+
+[node name="NextLabel" type="Label" parent="." unique_id=649953324]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 690.0
+offset_right = 1174.0
+offset_bottom = 732.0
+text = "Press Enter"
+horizontal_alignment = 1

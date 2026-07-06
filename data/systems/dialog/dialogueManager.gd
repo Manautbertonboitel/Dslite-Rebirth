@@ -1,4 +1,3 @@
-class_name DialogueManager
 extends Node
 
 const DIALOGUE_SCENE := preload("res://data/systems/dialog/Dialogue.tscn")

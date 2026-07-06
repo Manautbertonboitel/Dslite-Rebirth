@@ -25,6 +25,7 @@ GameManager="*res://data/systems/autoload/game_manager.gd"
 TransitionManager="*res://data/systems/autoload/transition_manager.gd"
 PhantomCameraManager="*uid://duq6jhf6unyis"
 SceneFade="*uid://nhkpbyp044kq"
+DialogueManager="*uid://7efexvbfuvkw"
 
 [display]
 

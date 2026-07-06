@@ -16,7 +16,6 @@ var camera
 
 @export_group("Dialog Trigger")
 @export_custom(PROPERTY_HINT_GROUP_ENABLE, "") var is_dialog: bool = false
-@export var dialogue_manager : DialogueManager
 @export var dialog_resource: Resource
 
 @export_group("Combat Trigger")
@@ -58,7 +57,7 @@ func _execute_trigger_action():
 			print("COMBATTRIGGER ")
 		trigger_action.DIALOG:
 			prompt_ui.visible = false
-			dialogue_manager.show_messages(dialog_resource.message_list)
+			DialogueManager.show_messages(dialog_resource.message_list)
 
 func reposition_prompt_ui():
 		screen_pos = camera.unproject_position(prompt_ui_world_pos.global_transform.origin)
