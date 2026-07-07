@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dekiy8g522ieh"]
+
+[ext_resource type="PackedScene" uid="uid://dm6sn2d21l5pw" path="res://data/environments/hill/src/Hill.glb" id="1_nsqnn"]
+[ext_resource type="Texture2D" uid="uid://bams4m8lgohfb" path="res://data/environments/hill/src/Hill_Grass006_4K-JPG_Color.jpg" id="2_ihvug"]
+[ext_resource type="Texture2D" uid="uid://bkx51o1qm4fna" path="res://data/environments/hill/src/Hill_Rock029_4K-JPG_Color.jpg" id="3_i6nc1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s7il2"]
+albedo_color = Color(0.33457062, 0.48949355, 0.46689814, 1)
+albedo_texture = ExtResource("2_ihvug")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hnhfe"]
+albedo_color = Color(0.50439245, 0.5144842, 0.4574842, 1)
+albedo_texture = ExtResource("3_i6nc1")
+
+[node name="Hill" unique_id=2140612594 instance=ExtResource("1_nsqnn")]
+
+[node name="Cube" parent="." index="0" unique_id=1248918178]
+surface_material_override/0 = SubResource("StandardMaterial3D_s7il2")
+surface_material_override/1 = SubResource("StandardMaterial3D_hnhfe")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube" index="0" unique_id=320924602]
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube/StaticBody3D" index="0" unique_id=2122460784]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, -2.9802322e-08, 0, 2.9802322e-08, 0.9999999, 0, 0, 0)
