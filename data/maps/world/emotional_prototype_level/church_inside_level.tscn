@@ -1,0 +1,470 @@
+[gd_scene format=3 uid="uid://c0f2tx6bhq2ab"]
+
+[ext_resource type="Shader" uid="uid://d1q3ratm6ww8o" path="res://data/effects/postprocess/PS1Scene.gdshader" id="1_4qd0a"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_p37g5"]
+[ext_resource type="PackedScene" uid="uid://cq0wq2tirpdqa" path="res://data/characters/player/player_3d_no_camera.tscn" id="3_kjs7x"]
+[ext_resource type="Texture2D" uid="uid://brhd3c61j25f7" path="res://data/environments/sky/sky_13_2k.png" id="4_6v6u0"]
+[ext_resource type="Script" uid="uid://du3wan1obv1h5" path="res://data/systems/character_camera_controller/camera/camera_switcher.gd" id="5_r8pik"]
+[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="6_8ag4k"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="7_eahmn"]
+[ext_resource type="PackedScene" uid="uid://ddn51wqo04n0d" path="res://data/environments/tower/arch.tscn" id="9_sw28x"]
+[ext_resource type="Script" uid="uid://bomw8xwsmbttp" path="res://data/systems/triggers/base_trigger.gd" id="13_t6v4w"]
+[ext_resource type="Script" uid="uid://dxbrooln481kq" path="res://data/systems/dialog/dialogue_trigger.gd" id="14_680k4"]
+[ext_resource type="Script" uid="uid://b2binuh54pjah" path="res://data/systems/combat/triggers/enemy_trigger.gd" id="15_tn2e5"]
+[ext_resource type="PackedScene" uid="uid://jwf65lyt1ndd" path="res://data/environments/tower/tower.tscn" id="16_fh42s"]
+[ext_resource type="Resource" uid="uid://dxryfnna46ibl" path="res://data/systems/combat/pools/forest_team1.tres" id="16_pfako"]
+[ext_resource type="Material" uid="uid://dgdkum2ye5ijs" path="res://data/material_library/prototype_box.tres" id="17_r81sk"]
+[ext_resource type="PackedScene" uid="uid://dtfhci3vvkfgr" path="res://data/characters/anno/anno.tscn" id="19_lbuq0"]
+[ext_resource type="PackedScene" uid="uid://l5boluq4n37e" path="res://data/characters/lapine/lapine.tscn" id="20_4jxkp"]
+[ext_resource type="Script" uid="uid://cecku3tu1lc0n" path="res://data/systems/SpawnPoint/SpawnPoint.gd" id="22_4qd0a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ab3st"]
+shader = ExtResource("1_4qd0a")
+shader_parameter/enabled = true
+shader_parameter/dithering = true
+shader_parameter/colors = 16
+shader_parameter/dither_size = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iiga4"]
+size = Vector3(5.983341, 9.984299, 5.812561)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dsjti"]
+size = Vector3(9.135986, 1.2788086, 12.22467)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_vs2kt"]
+panorama = ExtResource("4_6v6u0")
+energy_multiplier = 1.5
+
+[sub_resource type="Sky" id="Sky_4slxw"]
+sky_material = SubResource("PanoramaSkyMaterial_vs2kt")
+
+[sub_resource type="Environment" id="Environment_ab3st"]
+background_mode = 2
+background_color = Color(0.45506775, 0.5841923, 0.8767696, 1)
+sky = SubResource("Sky_4slxw")
+sky_rotation = Vector3(0, 2.6110125, 0)
+ambient_light_source = 2
+ambient_light_color = Color(0.543979, 0.680659, 0.89865, 1)
+ambient_light_energy = 1.95
+reflected_light_source = 2
+glow_enabled = true
+fog_density = 0.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0135
+volumetric_fog_albedo = Color(0.777223, 0.767115, 0.938221, 1)
+adjustment_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vncgj"]
+albedo_color = Color(0.3631184, 0.35520193, 0.33378476, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_4slxw"]
+material = SubResource("StandardMaterial3D_vncgj")
+size = Vector2(5, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08l2d"]
+albedo_color = Color(0.21242923, 0.09353679, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_t6v4w"]
+material = SubResource("StandardMaterial3D_08l2d")
+size = Vector2(5, 5)
+
+[sub_resource type="Gradient" id="Gradient_t6v4w"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_p37g5"]
+gradient = SubResource("Gradient_t6v4w")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wt6xk"]
+size = Vector3(20.873379, 11.416614, 38.195824)
+
+[sub_resource type="Resource" id="Resource_e8hua"]
+script = ExtResource("7_eahmn")
+duration = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_08l2d"]
+size = Vector3(27.17653, 11.851374, 39.245495)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t6v4w"]
+size = Vector3(17.510828, 11.63006, 38.195824)
+
+[node name="Node3D" type="Node3D" unique_id=1121726285]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1670392050]
+visible = false
+material = SubResource("ShaderMaterial_ab3st")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1833311363]
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 0
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=5274261]
+transform = Transform3D(0.70583785, 0.0666372, -0.70523196, 0, 0.9955653, 0.09407073, 0.7083731, -0.06639869, 0.7027077, 14.556674, 3.7464314, -20.953022)
+top_level = true
+h_offset = 0.53
+v_offset = 0.015
+fov = 65.8
+near = 0.001
+
+[node name="PhantomCameraHost" type="Node" parent="Camera3D" unique_id=522715566]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("2_p37g5")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[node name="World" type="Node" parent="." unique_id=782261563]
+
+[node name="Resources" type="Node" parent="World" unique_id=546810188]
+
+[node name="InteractablesResources" type="Node" parent="World/Resources" unique_id=1780570439]
+
+[node name="DialogTriggerPrefab" type="Area3D" parent="World/Resources/InteractablesResources" unique_id=1996842291]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.6515, 0.580771, 22.079838)
+script = ExtResource("14_680k4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Resources/InteractablesResources/DialogTriggerPrefab" unique_id=195252706]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1811523, 0.1394043, 1.1382446)
+shape = SubResource("BoxShape3D_iiga4")
+
+[node name="EnemyTriggerPrefab" type="Area3D" parent="World/Resources/InteractablesResources" unique_id=136752931]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.144, 1, 9.138)
+script = ExtResource("15_tn2e5")
+enemy_team = ExtResource("16_pfako")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Resources/InteractablesResources/EnemyTriggerPrefab" unique_id=1686855922]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+shape = SubResource("BoxShape3D_dsjti")
+
+[node name="LevelDesign" type="Node" parent="World" unique_id=1381709483]
+
+[node name="Ground plane" type="CSGBox3D" parent="World/LevelDesign" unique_id=386790570]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.576797, -40.37793, -14.244812)
+use_collision = true
+size = Vector3(42.00418, 81.75586, 91.270874)
+material = ExtResource("17_r81sk")
+
+[node name="LevelArt" type="Node" parent="World" unique_id=1161098492]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World/LevelArt" unique_id=458493203]
+environment = SubResource("Environment_ab3st")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World/LevelArt/WorldEnvironment" unique_id=1176231910]
+transform = Transform3D(0.75587916, -0.44090208, 0.48399585, -0.242683, 0.49790588, 0.8325831, -0.60807204, -0.74678975, 0.26935726, 5.00624, 9.33842, -0.482016)
+light_color = Color(0.6661935, 0.76812303, 0.9709651, 1)
+light_energy = 2.538
+shadow_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Church" type="Node3D" parent="World/LevelArt" unique_id=734854820]
+metadata/_edit_lock_ = true
+
+[node name="Ground plane2" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=78059769]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 6, -4.5)
+use_collision = true
+size = Vector3(1, 11, 31)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane3" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=2092464384]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 6, -4.5)
+use_collision = true
+size = Vector3(1, 11, 31)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane10" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=1731078060]
+transform = Transform3D(0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0, 1, 16.5, 16.866026, -4.5)
+use_collision = true
+size = Vector3(1, 13, 31)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane19" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=263850503]
+transform = Transform3D(0.8660254, -0.5, 0, 0.5, 0.8660254, 0, 0, 0, 1, 23.5, 16.866026, -4.5)
+use_collision = true
+size = Vector3(1, 13, 31)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane20" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=1442791316]
+transform = Transform3D(0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0, 1, 16.5, 16.866026, -35.5)
+use_collision = true
+size = Vector3(1, 13, 31)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane21" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=1025727583]
+transform = Transform3D(0.8660254, -0.5, 0, 0.5, 0.8660254, 0, 0, 0, 1, 23.5, 16.866026, -35.5)
+use_collision = true
+size = Vector3(1, 13, 31)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane22" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=358993817]
+transform = Transform3D(-3.7855173e-08, -2.1855694e-08, -1, -0.5, 0.8660254, 0, 0.8660254, 0.5, -4.371139e-08, 20, 16.866026, -30)
+use_collision = true
+size = Vector3(1, 13, 35)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane23" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=2065023988]
+transform = Transform3D(-3.7855173e-08, 2.1855694e-08, -1, 0.5, 0.8660254, 0, 0.8660254, -0.5, -4.371139e-08, 20, 16.866026, -23)
+use_collision = true
+size = Vector3(1, 13, 35)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane4" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=582074956]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 6, -41.5)
+use_collision = true
+size = Vector3(1, 11, 17)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane5" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=51908720]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 6, -41.5)
+use_collision = true
+size = Vector3(1, 11, 17)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane6" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=955662740]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 32, 6, -32.5)
+use_collision = true
+size = Vector3(1, 11, 11)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane7" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=509788252]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 32, 6, -20.5)
+use_collision = true
+size = Vector3(1, 11, 11)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane11" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=1341118250]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 16.17456, 6, 11.5)
+use_collision = true
+size = Vector3(1, 11, 3.349121)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane13" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=660887825]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 19.970612, 15.24976, 11.5)
+use_collision = true
+size = Vector3(1, 13.954834, 15.294006)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane12" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=805981111]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 24.65207, 6, 11.5)
+use_collision = true
+size = Vector3(1, 11, 4.77594)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane16" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=1207150116]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20, 6, -50.5)
+use_collision = true
+size = Vector3(1, 11, 11)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane24" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=449883871]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 38, 6, -26.5)
+use_collision = true
+size = Vector3(1, 11, 11)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane17" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=1134554483]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2, 6, -30)
+use_collision = true
+size = Vector3(1, 11, 4)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane18" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=100578921]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2, 6, -23)
+use_collision = true
+size = Vector3(1, 11, 4)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane8" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=1458773543]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8, 6, -32.5)
+use_collision = true
+size = Vector3(1, 11, 11)
+material = ExtResource("17_r81sk")
+
+[node name="Ground plane9" type="CSGBox3D" parent="World/LevelArt/Church" unique_id=254649420]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8, 6, -20.5)
+use_collision = true
+size = Vector3(1, 11, 11)
+material = ExtResource("17_r81sk")
+
+[node name="Tower" parent="World/LevelArt/Church" unique_id=1672718974 instance=ExtResource("16_fh42s")]
+transform = Transform3D(-0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, -0.70710677, 26.040762, 0.3554933, -32.385986)
+
+[node name="Tower2" parent="World/LevelArt/Church" unique_id=996757838 instance=ExtResource("16_fh42s")]
+transform = Transform3D(-0.8660254, 0, 0.49999994, 0, 1, 0, -0.49999994, 0, -0.8660254, 26.040762, 0.3554933, -20.385986)
+
+[node name="Tower3" parent="World/LevelArt/Church" unique_id=1819645684 instance=ExtResource("16_fh42s")]
+transform = Transform3D(0.7071067, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.7071067, 13.499149, 0.3554933, -20.013052)
+
+[node name="Tower4" parent="World/LevelArt/Church" unique_id=2029364173 instance=ExtResource("16_fh42s")]
+transform = Transform3D(0.86602545, 0, -0.4999999, 0, 1, 0, 0.4999999, 0, 0.86602545, 13.355476, 0.3554933, -33.12138)
+
+[node name="Arch" parent="World/LevelArt/Church" unique_id=1437925572 instance=ExtResource("9_sw28x")]
+transform = Transform3D(-6.60042e-08, 0, -1.51, 0, 1.51, 0, 1.51, 0, -6.60042e-08, 13.98024, -0.474463, 11.90097)
+
+[node name="Tower5" parent="World/LevelArt/Church" unique_id=33979866 instance=ExtResource("16_fh42s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.288055, 0.49999905, 10.668873)
+
+[node name="Tower6" parent="World/LevelArt/Church" unique_id=526834120 instance=ExtResource("16_fh42s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.288055, 0.49999905, 10.668873)
+
+[node name="Sol1" type="MeshInstance3D" parent="World/LevelArt" unique_id=1294429192]
+transform = Transform3D(21.3111, 0, 0, 0, 0.478999, 0, 0, 0, 23.6998, 21.14303, 0.5235343, -27.588678)
+mesh = SubResource("PlaneMesh_4slxw")
+skeleton = NodePath("../CSGBox3D")
+
+[node name="Porte" type="MeshInstance3D" parent="World/LevelArt" unique_id=1523280130]
+transform = Transform3D(1.04, 0, 0, 0, -7.081245e-08, 2.795, 0, -1.62, -1.2217333e-07, 20.349209, 4.6080685, 11.245915)
+mesh = SubResource("PlaneMesh_t6v4w")
+skeleton = NodePath("../CSGBox3D")
+
+[node name="Characters" type="Node" parent="World" unique_id=911758090]
+
+[node name="Anno" parent="World/Characters" unique_id=1112256570 instance=ExtResource("19_lbuq0")]
+transform = Transform3D(0.8404342, 0, -0.5419136, 0, 1, 0, 0.5419136, 0, 0.8404342, -32.039032, 0.5011008, 32.916958)
+
+[node name="Lapine" parent="World/Characters" unique_id=1260480903 instance=ExtResource("20_4jxkp")]
+transform = Transform3D(0.9782066, 0, -1.4274586, 0, 1.73047, 0, 1.4274586, 0, 0.9782066, 22.063581, 0.489635, 14.950001)
+
+[node name="PlayerCharacter" parent="World/Characters" unique_id=205379790 node_paths=PackedStringArray("_current_camera") instance=ExtResource("3_kjs7x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.29234, 0.6185219, -23.695314)
+_current_camera = NodePath("../../../Camera3D")
+
+[node name="Interactables" type="Node" parent="World" unique_id=1071517342]
+
+[node name="DoorTrigger" type="Area3D" parent="World/Interactables" unique_id=1819888897 node_paths=PackedStringArray("prompt_ui", "prompt_ui_world_pos")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.943115, 0.580771, 7.5440063)
+script = ExtResource("13_t6v4w")
+prompt_ui = NodePath("PromptUIPos/CanvasLayer/PromptUI")
+prompt_ui_world_pos = NodePath("PromptUIPos")
+is_door = true
+scene_path = "res://data/maps/world/emotional_prototype_level/emotional_prototype_level.tscn"
+target_spawn_id = "spawn_church_door_outside_1"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/DoorTrigger" unique_id=1813966339]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.216959, 4.5047836, -0.12979126)
+shape = SubResource("BoxShape3D_iiga4")
+
+[node name="PromptUIPos" type="Node3D" parent="World/Interactables/DoorTrigger" unique_id=819115605]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.617982, 3.6365433)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="World/Interactables/DoorTrigger/PromptUIPos" unique_id=710139505]
+
+[node name="PromptUI" type="Control" parent="World/Interactables/DoorTrigger/PromptUIPos/CanvasLayer" unique_id=1023308595]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 156.0
+offset_bottom = 35.0
+
+[node name="TextureRect" type="TextureRect" parent="World/Interactables/DoorTrigger/PromptUIPos/CanvasLayer/PromptUI" unique_id=1207689214]
+z_index = -40
+layout_mode = 0
+offset_left = 1.0
+offset_right = 34.0
+offset_bottom = 34.0
+texture = SubResource("GradientTexture1D_p37g5")
+expand_mode = 1
+
+[node name="Input" type="Label" parent="World/Interactables/DoorTrigger/PromptUIPos/CanvasLayer/PromptUI" unique_id=521565362]
+z_index = 84
+layout_mode = 0
+offset_left = 12.0
+offset_top = 6.0
+offset_right = 52.0
+offset_bottom = 29.0
+text = "E"
+
+[node name="Description" type="Label" parent="World/Interactables/DoorTrigger/PromptUIPos/CanvasLayer/PromptUI" unique_id=1606607000]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 7.0
+offset_right = 232.0
+offset_bottom = 30.0
+text = "Go Outside"
+
+[node name="DialogTrigger" type="Area3D" parent="World/Interactables" unique_id=1539635708]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.12751, 0.580771, 14.922703)
+script = ExtResource("14_680k4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Interactables/DialogTrigger" unique_id=939370530]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1811523, 0.1394043, 1.1382446)
+shape = SubResource("BoxShape3D_iiga4")
+
+[node name="Camera" type="Node" parent="World" unique_id=1540268178]
+
+[node name="CameraModule2" type="Node" parent="World/Camera" unique_id=2033144718]
+
+[node name="CameraTrigger" type="Area3D" parent="World/Camera/CameraModule2" unique_id=491257499 node_paths=PackedStringArray("linked_camera")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.33923, 0.88345265, -23.997152)
+priority = 5
+script = ExtResource("5_r8pik")
+linked_camera = NodePath("../PhantomCamera3D")
+active_priority = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Camera/CameraModule2/CameraTrigger" unique_id=1773272795]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.698683, 5.348444, 0.14933014)
+shape = SubResource("BoxShape3D_wt6xk")
+
+[node name="PhantomCamera3D" type="Node3D" parent="World/Camera/CameraModule2" unique_id=314998288]
+transform = Transform3D(0.70583785, 0.0666372, -0.70523196, 0, 0.9955653, 0.09407073, 0.7083731, -0.06639869, 0.7027077, 14.556674, 3.7464314, -20.953022)
+script = ExtResource("6_8ag4k")
+priority = 2
+tween_resource = SubResource("Resource_e8hua")
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="CameraModule3" type="Node" parent="World/Camera" unique_id=1750481904]
+
+[node name="CameraTrigger" type="Area3D" parent="World/Camera/CameraModule3" unique_id=1483544977 node_paths=PackedStringArray("linked_camera")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.33923, 0.88345265, -23.997152)
+priority = 5
+script = ExtResource("5_r8pik")
+linked_camera = NodePath("../PhantomCamera3D")
+active_priority = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Camera/CameraModule3/CameraTrigger" unique_id=178290040]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3364925, 5.1310635, 0.6741314)
+shape = SubResource("BoxShape3D_08l2d")
+
+[node name="PhantomCamera3D" type="Node3D" parent="World/Camera/CameraModule3" unique_id=973480207]
+transform = Transform3D(-0.6704623, 0.12753382, -0.7309, 0, 0.9851157, 0.17189161, 0.7419432, 0.11524686, -0.66048306, 14.505225, 4.0582495, -32.35778)
+script = ExtResource("6_8ag4k")
+priority = 1
+tween_resource = SubResource("Resource_e8hua")
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="CameraModule4" type="Node" parent="World/Camera" unique_id=637474562]
+
+[node name="CameraTrigger" type="Area3D" parent="World/Camera/CameraModule4" unique_id=1068858963 node_paths=PackedStringArray("linked_camera")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.33923, 0.88345265, -23.997152)
+priority = 5
+script = ExtResource("5_r8pik")
+linked_camera = NodePath("../PhantomCamera3D")
+active_priority = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Camera/CameraModule4/CameraTrigger" unique_id=359755794]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.70776, 5.455167, 0.14930916)
+shape = SubResource("BoxShape3D_t6v4w")
+
+[node name="PhantomCamera3D" type="Node3D" parent="World/Camera/CameraModule4" unique_id=1559073716]
+transform = Transform3D(-0.9998772, 0.0038409235, -0.015174318, 0, 0.96942645, 0.24538125, 0.015652878, 0.24535115, -0.9693076, 20.206005, 6.0559797, -8.385984)
+script = ExtResource("6_8ag4k")
+priority = 1
+tween_resource = SubResource("Resource_e8hua")
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="SpawnPoints" type="Node" parent="World" unique_id=228138795]
+
+[node name="spawn_church_door_inside_1" type="Node3D" parent="World/SpawnPoints" unique_id=1112273059 groups=["SpawnPoints"]]
+transform = Transform3D(-0.9049236, 0, 0.425574, 0, 1, 0, -0.425574, 0, -0.9049236, 19.943115, 0.580771, 5.878275)
+script = ExtResource("22_4qd0a")
+spawn_id = "spawn_church_door_inside_1"
+
+[connection signal="body_entered" from="World/Camera/CameraModule2/CameraTrigger" to="World/Camera/CameraModule2/CameraTrigger" method="_on_body_entered"]
+[connection signal="body_exited" from="World/Camera/CameraModule2/CameraTrigger" to="World/Camera/CameraModule2/CameraTrigger" method="_on_body_exited"]
+[connection signal="body_entered" from="World/Camera/CameraModule3/CameraTrigger" to="World/Camera/CameraModule3/CameraTrigger" method="_on_body_entered"]
+[connection signal="body_exited" from="World/Camera/CameraModule3/CameraTrigger" to="World/Camera/CameraModule3/CameraTrigger" method="_on_body_exited"]
+[connection signal="body_entered" from="World/Camera/CameraModule4/CameraTrigger" to="World/Camera/CameraModule4/CameraTrigger" method="_on_body_entered"]
+[connection signal="body_exited" from="World/Camera/CameraModule4/CameraTrigger" to="World/Camera/CameraModule4/CameraTrigger" method="_on_body_exited"]

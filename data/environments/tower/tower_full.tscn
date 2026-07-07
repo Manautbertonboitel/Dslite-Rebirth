@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dip7n6h142p8h"]
+
+[ext_resource type="PackedScene" uid="uid://7638od8vunh6" path="res://data/environments/tower/src/TowerFull.glb" id="1_j2mph"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j2mph"]
+size = Vector3(2.23489, 7.82934, 5.0527)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wji7v"]
+size = Vector3(2.09772, 18.0556, 2.1615)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4mdta"]
+size = Vector3(1.64502, 6.25482, 4.57672)
+
+[node name="TowerFull" unique_id=660856285 instance=ExtResource("1_j2mph")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Arch" parent_id_path=PackedInt32Array(2048863568) index="0" unique_id=1355689179]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arch/StaticBody3D" index="0" unique_id=1296131417]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0940704, 4.04721, -3.45418)
+shape = SubResource("BoxShape3D_j2mph")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Tower" parent_id_path=PackedInt32Array(98825071) index="0" unique_id=242587946]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Tower/StaticBody3D" index="0" unique_id=142182662]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00479126, 9.04141, 0.000183105)
+shape = SubResource("BoxShape3D_wji7v")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Half arch" parent_id_path=PackedInt32Array(701654829) index="0" unique_id=825272436]
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Half arch/StaticBody3D" index="0" unique_id=1970778291]
+transform = Transform3D(0.996934, 0, 0, 0, 0.996934, 0, 0, 0, 0.996934, -0.141272, 3.25211, 3.29635)
+shape = SubResource("BoxShape3D_4mdta")

@@ -1,0 +1,8 @@
+[gd_resource type="PlaneMesh" format=3 uid="uid://qinkj4pwxg14"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vncgj"]
+albedo_color = Color(0.174484, 0.309376, 0.264245, 1)
+
+[resource]
+material = SubResource("StandardMaterial3D_vncgj")
+size = Vector2(5, 5)
